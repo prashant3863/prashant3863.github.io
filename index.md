@@ -17,9 +17,9 @@ A collection of thoughts and musings
 - [Red, Green, Refactor (2015)](https://redgreenrefactor.quora.com/The-Learning-Begins){:target="_blank"}
 
 **Projects**
-- [Ogi, ETL utility](https://gojekfarm.github.io/ogi/){:target="_blank"}
-- [Claim Genie, Auto medi-claim processing engine](https://devfolio.co/projects/claimgenie){:target="_blank"}
 - [Supertrader, Create your own crypto fund](https://showcase.ethglobal.com/ethonline/supertrader){:target="_blank"}
+- [Claim Genie, Auto medi-claim processing engine](https://devfolio.co/projects/claimgenie){:target="_blank"}
+- [Ogi, ETL utility](https://gojekfarm.github.io/ogi/){:target="_blank"}
 
 **Talks**
 
