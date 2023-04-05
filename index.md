@@ -6,6 +6,7 @@ backLink: false
 A collection of thoughts and musings
 
 **Writings**
+- [Identitifers (2023)](/posts/identifiers)
 
 - [Tale of Two Lambdas: solving event-sourcing at Gojek (2018)](https://medium.com/gojekengineering/a-tale-of-two-lambdas-solving-event-sourcing-at-go-jek-149884d898a1){:target="_blank"}
 - [Devops Journey, Gojek (2017)](https://prezi.com/tiepzeriz-gx/the-devops-journey/){:target="_blank"}
