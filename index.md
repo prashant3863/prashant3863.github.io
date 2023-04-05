@@ -18,7 +18,7 @@ A collection of thoughts and musings
 - [Red, Green, Refactor (2015)](https://redgreenrefactor.quora.com/The-Learning-Begins){:target="_blank"}
 
 **Projects**
-- [Rolodex, Own you Twitter Social Graph](https://rolodex.shovel.company/){:target="_blank"}
+- [Rolodex, Own your Twitter Social Graph](https://rolodex.shovel.company/){:target="_blank"}
 - [Ziggurat, Steam processing Framework](https://ziggurat.dev/){:target="_blank"}
 - [Supertrader, Create your own crypto fund](https://showcase.ethglobal.com/ethonline/supertrader){:target="_blank"}
 - [Claim Genie, Auto medi-claim processing engine](https://devfolio.co/projects/claimgenie){:target="_blank"}
