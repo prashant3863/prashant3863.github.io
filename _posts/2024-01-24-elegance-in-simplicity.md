@@ -10,9 +10,9 @@ This is a story about my journey through learning frontend development and how s
 
 Being a devops engineer in the past life most of my development revolved around writing shell script or backend services in Rails. Now with Shovel we need to create a bunch of MVPs and PoCs. Being in the Lofi and decentralised space, most of the code needs to run on client side and hence require JavaScript.
 
-Early last year, I started learning javascript development. I personally subscribe to the "start and then learn" philosophy
-Whenever I looked for a place to start learning js, React just pops out of nowhere. It felt like React is synonymous to frontend development.
-Everyone want you to just use 'create-react-app' and start making changes to the file.
+Early last year, I started learning javascript development. I personally subscribe to the "start and then learn" philosophy.
+Whenever I looked for a place to start learning js, React just popped out of nowhere. 
+It felt like React was synonymous to frontend development. Everyone want you to just use 'create-react-app' and start making changes to the file.
 
 Don't get me wrong, I love how easy it was to get started. But I also feelt a level of opaqueness around what was happening inside the guts of the machine. I found yourself learning the quirks of the framework rather than building an understanding from first principles.
 
