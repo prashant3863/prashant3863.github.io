@@ -19,7 +19,7 @@ permalink: /posts/history
 * When my identity is revealed by the underlying mechanism of the transaction, I have no privacy.  I cannot here selectively reveal myself; I must_always_ reveal myself
 * privacy in an open society requires anonymous transaction systems.  Until now, cash has been the primary such system.
 * It is to their(govt & orgs) advantage to speak of us, and  we should expect that they will speak.  To try to prevent their speech is to fight against the realities of information
-* Cypherpunks write code.  We know that someone has to write software to defend privacy, and since we can't get privacy unless we all do, we're going to write it.
+* Cypherpunks write code.  We know that someone has to write software to defend privacy, and since we can't get privacy unless we all do, we're going to write it
 * Cypherpunks deplore regulations on cryptography, for encryption is fundamentally a private act.
 * For privacy to be widespread it must be part of a social contract. People must come and together deploy these systems for the common good.
 
