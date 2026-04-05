@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="/dist/index.css">
+<link rel="shortcut icon" type="image/png" href=/assets/favicon.ico>
+
+<title>Not Shant Blog - autosub — building a video subtitle tool over dinner</title>
+<meta itemprop="description" name="description"
+    content="Built a browser-based tool that auto-transcribes and burns subtitles into videos. No uploads, no servers." />
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>autosub — building a video subtitle tool over dinner | Not Shant Blog</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="autosub — building a video subtitle tool over dinner" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Built a browser-based tool that auto-transcribes and burns subtitles into videos. No uploads, no servers." />
+<meta property="og:description" content="Built a browser-based tool that auto-transcribes and burns subtitles into videos. No uploads, no servers." />
+<link rel="canonical" href="https://notshant.xyz/posts/autosub" />
+<meta property="og:url" content="https://notshant.xyz/posts/autosub" />
+<meta property="og:site_name" content="Not Shant Blog" />
+<meta property="og:image" content="https://notshant.xyz/assets/autosub/ui.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2026-04-05T00:00:00-05:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="https://notshant.xyz/assets/autosub/ui.png" />
+<meta property="twitter:title" content="autosub — building a video subtitle tool over dinner" />
+<meta name="twitter:site" content="@" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-04-05T00:00:00-05:00","datePublished":"2026-04-05T00:00:00-05:00","description":"Built a browser-based tool that auto-transcribes and burns subtitles into videos. No uploads, no servers.","headline":"autosub — building a video subtitle tool over dinner","image":"https://notshant.xyz/assets/autosub/ui.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://notshant.xyz/posts/autosub"},"url":"https://notshant.xyz/posts/autosub"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-JGZRXWFK8F"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-JGZRXWFK8F');
+</script>
+
+<body class="antialiased text-gray-900 min-h-screen container mx-auto w-3/4">
+    <header class="flex flex-row justify-between items-center h-12 md:h-20 text-sm md:text-lg font-semibold">
+  <div class="w-1/4 md:none">
+    <a href="/"><img src="/assets/shant_logo.svg"></a>
+  </div>
+  <div class="flex flex-row space-x-2 md:space-x-4 justify-end items-center">
+    <a href="/about" class="hover:text-red-500"> About </a>
+    <a href="/" class="hover:text-red-500">Posts</a>
+    <a href="/posts/past-life" class="hover:text-red-500"> Archive </a>
+    <a href="https://twitter.com/prashant_mit" class="w-4 md:w-5"><img src="/assets/twitter_icon.svg"></a>
+    <a href="https://github.com/prashant3863" class="w-4 md:w-5"><img src="/assets/github_icon.svg"></a>
+  </div>
+</header>
+
+    <header>
+    
+    <a href="/" class="flex items-center m-1 md:m-5 md:text-lg hover:underline">
+        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd"
+                d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                clip-rule="evenodd"></path>
+        </svg>
+        <span>Back</span>
+    </a>
+    
+</header>
+
+<article class="prose prose-sm md:prose mx-auto">
+  <p>My wife was looking for a way to add subtitles to a video she wanted to post. Every tool she found either required uploading to some server, was paid with watermarks, or exported at lower quality. I figured — how hard can this be to build from scratch?</p>
+
+<p>Turns out, not that hard. A few hours later, <a href="https://notshant.xyz/autosub/">autosub</a> was working.</p>
+
+<p><img src="/assets/autosub/ui.png" alt="autosub UI" /></p>
+
+<h3 id="what-it-does">What it does</h3>
+
+<p>Upload a video, it transcribes the speech, lets you pick a subtitle style, and burns the subtitles into the video. After transcription, you get an editable list of all the cues — so you can fix any words Whisper got wrong before burning. Everything runs in the browser. Your video never leaves your device.</p>
+
+<p><img src="/assets/autosub/output-portrait.png" alt="Portrait output with subtitles" /></p>
+
+<h3 id="how-it-works-under-the-hood">How it works under the hood</h3>
+
+<p>The pipeline has three main phases:</p>
+
+<p><strong>Transcription</strong> — <a href="https://huggingface.co/Xenova/whisper-small">Whisper</a> (the small multilingual model) runs via <a href="https://huggingface.co/docs/transformers.js">Transformers.js</a> inside a Web Worker. This was necessary because ONNX inference blocks the main thread so hard that even CSS animations freeze. Running it in a worker keeps the UI responsive. Whisper also handles translation — non-English audio gets translated to English subtitles automatically.</p>
+
+<p><strong>Subtitle rendering</strong> — Canvas 2D draws the text onto each video frame. This sounds simple until you deal with word-wrapping, per-line background boxes with rounded corners, and the fun edge case of multi-line boxed subtitles where the lines are different widths. Ended up building a custom composite path with concave notch curves at the width-step junctions to make the background look like a single cohesive shape.</p>
+
+<p><strong>Video encoding</strong> — The <a href="https://developer.mozilla.org/en-US/docs/Web/API/WebCodecs_API">WebCodecs API</a> decodes frames, we draw subtitles on a canvas, then re-encode with hardware acceleration. On a MacBook this uses VideoToolbox and processes 4K video at ~47 fps. There’s an <a href="https://ffmpegwasm.netlify.app/">FFmpeg.wasm</a> fallback for browsers that don’t support WebCodecs, but it’s significantly slower since it runs entirely in WASM on the CPU.</p>
+
+<h3 id="interesting-problems-along-the-way">Interesting problems along the way</h3>
+
+<p><strong>Memory</strong> was the first real issue. Whisper’s model is ~250MB in memory, the decoded audio is another chunk, and 4K video frames are ~32MB each uncompressed. Without backpressure on the WebCodecs decode/encode pipeline, memory usage would spike to several GB. The fix was a pump mechanism that checks queue sizes before feeding more frames, and disposing the Whisper model before starting the burn phase.</p>
+
+<p><strong>HEVC 10-bit input</strong> caused video corruption on the first attempt — black squiggly lines on certain frames. The input video was HDR (yuv420p10le, bt2020) and H.264 encoding didn’t handle the pixel format conversion gracefully. A <code class="language-plaintext highlighter-rouge">format=yuv420p</code> conversion step before the drawtext filter fixed it.</p>
+
+<p><strong>The initial FFmpeg.wasm approach took 30+ minutes</strong> for a 44-second 4K video. Switching to WebCodecs brought it down to ~24 seconds. The difference is hardware encoding vs single-threaded WASM — roughly 50x.</p>
+
+<h3 id="tech-choices">Tech choices</h3>
+
+<ul>
+  <li><strong>Transformers.js</strong> over a backend API — no server costs, no API keys, works offline after first model download (~250MB, cached)</li>
+  <li><strong>WebCodecs</strong> over FFmpeg.wasm for encoding — hardware acceleration makes 4K feasible</li>
+  <li><strong>Canvas 2D</strong> for subtitle rendering — simple, reliable, same code for preview and final output</li>
+  <li><strong>Web Worker</strong> for transcription — keeps UI alive during heavy ONNX inference</li>
+  <li><strong>mp4box.js</strong> for demuxing, <strong>mp4-muxer</strong> for output — lightweight, browser-native</li>
+</ul>
+
+<p>The whole thing is vanilla HTML/CSS/JS bundled with Vite. No React, no framework. It didn’t need one.</p>
+
+<h3 id="try-it">Try it</h3>
+
+<p><a href="https://notshant.xyz/autosub/">notshant.xyz/autosub</a> — works best in Chrome. Source on <a href="https://github.com/prashant3863/autosub">GitHub</a>.</p>
+
+  <div class="h-2 md:h-4"></div>
+</article>
+
+</body>
+
+</html>
