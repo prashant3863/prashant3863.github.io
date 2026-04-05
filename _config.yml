@@ -3,6 +3,8 @@ google_analytics: G-JGZRXWFK8F
 title: Not Shant Blog
 description: Personal Blog of Prashant Mittal
 url: https://notshant.xyz
+twitter:
+  card: summary_large_image
 
 plugins:
   - jekyll-seo-tag
