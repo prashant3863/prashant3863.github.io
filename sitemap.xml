@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url>
+<loc>https://notshant.xyz/about</loc>
+<lastmod>2026-04-05T00:00:00+00:00</lastmod>
+</url>
+<url>
+<loc>https://notshant.xyz/posts/past-life</loc>
+<lastmod>2023-01-01T00:00:00+00:00</lastmod>
+</url>
+<url>
+<loc>https://notshant.xyz/posts/identifiers</loc>
+<lastmod>2023-04-05T00:00:00+00:00</lastmod>
+</url>
+<url>
+<loc>https://notshant.xyz/posts/history</loc>
+<lastmod>2023-07-03T00:00:00+00:00</lastmod>
+</url>
+<url>
+<loc>https://notshant.xyz/posts/elegance-in-simplicity</loc>
+<lastmod>2024-01-24T00:00:00+00:00</lastmod>
+</url>
+<url>
+<loc>https://notshant.xyz/posts/autosub</loc>
+<lastmod>2026-04-05T00:00:00+00:00</lastmod>
+</url>
+<url>
+<loc>https://notshant.xyz/posts/software-estimation</loc>
+<lastmod>2026-10-03T00:00:00+00:00</lastmod>
+</url>
+<url>
+<loc>https://notshant.xyz/</loc>
+</url>
+</urlset>

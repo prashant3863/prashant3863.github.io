@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-30.0 -30.0 1788.0 600.0" role="img" aria-label="Cumulative probability curve: 50 percent chance of finishing by week 14, 85 percent by week 18"><style>
+text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;fill:#2a2a2a;font-size:20px}
+.ax{font-size:18px;fill:#6e6e6e}
+.axu{font-size:17px;fill:#6e6e6e;letter-spacing:.1em;text-transform:uppercase}
+.sr{font-family:Georgia,"Times New Roman",serif;font-size:26px;fill:#121212;font-weight:600}
+.sri{font-family:Georgia,"Times New Roman",serif;font-style:italic;font-size:24px;fill:#2a2a2a}
+.red{fill:#e3120b}.wt{fill:#fff}.b{font-weight:600}
+</style><rect x="-30.0" y="-30.0" width="1788.0" height="600.0" fill="#fff"/>
+        <!-- X = 120 + (w-10)*100 ; Y = 500 - p*440 -->
+        <g stroke="#ececec"><line x1="120" y1="60" x2="1560" y2="60"/><line x1="120" y1="170" x2="1560" y2="170"/><line x1="120" y1="280" x2="1560" y2="280"/><line x1="120" y1="390" x2="1560" y2="390"/></g>
+        <line x1="120" y1="500" x2="1560" y2="500" stroke="#121212" stroke-width="2"/>
+        <g class="ax" text-anchor="end"><text x="100" y="66">100%</text><text x="100" y="286">50%</text><text x="100" y="506">0%</text></g>
+        <g class="ax" text-anchor="middle"><text x="120" y="534">Week 10</text><text x="520" y="534">14</text><text x="920" y="534">18</text><text x="1320" y="534">22</text></g>
+        <polyline points="120,500 220,487 320,447 420,368 520,280 620,210 720,166 820,139 920,126 1020,104 1120,91 1320,73 1520,64" fill="none" stroke="#3e4c6e" stroke-width="3" stroke-linejoin="round"/>
+        <!-- P50 -->
+        <line x1="120" y1="280" x2="520" y2="280" stroke="#7d97b5" stroke-width="2" stroke-dasharray="6 6"/>
+        <line x1="520" y1="280" x2="520" y2="500" stroke="#7d97b5" stroke-width="2" stroke-dasharray="6 6"/>
+        <circle cx="520" cy="280" r="9" fill="#7d97b5"/>
+        <text x="545" y="316" class="sr">P50: week 14</text>
+        <text x="545" y="348" class="ax">a coin toss</text>
+        <!-- P85 -->
+        <line x1="120" y1="126" x2="920" y2="126" stroke="#121212" stroke-width="2" stroke-dasharray="6 6"/>
+        <line x1="920" y1="126" x2="920" y2="500" stroke="#121212" stroke-width="2" stroke-dasharray="6 6"/>
+        <rect x="910" y="116" width="20" height="20" fill="#e3120b"/>
+        <text x="950" y="170" class="sr">P85: week 18</text>
+        <text x="950" y="202" class="ax">what you commit to</text>
+        <text x="1560" y="40" text-anchor="end" class="axu">Chance of finishing by this week</text>
+      </svg>

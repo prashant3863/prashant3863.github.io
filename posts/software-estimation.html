@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="/dist/index.css">
+<link rel="shortcut icon" type="image/png" href=/assets/favicon.ico>
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>“How long will this take?” How to estimate software projects | Not Shant Blog</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="“How long will this take?” How to estimate software projects" />
+<meta name="author" content="Prashant Mittal" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="How to estimate software projects under uncertainty: why estimates miss, 4 pitfalls, a 5-step method, what changes with AI, and pricing consulting work." />
+<meta property="og:description" content="How to estimate software projects under uncertainty: why estimates miss, 4 pitfalls, a 5-step method, what changes with AI, and pricing consulting work." />
+<link rel="canonical" href="https://notshant.xyz/posts/software-estimation" />
+<meta property="og:url" content="https://notshant.xyz/posts/software-estimation" />
+<meta property="og:site_name" content="Not Shant Blog" />
+<meta property="og:image" content="https://notshant.xyz/assets/estimates/social-card.png" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:alt" content="How long will this take? Estimating under uncertainty: the pitfalls, a five-step method, and what changes with AI, with the cone of uncertainty" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2026-10-03T00:00:00+00:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="https://notshant.xyz/assets/estimates/social-card.png" />
+<meta name="twitter:image:alt" content="How long will this take? Estimating under uncertainty: the pitfalls, a five-step method, and what changes with AI, with the cone of uncertainty" />
+<meta property="twitter:title" content="“How long will this take?” How to estimate software projects" />
+<meta name="twitter:site" content="@prashant_mit" />
+<meta name="twitter:creator" content="@prashant_mit" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Prashant Mittal","url":"https://notshant.xyz/about"},"dateModified":"2026-10-03T00:00:00+00:00","datePublished":"2026-10-03T00:00:00+00:00","description":"How to estimate software projects under uncertainty: why estimates miss, 4 pitfalls, a 5-step method, what changes with AI, and pricing consulting work.","headline":"“How long will this take?” How to estimate software projects","image":{"alt":"How long will this take? Estimating under uncertainty: the pitfalls, a five-step method, and what changes with AI, with the cone of uncertainty","width":1200,"height":630,"url":"https://notshant.xyz/assets/estimates/social-card.png","@type":"imageObject"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://notshant.xyz/posts/software-estimation"},"url":"https://notshant.xyz/posts/software-estimation"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-JGZRXWFK8F"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-JGZRXWFK8F');
+</script>
+
+<body class="antialiased text-gray-900 min-h-screen container mx-auto w-3/4">
+    <header class="flex flex-row justify-between items-center h-12 md:h-20 text-sm md:text-lg font-semibold">
+  <div class="w-1/4 md:none">
+    <a href="/"><img src="/assets/shant_logo.svg"></a>
+  </div>
+  <div class="flex flex-row space-x-2 md:space-x-4 justify-end items-center">
+    <a href="/about" class="hover:text-red-500"> About </a>
+    <a href="/" class="hover:text-red-500">Posts</a>
+    <a href="/posts/past-life" class="hover:text-red-500"> Archive </a>
+    <a href="https://twitter.com/prashant_mit" class="w-4 md:w-5"><img src="/assets/twitter_icon.svg"></a>
+    <a href="https://github.com/prashant3863" class="w-4 md:w-5"><img src="/assets/github_icon.svg"></a>
+  </div>
+</header>
+
+    <header>
+    
+    <a href="/" class="flex items-center m-1 md:m-5 md:text-lg hover:underline">
+        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd"
+                d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                clip-rule="evenodd"></path>
+        </svg>
+        <span>Back</span>
+    </a>
+    
+</header>
+
+<article class="prose prose-sm md:prose lg:prose-lg mx-auto md:max-w-3xl lg:max-w-4xl numbered">
+  <h1 id="how-long-will-this-take">“How long will this take?”</h1>
+
+<p class="c-subtitle">Estimating under uncertainty: the pitfalls, a five-step method, and what changes with AI</p>
+
+<p>Every software project starts with this question, and almost every answer to it turns out wrong. Last week I gave <a href="#the-slides">a talk</a> at work on estimation. It was mostly for our sales and tech folks, who answer this question together before anyone signs a contract. I called it <em>An estimate they can’t refuse</em>, a nod to <a href="https://en.wikipedia.org/wiki/The_Godfather">The Godfather</a>’s “I’m gonna make him an offer he can’t refuse.”</p>
+
+<p class="c-key">When estimating, the goal isn’t the lowest number, or the number the client wants to hear. It’s a number with enough reasoning behind it that neither side feels the need to argue with it.</p>
+
+<div class="c-summary">
+  <p><span class="c-label">In this post</span></p>
+
+  <ol>
+    <li><a href="#why-estimates-miss-even-good-ones">Why estimates miss, even good ones</a></li>
+    <li><a href="#three-words-we-use-interchangeably">Three words we use interchangeably</a></li>
+    <li><a href="#four-ways-we-make-it-worse">Four ways we make it worse</a></li>
+    <li><a href="#how-to-estimate">How to estimate</a></li>
+    <li><a href="#estimating-for-an-ai-native-sdlc">Estimating for an AI-native SDLC</a></li>
+    <li><a href="#from-estimate-to-contract">From estimate to contract</a></li>
+    <li><a href="#questions-youre-probably-asking">Questions you’re probably asking</a></li>
+    <li><a href="#the-slides">The slides</a></li>
+  </ol>
+</div>
+
+<h3 id="why-estimates-miss-even-good-ones">Why estimates miss, even good ones</h3>
+
+<p><img src="/assets/estimates/cone.svg" alt="Cone of uncertainty: a software estimate can range from 0.25x to 4x at the start of a project, narrowing as requirements and design are done" /></p>
+
+<p>This is the <a href="https://en.wikipedia.org/wiki/Cone_of_Uncertainty"><strong>cone of uncertainty</strong></a>. It shows how far off even a good estimate can be at each stage of a project. At the start, very little is decided, so the range is huge. As you write requirements, agree designs and build code, each decision removes some uncertainty. The range narrows, and it only closes when the software is done.</p>
+
+<blockquote class="fact">
+  <p>On day zero, when all you have is an idea, the actual cost can land anywhere from <strong>a quarter to four times</strong> your estimate.</p>
+</blockquote>
+
+<p class="cite">Steve McConnell, <a href="https://www.construx.com/wp-content/uploads/2019/02/CxWhitePaper_ConeOfUncertainty.pdf">The Cone of Uncertainty</a></p>
+
+<p>That is a 16x range, and it is the best case, for skilled estimators.</p>
+
+<p>We write most proposals and SoWs in that grey band on the left. Sometimes a little further right, if the client has done a lot of homework. But mostly there.</p>
+
+<p>Don’t be scared of the range, but know it’s there. A single number on day zero is a guess with false precision. Estimating well means narrowing that range as you learn things, not squeezing it to look sure.</p>
+
+<p><img src="/assets/estimates/long-tail.svg" alt="Distribution of IT project cost overruns: the average is 27%, but one project in six runs about 200% over budget" /></p>
+
+<p>Next, look at how overruns spread across projects. A study of 1,471 IT projects found:</p>
+
+<blockquote class="fact">
+  <p>The average cost overrun was <strong>27%</strong>.</p>
+</blockquote>
+
+<p class="cite">Flyvbjerg and Budzier, <a href="https://hbr.org/2011/09/why-your-it-project-may-be-riskier-than-you-think">Why Your IT Project May Be Riskier Than You Think</a>, HBR (2011)</p>
+
+<p>Sounds manageable, add a quarter and move on. Except the average hides the tail.</p>
+
+<blockquote class="fact">
+  <p><strong>One project in six</strong> went about 200% over budget and 70% over time.</p>
+</blockquote>
+
+<p class="cite">Same study</p>
+
+<p>Projects can’t finish much earlier than planned, but they can finish far later. You can’t pad your way out of that. You have to spot the work likely to end up in the tail and treat it differently.</p>
+
+<h3 id="three-words-we-use-interchangeably">Three words we use interchangeably</h3>
+
+<p>We use estimate, target and commitment as if they mean the same thing. They don’t, and mixing them up is where many estimation arguments start:</p>
+
+<div class="c-grid c-grid-3">
+  <div class="c-card">
+    <span class="c-label">Estimate</span>
+    <p class="c-title">What the work will probably take</p>
+    <p>A range, worked out from the work itself, by the people who'll do it. Say, 11 to 21 weeks. It changes only when you learn something new about the work.</p>
+  </div>
+  <div class="c-card">
+    <span class="c-label">Target</span>
+    <p class="c-title">What the business wants</p>
+    <p>A date or budget the client needs for their own reasons, like "we go live in 10 weeks because there's a launch event." It's a fair goal, but it says nothing about how long the work takes.</p>
+  </div>
+  <div class="c-card">
+    <span class="c-label">Commitment</span>
+    <p class="c-title">What you promise</p>
+    <p>A specific date and scope you agree to deliver, decided after looking at the estimate and the target together. You make this call after weighing both.</p>
+  </div>
+</div>
+
+<p>If the target sits outside your estimate, talk about scope or capacity. You can fix time, scope and team size, but only two of the three (the old <a href="https://en.wikipedia.org/wiki/Project_management_triangle">project management triangle</a>). Don’t change the estimate to match the target. That pushes the problem later in the project, where it’s harder and costlier to fix.</p>
+
+<h3 id="four-ways-we-make-it-worse">Four ways we make it worse</h3>
+
+<div class="c-grid c-grid-2">
+  <div class="c-card">
+    <span class="c-label">Pitfall 1</span>
+    <p class="c-title">Anchoring</p>
+    <p>The first number you hear pulls yours towards it.</p>
+    <p class="c-fix">Fix: estimate before you hear the budget.</p>
+  </div>
+  <div class="c-card">
+    <span class="c-label">Pitfall 2</span>
+    <p class="c-title">Narrowing the range to look confident</p>
+    <p>Nobody asks for a tight range, but we give one anyway.</p>
+    <p class="c-fix">Fix: widen it until you'd bet on it.</p>
+  </div>
+  <div class="c-card">
+    <span class="c-label">Pitfall 3</span>
+    <p class="c-title">Estimating the code, not the project</p>
+    <p>Everyone forgets the work around the code.</p>
+    <p class="c-fix">Fix: a checklist, with a line for every item.</p>
+  </div>
+  <div class="c-card">
+    <span class="c-label">Pitfall 4</span>
+    <p class="c-title">Cutting the number instead of the scope</p>
+    <p>Someone pushes, and the number shrinks. The work doesn't.</p>
+    <p class="c-fix">Fix: negotiate the scope instead.</p>
+  </div>
+</div>
+
+<h4 id="1-anchoring">1. Anchoring</h4>
+
+<p>This is my favourite study. Magne Jørgensen and Dag Sjøberg <a href="https://www.researchgate.net/publication/222369188_The_impact_of_customer_expectation_on_software_development_effort_estimates">gave two groups of professionals the same spec</a>. One group was told, in passing, that the client thought it would take 50 hours. The other was told 1,000 hours. Both were told the client knew nothing about software and to ignore the number.</p>
+
+<p><img src="/assets/estimates/anchoring.svg" alt="Anchoring in software estimation: developers told 50 hours estimated 77 hours, developers told 1,000 hours estimated 632 hours for the same spec" /></p>
+
+<p>Both groups estimated the same work. The second group’s answer came out eight times bigger. And when asked, the estimators said the client’s number hadn’t influenced them. Jørgensen has <a href="https://cms.simula.no/sites/default/files/publications/files/lohre_jorgensen_-_anchors_software_estimation.pdf">kept finding the same effect</a> since. It even has a name: the <a href="https://en.wikipedia.org/wiki/Anchoring_effect">anchoring effect</a>.</p>
+
+<p>Any number you hear first becomes the anchor: the client’s budget, a competitor’s quote, what sales is hoping for. So estimate before you hear the budget. Write it down. Then compare. Asking for the budget is still essential. It’s how you shape scope. Just don’t let it into the room before you have an estimate done.</p>
+
+<h4 id="2-narrowing-the-range-to-look-confident">2. Narrowing the range to look confident</h4>
+
+<p>McConnell’s book, <a href="https://www.oreilly.com/library/view/software-estimation-demystifying/0735605351/"><em>Software Estimation</em></a>, opens with <a href="https://scrumandkanban.co.uk/how-accurate-are-your-estimates/">a quiz</a>: ten general-knowledge questions. For each, you give a range you’re 90% sure contains the answer. You should get nine right. The average is <strong>2.8</strong>.</p>
+
+<p>Notice what the quiz never asks for: a narrow range. People are free to make their ranges as wide as they like, and they still squeeze them. A tight range feels like expertise, and a wide one feels like admitting you don’t know. So we narrow ranges on our own, as a stand-in for confidence, when nobody asked us to.</p>
+
+<p>The same thing happens in a proposal. “11 to 21 weeks” feels too vague to put in front of a client, so it gets trimmed to “14 to 16.” But at proposal stage, a wide range is the accurate answer, and a wide range is itself information. It tells you how many unknowns you still have.</p>
+
+<h4 id="3-estimating-the-code-not-the-project">3. Estimating the code, not the project</h4>
+
+<p>Engineers estimate what they picture: building features. They forget everything around it:</p>
+
+<ul class="c-check">
+  <li>Environments and access</li>
+  <li>Integrating with the client’s systems</li>
+  <li>Testing</li>
+  <li>Security review</li>
+  <li>Data migration</li>
+  <li>Deployment</li>
+  <li>Demos</li>
+  <li>UAT support</li>
+  <li>Waiting on client inputs</li>
+  <li>Handover</li>
+</ul>
+
+<p>Forgotten work like this is one of the most common sources of estimation error. On many of the projects I’ve seen, that “everything else” is close to half the effort. Keep a checklist like this one and put a line against every item, even if the line says zero. A zero you chose is fine. A zero you forgot is an overrun.</p>
+
+<h4 id="4-cutting-the-number-instead-of-the-scope">4. Cutting the number instead of the scope</h4>
+
+<p>“It’ll take 20 weeks.” “Can we do it faster?” There are only two real ways to go faster: less scope, or fewer unknowns. Shaving the number because someone pushed leaves the work the same size. It only feeds the <a href="https://en.wikipedia.org/wiki/Planning_fallacy">planning fallacy</a>. People haggle over a single number. A range with reasons behind it is much harder to haggle over.</p>
+
+<h3 id="how-to-estimate">How to estimate</h3>
+
+<div class="c-step">
+<div class="c-step-num">1</div>
+<div class="c-step-body">
+
+    <h4 id="break-it-down-and-sort-it">Break it down and sort it</h4>
+
+    <p>“Build a web service” is hard to estimate. “Build an endpoint that does these four things” is not. Then sort each piece into one of three kinds:</p>
+
+    <ul>
+      <li><em>Known</em>: you’ve done this before, so the range is tight.</li>
+      <li><em>Assumed</em>: you believe it, but nobody has checked. The range widens, and the assumption goes in writing.</li>
+      <li><em>Unknown</em>: no estimate at all. Run a timeboxed <a href="https://en.wikipedia.org/wiki/Spike_%28software_development%29">spike</a> to find out first.</li>
+    </ul>
+
+  </div>
+</div>
+
+<div class="c-step">
+<div class="c-step-num">2</div>
+<div class="c-step-body">
+
+    <h4 id="three-numbers-per-piece">Three numbers per piece</h4>
+
+    <p>Best case, most likely, worst case. Then weight them, using the <a href="https://en.wikipedia.org/wiki/Three-point_estimation">three-point (PERT) estimate</a>:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>expected = (best + 4 × likely + worst) / 6
+</code></pre></div>    </div>
+
+    <p><img src="/assets/estimates/three-point.svg" alt="Three-point PERT estimate: best case 10 days, likely 15, worst 35, expected 17.5 days" /></p>
+
+    <p>The formula is a weighted average. The likely case gets four times the weight, because it’s what usually happens. The best and worst cases get one share each, so they still pull on the result.</p>
+
+    <p>Take a task where the best case is 10 days, the likely case is 15 and the worst case is 35. The best case is only 5 days better than likely, but the worst case is 20 days worse. Things can go a lot more wrong than they can go right. So the weighted answer comes out at 17.5 days, not 15.</p>
+
+    <p>That 2.5-day gap looks small on one task. Across fifty tasks it adds up to weeks. If you add up the “likely” numbers, your plan assumes nothing ever goes badly, and you’re late by design. Add up the expected numbers instead.</p>
+
+  </div>
+</div>
+
+<div class="c-step">
+<div class="c-step-num">3</div>
+<div class="c-step-body">
+
+    <h4 id="alone-first-then-together">Alone first, then together</h4>
+
+    <p>Do the first pass alone, in writing, with the codebase open. That way you build your own picture of the work before anyone else’s number can sway it. Then do a round with others, ideally with someone who’ll build it. This is <a href="https://en.wikipedia.org/wiki/Wideband_delphi">Wideband Delphi</a>; <a href="https://en.wikipedia.org/wiki/Planning_poker">planning poker</a> is a lighter version. When estimates spread from 6 to 28 weeks, don’t average them. Ask the highest and lowest to explain. They’re almost always picturing different work, and that conversation usually tells you more than the numbers do. Two or three rounds and you get to something like 12 to 17.</p>
+
+  </div>
+</div>
+
+<div class="c-step">
+<div class="c-step-num">4</div>
+<div class="c-step-body">
+
+    <h4 id="check-it-against-history">Check it against history</h4>
+
+    <p>Keep a reference sheet of how long each kind of work has taken you before. Use the same pieces you broke the project into in step one: an API endpoint, an integration, a data migration, an agent. If a new estimate looks optimistic next to what that kind of work took before, trust the history. Flyvbjerg calls this <a href="https://en.wikipedia.org/wiki/Reference_class_forecasting">reference class forecasting</a>.</p>
+
+    <p>The sheet matters most for the kinds of work where gut feel is worst. Rescues and rewrites of existing systems are the usual example. They almost always take far longer than estimated, because the old code hides behaviour nobody thought to list. (More on that in <a href="#from-estimate-to-contract">From estimate to contract</a>.) Your history shows that pattern long before your instinct accepts it. With agents in the loop, this history needs adjusting too, which the next section covers.</p>
+
+  </div>
+</div>
+
+<div class="c-step">
+<div class="c-step-num">5</div>
+<div class="c-step-body">
+
+    <h4 id="quote-a-range-and-a-confidence">Quote a range and a confidence</h4>
+
+    <p>Never a range without a confidence. “10 to 20 weeks” on its own doesn’t say how likely you are to land inside it. Said with 50% confidence, it’s as likely to miss as to hit. Said with 90%, it’s something the client can plan a launch around. The same range can be a safe promise or a reckless one, and only the confidence tells everyone which. It also tells you how much risk you’re taking on.</p>
+
+    <p><img src="/assets/estimates/p50-p85.svg" alt="Project delivery forecast: 50% confidence at week 14 (P50), 85% confidence at week 18 (P85)" /></p>
+
+    <p>P50 is a coin toss. P85 is what you commit to. If you want to get rigorous, a Monte Carlo simulation over your three-point numbers gives you the whole curve. Troy Magennis has <a href="https://www.focusedobjective.com/">free spreadsheets</a> for this. “14 to 18 weeks, and we commit to 18 for this scope.” My test for P85: would I bet a month’s salary on landing inside the range? If not, widen it.</p>
+
+  </div>
+</div>
+
+<h3 id="estimating-for-an-ai-native-sdlc">Estimating for an AI-native SDLC</h3>
+
+<p>Most of my history, and most of the research above, comes from a world where humans typed every line. That’s not how we work anymore. An API that took me a day by hand now often takes a few hours with an agent doing the typing.</p>
+
+<div class="c-callout">
+  <div class="c-big">÷&nbsp;1.5</div>
+  <div>
+    <span class="c-label">The AI multiplier</span>
+    <p>After adding everything up, I divide the build work by an <strong>AI multiplier</strong>. These days I usually use <strong>1.5</strong>: if I'd have said 10 days by hand, it'll probably be 6 or 7.</p>
+    <p>It's a gut call, but it's a gut call I write down, so I can check it later.</p>
+  </div>
+</div>
+
+<p>How big the multiplier should be depends on a few things:</p>
+
+<div class="c-grid c-grid-2">
+  <div class="c-card">
+    <p class="c-title">How well you know the stack</p>
+    <p>Agents amplify what you already know. In a stack you know well, you can review their output quickly and steer them away from bad ideas. In an unfamiliar one, you can't tell good output from output that only looks right, so the speed-up shrinks.</p>
+  </div>
+  <div class="c-card">
+    <p class="c-title">How new the problem is</p>
+    <p>CRUD endpoints, integrations with well-documented APIs and test scaffolding speed up a lot. New logic, tricky concurrency and anything nobody has written about before speed up much less.</p>
+  </div>
+  <div class="c-card">
+    <p class="c-title">How good your tooling and harness are</p>
+    <p>An agent with a fast test suite, clear conventions and context about the codebase is a different tool from one working blind. The better the harness, the bigger the multiplier you can justify.</p>
+  </div>
+  <div class="c-card">
+    <p class="c-title">How easy the output is to check</p>
+    <p>If a test or a quick demo proves it works, the agent's speed shows up as faster delivery. If a person has to read every line carefully, the review becomes the bottleneck.</p>
+  </div>
+</div>
+
+<p>Two cautions.</p>
+
+<p><strong>Only divide the build work.</strong> Agents speed up writing code. They don’t speed up the rest: waiting for client inputs, getting access to environments, a security review, UAT. Or the meeting where three stakeholders disagree on what “done” means. Remember the forgotten-work checklist from earlier. Apply the multiplier only to the pieces an agent will build. Apply it to the whole project and you’ll shrink the parts that were never about typing speed.</p>
+
+<p><strong>Track it separately.</strong> Your estimated-vs-actuals sheet from before AI is now skewed. Add a column for whether the work was agent-assisted, and what multiplier you assumed. In a few months you’ll know whether 1.5 was about right, too optimistic or too cautious, and you can stop guessing.</p>
+
+<h3 id="from-estimate-to-contract">From estimate to contract</h3>
+
+<p>Everything so far applies to any team estimating its own work. If you build software for clients, there’s one more step. The estimate turns into a price, and the price turns into a contract. That’s where a wide range stops being an inconvenience. It becomes risk someone has to carry: you, the client, or both. So the rest of this post is about consulting. What do you do when the range is too wide to price? And how do you match the contract to the range you have?</p>
+
+<p>If the range is wide, it’s because there are unknowns, and no technique will narrow it. The information doesn’t exist yet. So buy it. Sell a short, fixed-fee discovery and credit it against the build. Blair Enns calls this <a href="https://2bobs.com/podcast/phase-your-client-engagements">diagnosing before you prescribe</a>.</p>
+
+<p>A good discovery gives you five things:</p>
+
+<ol>
+  <li>Exactly what you’ll hand over at the end of the build.</li>
+  <li>A definition of done that both sides sign.</li>
+  <li>A small spike on each unknown. Never connected Salesforce to Snowflake? Connect a toy instance. Never built an agent? Build a hello-world one.</li>
+  <li>A starter eval set, if it’s AI work.</li>
+  <li>A P85 estimate for the build.</li>
+</ol>
+
+<p>Even if the client takes the plan elsewhere, they got their money’s worth.</p>
+
+<p>Then let the width of the range pick the contract.</p>
+
+<p><img src="/assets/estimates/contract-ladder.svg" alt="Choosing a software consulting contract by estimate range: fixed price, fixed price with checkpoints, target cost, time and materials" /></p>
+
+<p>Narrow range, fixed price is fine. Wider, fixed price with checkpoints where both sides re-look at scope (the <a href="https://en.wikipedia.org/wiki/Agile_contracts">agile fixed price</a> model). Wider still, <a href="https://www.pinsentmasons.com/out-law/guides/how-target-cost-contracts-can-reduce-risk">target cost</a> with overruns and savings split. Too vague, time and materials with a flexible scope.</p>
+
+<p class="pull">A fixed price on a wide range isn’t a price. It’s a bet.</p>
+
+<p>And watch out for scope that points at something instead of defining done. “Finish the build.” “Rewrite it in a modern stack.” “Just make it do what the current system does.” Nobody knows what the current system does, not you and not the client. The old system is the only complete spec of itself, and thanks to <a href="https://www.hyrumslaw.com/">Hyrum’s Law</a>, someone depends on every one of its quirks. Audit first, write down what it does, agree that list as the definition of done, then estimate.</p>
+
+<h3 id="questions-youre-probably-asking">Questions you’re probably asking</h3>
+
+<h4 id="doesnt-estimating-before-the-budget-waste-time-on-deals-that-wont-fit">“Doesn’t estimating before the budget waste time on deals that won’t fit?”</h4>
+
+<p>It can. You don’t want to spend days estimating a deal that was never going to fit. Start with a <a href="https://en.wikipedia.org/wiki/Scientific_wild-ass_guess"><strong>SWAG</strong></a>: a quick range from someone experienced. Anywhere from 50k to 150k. Wide, but it tells you it isn’t 10k and it isn’t a million. That’s enough to know if the client’s appetite is in the neighbourhood. Then do the full estimate.</p>
+
+<h4 id="how-do-i-account-for-different-speeds-and-skill-levels-on-the-team">“How do I account for different speeds and skill levels on the team?”</h4>
+
+<p>Normalise to the middle of the team. Any team has a spread: some people finish a task in half a day, others take two or three. Estimate the work as a mid-level engineer on that team would do it, not your fastest person and not your newest.</p>
+
+<p>Estimating to your best people is the common trap. They’re the ones most likely to get pulled onto something else, and then the estimate no longer matches who’s doing the work. A normalised estimate holds up when the staffing changes. If the team really is skewed, say mostly senior or mostly new, adjust for it openly and write down the staffing assumption next to the number.</p>
+
+<p>Clients vary too: consider a <strong>1.25x buffer for difficult clients</strong>. You can usually tell in the sales cycle.</p>
+
+<h4 id="what-if-their-budget-is-just-too-low">“What if their budget is just too low?”</h4>
+
+<p>Every client has some constraint. Nobody has infinite time or money. If they’re at 50k and you’re at 100k, price the intangibles: a case study, a logo, a quote. Treat it as acquisition cost if the account could be worth millions later. But ask one more question: <em>can we deliver this properly?</em> If you’re taking the deal to get into a deep account, that first project has to blow them away. A tight budget that makes that impossible is worse than no deal.</p>
+
+<h4 id="what-if-the-client-thinks-were-padding-the-estimate">“What if the client thinks we’re padding the estimate?”</h4>
+
+<p>An estimate higher than the client hoped for can look like sandbagging: a number inflated so the team looks good later. Arguing doesn’t fix that. Showing your work does.</p>
+
+<p>Take a client who wants a full rewrite in two and a half months on a small budget, where the real estimate needs twice the team or twice the time. Don’t send a number. Send the breakdown behind it: every API and flow you’ve understood, the assumptions, and what each piece will take. Three pages is enough. Now the client can check the reasoning line by line, and a big number reads as thorough rather than padded.</p>
+
+<p>The same applies to buffers. If you add contingency, label it and say why. Hidden padding is what makes estimates look dishonest, and once a client finds one, they stop trusting the rest.</p>
+
+<h4 id="should-i-leave-any-buffer">“Should I leave any buffer?”</h4>
+
+<p>Leave room to be excellent. If the estimate only covers what you promised, you’ll deliver that and nothing more. Next time they’ll pick someone cheaper. Leave a little room to do something really well.</p>
+
+<p class="pull">If you remember three words from this post: <strong>range, confidence, reasons.</strong></p>
+
+<h3 id="the-slides">The slides</h3>
+
+<p>Here’s the deck from the talk. Use the arrow keys or click to move through it, and press <code class="language-plaintext highlighter-rouge">N</code> for the speaker notes. Or <a href="/assets/estimates/deck.html">open it full screen</a>.</p>
+
+<div style="position: relative; width: 100%; aspect-ratio: 16 / 9; margin: 1.5rem 0; border: 1px solid #e5e7eb; border-radius: 4px; overflow: hidden;">
+  <iframe src="/assets/estimates/deck.html" title="An estimate they can't refuse, slide deck" loading="lazy" style="position: absolute; inset: 0; width: 100%; height: 100%; border: 0;" allowfullscreen=""></iframe>
+</div>
+
+  <div class="h-2 md:h-4"></div>
+</article>
+
+<style>
+    /* Reusable post components. Inline so Tailwind's purge never strips them. */
+    article.prose {
+        --c-accent: #e3120b;
+        --c-ink: #111827;
+        --c-muted: #6b7280;
+        --c-rule: #e5e7eb;
+        --c-tint: #f7f5f0;
+    }
+
+    /* Pull-quote style facts with a source line underneath */
+    article.prose blockquote.fact {
+        font-size: 1.3em; line-height: 1.45; font-weight: 500;
+        border-left: 4px solid var(--c-accent); padding-left: 1em;
+    }
+    article.prose p.cite { font-size: 0.75em; color: #9ca3af; margin-top: -0.75em; }
+    article.prose p.cite a { color: #9ca3af; }
+
+    /* The key idea of a post: large, bold, set apart */
+    article.prose p.c-key {
+        font-size: 1.45em; line-height: 1.4; font-weight: 700; color: var(--c-ink);
+        background: var(--c-tint); border-left: 6px solid var(--c-accent);
+        padding: 1.25rem 1.5rem; margin: 2rem 0; border-radius: 4px;
+    }
+
+    /* Subtitle directly under the post's H1 */
+    article.prose p.c-subtitle {
+        font-size: 1.35em; line-height: 1.35; color: var(--c-muted); font-weight: 500;
+        margin-top: -0.6em; margin-bottom: 1.75em;
+    }
+
+        /* Big standalone line, no quote marks */
+    article.prose p.pull {
+        font-size: 1.6em; line-height: 1.3; font-weight: 700; color: var(--c-ink);
+        border-top: 3px solid var(--c-accent); padding-top: 0.75em; margin: 2.5rem 0;
+        max-width: 32ch;
+    }
+
+    /* Numbered section headings */
+    article.numbered { counter-reset: section; }
+    article.numbered h3 {
+        counter-increment: section;
+        border-top: 1px solid var(--c-rule); padding-top: 1.75rem; margin-top: 3rem;
+    }
+    article.numbered h3::before {
+        content: counter(section, decimal-leading-zero);
+        display: block; font-size: 0.7em; font-weight: 700; letter-spacing: 0.12em;
+        color: var(--c-accent); margin-bottom: 0.35rem;
+    }
+
+    /* Generic card and grids */
+    article.prose .c-grid { display: grid; gap: 1rem; margin: 1.5rem 0; }
+    article.prose .c-grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    article.prose .c-grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    @media (max-width: 640px) {
+        article.prose .c-grid-2, article.prose .c-grid-3 { grid-template-columns: 1fr; }
+    }
+    article.prose .c-card {
+        border: 1px solid var(--c-rule); border-top: 3px solid var(--c-ink);
+        border-radius: 4px; padding: 1rem 1.1rem; background: #fff;
+    }
+    article.prose .c-card > :first-child { margin-top: 0; }
+    article.prose .c-card > :last-child { margin-bottom: 0; }
+    article.prose .c-card p { margin: 0.4em 0; font-size: 0.95em; }
+    article.prose .c-label {
+        display: block; font-size: 0.72em; font-weight: 700; letter-spacing: 0.12em;
+        text-transform: uppercase; color: var(--c-accent); margin-bottom: 0.25rem;
+    }
+    article.prose .c-card .c-title { font-weight: 700; font-size: 1.05em; color: var(--c-ink); }
+    /* A card with a fix line is a column, so the fix sits at the bottom of every card in a row */
+    article.prose .c-card:has(.c-fix) { display: flex; flex-direction: column; }
+    article.prose .c-card p.c-fix {
+        margin-top: auto; margin-bottom: 0;
+        border-top: 1px solid var(--c-rule); padding-top: 0.5em; font-weight: 600;
+    }
+    article.prose .c-card:has(.c-fix) p:nth-last-child(2) { margin-bottom: 0.9em; }
+
+    /* "In this post" summary box, kept quiet so the key idea leads */
+    article.prose .c-summary {
+        border: 1px solid var(--c-rule); border-radius: 4px;
+        padding: 0.75rem 1.1rem; margin: 1.5rem 0; font-size: 0.9em;
+    }
+    article.prose .c-summary .c-label { color: var(--c-muted); }
+    article.prose .c-summary ol { margin: 0.25rem 0 0; }
+    article.prose .c-summary li { margin: 0.1rem 0; }
+    article.prose .c-summary a { color: var(--c-muted); }
+
+    /* Numbered step cards */
+    article.prose .c-step {
+        display: grid; grid-template-columns: 3rem minmax(0, 1fr); gap: 1rem;
+        border-top: 1px solid var(--c-rule); padding: 1.25rem 0;
+    }
+    article.prose .c-step:last-of-type { border-bottom: 1px solid var(--c-rule); }
+    article.prose .c-step-num {
+        width: 2.5rem; height: 2.5rem; border-radius: 999px; background: var(--c-ink); color: #fff;
+        display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.1em;
+    }
+    article.prose .c-step-body > :first-child { margin-top: 0.3rem; }
+    article.prose .c-step-body > :last-child { margin-bottom: 0; }
+    article.prose .c-step-body h4 { margin-top: 0.2rem; }
+
+    /* Checklist */
+    article.prose ul.c-check {
+        list-style: none; padding-left: 0; display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 2rem; row-gap: 0.6rem;
+    }
+    @media (max-width: 640px) { article.prose ul.c-check { grid-template-columns: 1fr; } }
+    article.prose ul.c-check li { position: relative; padding-left: 1.8rem; margin: 0; }
+    article.prose ul.c-check li::before {
+        content: ""; position: absolute; left: 0; top: 0.35em; width: 1rem; height: 1rem;
+        border: 2px solid var(--c-ink); border-radius: 3px; background: none;
+    }
+
+    /* Highlight callout, e.g. the AI multiplier */
+    article.prose .c-callout {
+        display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 1.5rem; align-items: center;
+        background: var(--c-ink); color: #f9fafb; border-radius: 6px; padding: 1.5rem 1.75rem; margin: 2rem 0;
+    }
+    @media (max-width: 640px) { article.prose .c-callout { grid-template-columns: 1fr; } }
+    article.prose .c-callout .c-big { font-size: 3.2em; font-weight: 800; line-height: 1; color: #fff; }
+    article.prose .c-callout p { margin: 0.3em 0; color: #e5e7eb; }
+    article.prose .c-callout strong { color: #fff; }
+    article.prose .c-callout .c-label { color: #fca5a5; }
+</style>
+
+<style>
+    article.prose img { cursor: zoom-in; }
+    .lightbox {
+        position: fixed; inset: 0; z-index: 50;
+        display: flex; align-items: center; justify-content: center;
+        padding: 2rem; background: rgba(17, 17, 17, 0.85);
+        cursor: zoom-out; opacity: 0; transition: opacity 150ms ease; outline: none;
+    }
+    .lightbox.is-open { opacity: 1; }
+    .lightbox img {
+        max-width: 95vw; max-height: 90vh; width: auto; height: auto;
+        background: #fff; border-radius: 4px; cursor: default;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+    }
+    @media (min-width: 768px) {
+        .lightbox img { min-width: 70vw; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+        .lightbox { transition: none; }
+    }
+</style>
+<script>
+    (function () {
+        var overlay = null;
+        var lastFocus = null;
+
+        function close() {
+            if (!overlay) return;
+            overlay.remove();
+            overlay = null;
+            document.body.style.overflow = '';
+            if (lastFocus) lastFocus.focus();
+        }
+
+        function open(img) {
+            lastFocus = document.activeElement;
+            overlay = document.createElement('div');
+            overlay.className = 'lightbox';
+            overlay.setAttribute('role', 'dialog');
+            overlay.setAttribute('aria-modal', 'true');
+            overlay.setAttribute('aria-label', img.alt || 'Image');
+            overlay.tabIndex = -1;
+
+            var big = document.createElement('img');
+            big.src = img.currentSrc || img.src;
+            big.alt = img.alt;
+            overlay.appendChild(big);
+
+            // Clicking the dimmed area closes; clicking the image itself does not.
+            overlay.addEventListener('click', function (e) {
+                if (e.target === overlay) close();
+            });
+
+            document.body.appendChild(overlay);
+            document.body.style.overflow = 'hidden';
+            overlay.focus();
+            requestAnimationFrame(function () { overlay.classList.add('is-open'); });
+        }
+
+        document.addEventListener('click', function (e) {
+            var img = e.target.closest && e.target.closest('article.prose img');
+            if (img && !overlay) open(img);
+        });
+
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') close();
+        });
+    })();
+</script>
+
+<script>
+    // Open every link in a post in a new tab, except in-page anchors like the contents list.
+    document.querySelectorAll('article.prose a[href]').forEach(function (a) {
+        if (a.getAttribute('href').charAt(0) === '#') return;
+        a.target = '_blank';
+        a.rel = 'noopener noreferrer';
+    });
+</script>
+
+
+</body>
+
+</html>

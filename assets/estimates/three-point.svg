@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-30.0 -30.0 1788.0 530.0" role="img" aria-label="Right-skewed distribution for one task: best case 10 days, most likely 15, expected 17.5, worst case 35"><style>
+text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;fill:#2a2a2a;font-size:20px}
+.ax{font-size:18px;fill:#6e6e6e}
+.axu{font-size:17px;fill:#6e6e6e;letter-spacing:.1em;text-transform:uppercase}
+.sr{font-family:Georgia,"Times New Roman",serif;font-size:26px;fill:#121212;font-weight:600}
+.sri{font-family:Georgia,"Times New Roman",serif;font-style:italic;font-size:24px;fill:#2a2a2a}
+.red{fill:#e3120b}.wt{fill:#fff}.b{font-weight:600}
+</style><rect x="-30.0" y="-30.0" width="1788.0" height="530.0" fill="#fff"/>
+        <line x1="120" y1="400" x2="1600" y2="400" stroke="#121212" stroke-width="2"/>
+        <path d="M360,400 C420,390 480,60 570,60 C660,60 720,240 820,300 C940,370 1100,395 1250,398 L1250,400 Z" fill="#c3d0dc"/>
+        <path d="M360,400 C420,390 480,60 570,60 C660,60 720,240 820,300 C940,370 1100,395 1250,398" fill="none" stroke="#3e4c6e" stroke-width="2.5"/>
+        <g stroke-width="2">
+          <line x1="420" y1="160" x2="420" y2="400" stroke="#6e6e6e" stroke-dasharray="5 5"/>
+          <line x1="570" y1="40" x2="570" y2="400" stroke="#3e4c6e"/>
+          <line x1="645" y1="40" x2="645" y2="400" stroke="#e3120b"/>
+          <line x1="1170" y1="160" x2="1170" y2="400" stroke="#6e6e6e" stroke-dasharray="5 5"/>
+        </g>
+        <text x="420" y="146" text-anchor="middle" class="b">Best: 10 days</text>
+        <text x="555" y="30" text-anchor="end" class="b">Likely: 15</text>
+        <text x="660" y="30" class="b red">Expected: 17.5</text>
+        <text x="1170" y="146" text-anchor="middle" class="b">Worst: 35 days</text>
+        <text x="900" y="250" class="sri">the long right side pulls the expected value up</text>
+        <g class="ax" text-anchor="middle"><text x="120" y="436">0</text><text x="420" y="436">10</text><text x="720" y="436">20</text><text x="1020" y="436">30</text><text x="1320" y="436">40 days</text></g>
+      </svg>
