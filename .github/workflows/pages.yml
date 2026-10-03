@@ -10,15 +10,25 @@ jobs:
      runs-on: ubuntu-latest
 
      steps:
-     - uses: actions/checkout@v2
-     - name: Install Dependencies
-       run: npm instal && npm run css:rel
+     - uses: actions/checkout@v4
 
-     - name: Build the site in the jekyll/builder container
-       run: |
-         docker run \
-         -v ${{ github.workspace }}:/srv/jekyll -v ${{ github.workspace }}/_site:/srv/jekyll/_site \
-         jekyll/builder:latest /bin/bash -c "chmod -R 777 /srv/jekyll && JEKYLL_ENV=production jekyll build --future"
+     - name: Install Dependencies
+       run: npm install && npm run css:rel
+
+     # Pinned Ruby with the gems from Gemfile.lock. Ruby 3.1 because Jekyll 4.2.2's
+     # Liquid 4.0.3 breaks on Ruby 3.2+. Replaces the jekyll/builder:latest image,
+     # which stopped installing the bundle and failed with Bundler::GemNotFound.
+     - name: Set up Ruby
+       uses: ruby/setup-ruby@v1
+       with:
+         ruby-version: '3.1'
+         bundler: latest
+         bundler-cache: true
+
+     - name: Build the site
+       run: bundle exec jekyll build --future
+       env:
+         JEKYLL_ENV: production
 
      - name: GitHub Pages
        uses: crazy-max/ghaction-github-pages@v2.5.0
