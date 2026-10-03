@@ -1,0 +1,8 @@
+<script>
+    // Open every link in a post in a new tab, except in-page anchors like the contents list.
+    document.querySelectorAll('article.prose a[href]').forEach(function (a) {
+        if (a.getAttribute('href').charAt(0) === '#') return;
+        a.target = '_blank';
+        a.rel = 'noopener noreferrer';
+    });
+</script>
