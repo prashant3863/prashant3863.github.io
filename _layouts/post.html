@@ -15,7 +15,9 @@ layout: default
     {% endif %}
 </header>
 
-<article class="prose prose-sm md:prose mx-auto">
+<article class="prose prose-sm md:prose lg:prose-lg mx-auto md:max-w-3xl lg:max-w-4xl">
   {{ content }}
   <div class="h-2 md:h-4"></div>
 </article>
+
+{% include lightbox.html %}

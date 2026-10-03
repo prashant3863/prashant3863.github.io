@@ -1,0 +1,69 @@
+<style>
+    article.prose img { cursor: zoom-in; }
+    .lightbox {
+        position: fixed; inset: 0; z-index: 50;
+        display: flex; align-items: center; justify-content: center;
+        padding: 2rem; background: rgba(17, 17, 17, 0.85);
+        cursor: zoom-out; opacity: 0; transition: opacity 150ms ease; outline: none;
+    }
+    .lightbox.is-open { opacity: 1; }
+    .lightbox img {
+        max-width: 95vw; max-height: 90vh; width: auto; height: auto;
+        background: #fff; border-radius: 4px; cursor: default;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+    }
+    @media (min-width: 768px) {
+        .lightbox img { min-width: 70vw; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+        .lightbox { transition: none; }
+    }
+</style>
+<script>
+    (function () {
+        var overlay = null;
+        var lastFocus = null;
+
+        function close() {
+            if (!overlay) return;
+            overlay.remove();
+            overlay = null;
+            document.body.style.overflow = '';
+            if (lastFocus) lastFocus.focus();
+        }
+
+        function open(img) {
+            lastFocus = document.activeElement;
+            overlay = document.createElement('div');
+            overlay.className = 'lightbox';
+            overlay.setAttribute('role', 'dialog');
+            overlay.setAttribute('aria-modal', 'true');
+            overlay.setAttribute('aria-label', img.alt || 'Image');
+            overlay.tabIndex = -1;
+
+            var big = document.createElement('img');
+            big.src = img.currentSrc || img.src;
+            big.alt = img.alt;
+            overlay.appendChild(big);
+
+            // Clicking the dimmed area closes; clicking the image itself does not.
+            overlay.addEventListener('click', function (e) {
+                if (e.target === overlay) close();
+            });
+
+            document.body.appendChild(overlay);
+            document.body.style.overflow = 'hidden';
+            overlay.focus();
+            requestAnimationFrame(function () { overlay.classList.add('is-open'); });
+        }
+
+        document.addEventListener('click', function (e) {
+            var img = e.target.closest && e.target.closest('article.prose img');
+            if (img && !overlay) open(img);
+        });
+
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') close();
+        });
+    })();
+</script>

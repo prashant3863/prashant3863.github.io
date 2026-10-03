@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-30.0 -30.0 1788.0 660.0" role="img" aria-label="Right-skewed distribution of IT project cost overruns, average 27 percent, with a long tail where one in six projects overran by 200 percent"><style>
+text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;fill:#2a2a2a;font-size:20px}
+.ax{font-size:18px;fill:#6e6e6e}
+.axu{font-size:17px;fill:#6e6e6e;letter-spacing:.1em;text-transform:uppercase}
+.sr{font-family:Georgia,"Times New Roman",serif;font-size:26px;fill:#121212;font-weight:600}
+.sri{font-family:Georgia,"Times New Roman",serif;font-style:italic;font-size:24px;fill:#2a2a2a}
+.red{fill:#e3120b}.wt{fill:#fff}.b{font-weight:600}
+</style><rect x="-30.0" y="-30.0" width="1788.0" height="660.0" fill="#fff"/>
+        <line x1="120" y1="520" x2="1720" y2="520" stroke="#121212" stroke-width="2"/>
+        <g class="ax" text-anchor="middle">
+          <text x="252" y="556">0%</text><text x="692" y="556">+100%</text><text x="1132" y="556">+200%</text><text x="1572" y="556">+300%</text>
+        </g>
+        <g stroke="#6e6e6e" stroke-width="1.5"><line x1="252" y1="520" x2="252" y2="530"/><line x1="692" y1="520" x2="692" y2="530"/><line x1="1132" y1="520" x2="1132" y2="530"/><line x1="1572" y1="520" x2="1572" y2="530"/></g>
+        <text x="920" y="592" text-anchor="middle" class="axu">Cost overrun against the original budget</text>
+        <path d="M120,518 C200,515 230,120 296,120 C360,120 420,330 516,380 C600,425 640,448 692,455 C900,480 1300,505 1704,512 L1704,520 L120,520 Z" fill="#c3d0dc"/>
+        <path d="M692,455 C900,480 1300,505 1704,512 L1704,520 L692,520 Z" fill="#3e4c6e"/>
+        <path d="M120,518 C200,515 230,120 296,120 C360,120 420,330 516,380 C600,425 640,448 692,455 C900,480 1300,505 1704,512" fill="none" stroke="#3e4c6e" stroke-width="2.5"/>
+        <line x1="371" y1="90" x2="371" y2="520" stroke="#121212" stroke-width="2" stroke-dasharray="5 5"/>
+        <text x="390" y="100" class="sr">Average: +27%</text>
+        <text x="390" y="132" class="ax">what most plans quietly assume</text>
+        <line x1="1100" y1="330" x2="1100" y2="488" stroke="#121212" stroke-width="1.5"/>
+        <circle cx="1100" cy="492" r="5" fill="#121212"/>
+        <text x="1100" y="250" class="sr" text-anchor="middle">1 in 6 projects</text>
+        <text x="1100" y="284" text-anchor="middle">averaged +200% cost and +70% time</text>
+        <text x="1100" y="316" text-anchor="middle" class="ax">no contingency covers this</text>
+      </svg>
