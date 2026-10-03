@@ -1,14 +1,24 @@
 ---
 layout: post
-title: An estimate they can't refuse
-permalink: /posts/estimates
-description: Why software estimates miss, four ways we make them worse, and how to estimate. Notes from a talk, and the questions that came after it.
-image: https://notshant.xyz/assets/estimates/cone.png
+title: "An estimate they can't refuse: how to estimate software projects"
+permalink: /posts/software-estimation
+description: "How to estimate software projects: why estimates miss, 4 common pitfalls, a 5-step method, AI-assisted delivery, and pricing consulting and freelance work."
+author:
+  name: Prashant Mittal
+  twitter: prashant_mit
+  url: https://notshant.xyz/about
+image:
+  path: /assets/estimates/social-card.png
+  alt: "An estimate they can't refuse: how to estimate software projects, with the cone of uncertainty"
+  width: 1200
+  height: 630
 article_class: numbered
 ---
 
-"How long will this take?"
-{: style="font-size: 2em; font-weight: 700; line-height: 1.2; margin: 1.5rem 0;"}
+# "How long will this take?"
+
+How to estimate software projects
+{: .c-subtitle}
 
 Every software project starts with this question, and almost every answer to it turns out wrong. Last week I gave [a talk](#the-slides) at work on estimation. It was mostly for our sales and tech folks, who answer this question together before anyone signs a contract. I called it *An estimate they can't refuse*, a nod to [The Godfather](https://en.wikipedia.org/wiki/The_Godfather)'s "I'm gonna make him an offer he can't refuse."
 
@@ -30,7 +40,7 @@ When estimating, the goal isn't the lowest number, or the number the client want
 
 ### Why estimates miss, even good ones
 
-![Cone of uncertainty](/assets/estimates/cone.svg)
+![Cone of uncertainty: a software estimate can range from 0.25x to 4x at the start of a project, narrowing as requirements and design are done](/assets/estimates/cone.svg)
 
 This is the [**cone of uncertainty**](https://en.wikipedia.org/wiki/Cone_of_Uncertainty). It shows how far off even a good estimate can be at each stage of a project. At the start, very little is decided, so the range is huge. As you write requirements, agree designs and build code, each decision removes some uncertainty. The range narrows, and it only closes when the software is done.
 
@@ -46,7 +56,7 @@ We write most proposals and SoWs in that grey band on the left. Sometimes a litt
 
 Don't be scared of the range, but know it's there. A single number on day zero is a guess with false precision. Estimating well means narrowing that range as you learn things, not squeezing it to look sure.
 
-![The long tail of IT project overruns](/assets/estimates/long-tail.svg)
+![Distribution of IT project cost overruns: the average is 27%, but one project in six runs about 200% over budget](/assets/estimates/long-tail.svg)
 
 Next, look at how overruns spread across projects. A study of 1,471 IT projects found:
 
@@ -123,7 +133,7 @@ If the target sits outside your estimate, talk about scope or capacity. You can 
 
 This is my favourite study. Magne Jørgensen and Dag Sjøberg [gave two groups of professionals the same spec](https://www.researchgate.net/publication/222369188_The_impact_of_customer_expectation_on_software_development_effort_estimates). One group was told, in passing, that the client thought it would take 50 hours. The other was told 1,000 hours. Both were told the client knew nothing about software and to ignore the number.
 
-![Anchoring results](/assets/estimates/anchoring.svg)
+![Anchoring in software estimation: developers told 50 hours estimated 77 hours, developers told 1,000 hours estimated 632 hours for the same spec](/assets/estimates/anchoring.svg)
 
 Both groups estimated the same work. The second group's answer came out eight times bigger. And when asked, the estimators said the client's number hadn't influenced them. Jørgensen has [kept finding the same effect](https://cms.simula.no/sites/default/files/publications/files/lohre_jorgensen_-_anchors_software_estimation.pdf) since. It even has a name: the [anchoring effect](https://en.wikipedia.org/wiki/Anchoring_effect).
 
@@ -188,7 +198,7 @@ Best case, most likely, worst case. Then weight them, using the [three-point (PE
 expected = (best + 4 × likely + worst) / 6
 ```
 
-![Three-point estimate](/assets/estimates/three-point.svg)
+![Three-point PERT estimate: best case 10 days, likely 15, worst 35, expected 17.5 days](/assets/estimates/three-point.svg)
 
 The formula is a weighted average. The likely case gets four times the weight, because it's what usually happens. The best and worst cases get one share each, so they still pull on the result.
 
@@ -231,7 +241,7 @@ The sheet matters most for the kinds of work where gut feel is worst. Rescues an
 
 Never a range without a confidence. "10 to 20 weeks" on its own doesn't say how likely you are to land inside it. Said with 50% confidence, it's as likely to miss as to hit. Said with 90%, it's something the client can plan a launch around. The same range can be a safe promise or a reckless one, and only the confidence tells everyone which. It also tells you how much risk you're taking on.
 
-![P50 vs P85](/assets/estimates/p50-p85.svg)
+![Project delivery forecast: 50% confidence at week 14 (P50), 85% confidence at week 18 (P85)](/assets/estimates/p50-p85.svg)
 
 P50 is a coin toss. P85 is what you commit to. If you want to get rigorous, a Monte Carlo simulation over your three-point numbers gives you the whole curve. Troy Magennis has [free spreadsheets](https://www.focusedobjective.com/) for this. "14 to 18 weeks, and we commit to 18 for this scope." My test for P85: would I bet a month's salary on landing inside the range? If not, widen it.
 
@@ -296,7 +306,7 @@ Even if the client takes the plan elsewhere, they got their money's worth.
 
 Then let the width of the range pick the contract.
 
-![Contract ladder: the wider the range, the more flexible the contract](/assets/estimates/contract-ladder.svg)
+![Choosing a software consulting contract by estimate range: fixed price, fixed price with checkpoints, target cost, time and materials](/assets/estimates/contract-ladder.svg)
 
 Narrow range, fixed price is fine. Wider, fixed price with checkpoints where both sides re-look at scope (the [agile fixed price](https://en.wikipedia.org/wiki/Agile_contracts) model). Wider still, [target cost](https://www.pinsentmasons.com/out-law/guides/how-target-cost-contracts-can-reduce-risk) with overruns and savings split. Too vague, time and materials with a flexible scope.
 
