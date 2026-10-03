@@ -1,0 +1,112 @@
+<style>
+    /* Reusable post components. Inline so Tailwind's purge never strips them. */
+    article.prose {
+        --c-accent: #e3120b;
+        --c-ink: #111827;
+        --c-muted: #6b7280;
+        --c-rule: #e5e7eb;
+        --c-tint: #f7f5f0;
+    }
+
+    /* Pull-quote style facts with a source line underneath */
+    article.prose blockquote.fact {
+        font-size: 1.3em; line-height: 1.45; font-weight: 500;
+        border-left: 4px solid var(--c-accent); padding-left: 1em;
+    }
+    article.prose p.cite { font-size: 0.75em; color: #9ca3af; margin-top: -0.75em; }
+    article.prose p.cite a { color: #9ca3af; }
+
+    /* The key idea of a post: large, bold, set apart */
+    article.prose p.c-key {
+        font-size: 1.45em; line-height: 1.4; font-weight: 700; color: var(--c-ink);
+        background: var(--c-tint); border-left: 6px solid var(--c-accent);
+        padding: 1.25rem 1.5rem; margin: 2rem 0; border-radius: 4px;
+    }
+
+    /* Big standalone line, no quote marks */
+    article.prose p.pull {
+        font-size: 1.6em; line-height: 1.3; font-weight: 700; color: var(--c-ink);
+        border-top: 3px solid var(--c-accent); padding-top: 0.75em; margin: 2.5rem 0;
+        max-width: 32ch;
+    }
+
+    /* Numbered section headings */
+    article.numbered { counter-reset: section; }
+    article.numbered h3 {
+        counter-increment: section;
+        border-top: 1px solid var(--c-rule); padding-top: 1.75rem; margin-top: 3rem;
+    }
+    article.numbered h3::before {
+        content: counter(section, decimal-leading-zero);
+        display: block; font-size: 0.7em; font-weight: 700; letter-spacing: 0.12em;
+        color: var(--c-accent); margin-bottom: 0.35rem;
+    }
+
+    /* Generic card and grids */
+    article.prose .c-grid { display: grid; gap: 1rem; margin: 1.5rem 0; }
+    article.prose .c-grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    article.prose .c-grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    @media (max-width: 640px) {
+        article.prose .c-grid-2, article.prose .c-grid-3 { grid-template-columns: 1fr; }
+    }
+    article.prose .c-card {
+        border: 1px solid var(--c-rule); border-top: 3px solid var(--c-ink);
+        border-radius: 4px; padding: 1rem 1.1rem; background: #fff;
+    }
+    article.prose .c-card > :first-child { margin-top: 0; }
+    article.prose .c-card > :last-child { margin-bottom: 0; }
+    article.prose .c-card p { margin: 0.4em 0; font-size: 0.95em; }
+    article.prose .c-label {
+        display: block; font-size: 0.72em; font-weight: 700; letter-spacing: 0.12em;
+        text-transform: uppercase; color: var(--c-accent); margin-bottom: 0.25rem;
+    }
+    article.prose .c-card .c-title { font-weight: 700; font-size: 1.05em; color: var(--c-ink); }
+    article.prose .c-card .c-fix { border-top: 1px solid var(--c-rule); padding-top: 0.5em; margin-top: 0.6em; font-weight: 600; }
+
+    /* "In this post" summary box, kept quiet so the key idea leads */
+    article.prose .c-summary {
+        border: 1px solid var(--c-rule); border-radius: 4px;
+        padding: 0.75rem 1.1rem; margin: 1.5rem 0; font-size: 0.9em;
+    }
+    article.prose .c-summary .c-label { color: var(--c-muted); }
+    article.prose .c-summary ol { margin: 0.25rem 0 0; }
+    article.prose .c-summary li { margin: 0.1rem 0; }
+    article.prose .c-summary a { color: var(--c-muted); }
+
+    /* Numbered step cards */
+    article.prose .c-step {
+        display: grid; grid-template-columns: 3rem minmax(0, 1fr); gap: 1rem;
+        border-top: 1px solid var(--c-rule); padding: 1.25rem 0;
+    }
+    article.prose .c-step:last-of-type { border-bottom: 1px solid var(--c-rule); }
+    article.prose .c-step-num {
+        width: 2.5rem; height: 2.5rem; border-radius: 999px; background: var(--c-ink); color: #fff;
+        display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.1em;
+    }
+    article.prose .c-step-body > :first-child { margin-top: 0.3rem; }
+    article.prose .c-step-body > :last-child { margin-bottom: 0; }
+    article.prose .c-step-body h4 { margin-top: 0.2rem; }
+
+    /* Checklist */
+    article.prose ul.c-check {
+        list-style: none; padding-left: 0; display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 2rem; row-gap: 0.6rem;
+    }
+    @media (max-width: 640px) { article.prose ul.c-check { grid-template-columns: 1fr; } }
+    article.prose ul.c-check li { position: relative; padding-left: 1.8rem; margin: 0; }
+    article.prose ul.c-check li::before {
+        content: ""; position: absolute; left: 0; top: 0.35em; width: 1rem; height: 1rem;
+        border: 2px solid var(--c-ink); border-radius: 3px; background: none;
+    }
+
+    /* Highlight callout, e.g. the AI multiplier */
+    article.prose .c-callout {
+        display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 1.5rem; align-items: center;
+        background: var(--c-ink); color: #f9fafb; border-radius: 6px; padding: 1.5rem 1.75rem; margin: 2rem 0;
+    }
+    @media (max-width: 640px) { article.prose .c-callout { grid-template-columns: 1fr; } }
+    article.prose .c-callout .c-big { font-size: 3.2em; font-weight: 800; line-height: 1; color: #fff; }
+    article.prose .c-callout p { margin: 0.3em 0; color: #e5e7eb; }
+    article.prose .c-callout strong { color: #fff; }
+    article.prose .c-callout .c-label { color: #fca5a5; }
+</style>
