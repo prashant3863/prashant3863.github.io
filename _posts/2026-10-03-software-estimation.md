@@ -1,15 +1,15 @@
 ---
 layout: post
-title: "An estimate they can't refuse: how to estimate software projects"
+title: "“How long will this take?” How to estimate software projects"
 permalink: /posts/software-estimation
-description: "How to estimate software projects: why estimates miss, 4 common pitfalls, a 5-step method, AI-assisted delivery, and pricing consulting and freelance work."
+description: "How to estimate software projects under uncertainty: why estimates miss, 4 pitfalls, a 5-step method, what changes with AI, and pricing consulting work."
 author:
   name: Prashant Mittal
   twitter: prashant_mit
   url: https://notshant.xyz/about
 image:
   path: /assets/estimates/social-card.png
-  alt: "An estimate they can't refuse: how to estimate software projects, with the cone of uncertainty"
+  alt: "How long will this take? Estimating under uncertainty: the pitfalls, a five-step method, and what changes with AI, with the cone of uncertainty"
   width: 1200
   height: 630
 article_class: numbered
@@ -17,7 +17,7 @@ article_class: numbered
 
 # "How long will this take?"
 
-How to estimate software projects
+Estimating under uncertainty: the pitfalls, a five-step method, and what changes with AI
 {: .c-subtitle}
 
 Every software project starts with this question, and almost every answer to it turns out wrong. Last week I gave [a talk](#the-slides) at work on estimation. It was mostly for our sales and tech folks, who answer this question together before anyone signs a contract. I called it *An estimate they can't refuse*, a nod to [The Godfather](https://en.wikipedia.org/wiki/The_Godfather)'s "I'm gonna make him an offer he can't refuse."
@@ -321,17 +321,25 @@ And watch out for scope that points at something instead of defining done. "Fini
 
 It can. You don't want to spend days estimating a deal that was never going to fit. Start with a [**SWAG**](https://en.wikipedia.org/wiki/Scientific_wild-ass_guess): a quick range from someone experienced. Anywhere from 50k to 150k. Wide, but it tells you it isn't 10k and it isn't a million. That's enough to know if the client's appetite is in the neighbourhood. Then do the full estimate.
 
-#### "Whose speed do I estimate at?"
+#### "How do I account for different speeds and skill levels on the team?"
 
-The average engineer's. Never your best people, never your weakest, always the middle. It's easy to fall into estimating to your best people and then act surprised. And clients vary too: consider a **1.25x buffer for difficult clients**. You can usually tell in the sales cycle.
+Normalise to the middle of the team. Any team has a spread: some people finish a task in half a day, others take two or three. Estimate the work as a mid-level engineer on that team would do it, not your fastest person and not your newest.
+
+Estimating to your best people is the common trap. They're the ones most likely to get pulled onto something else, and then the estimate no longer matches who's doing the work. A normalised estimate holds up when the staffing changes. If the team really is skewed, say mostly senior or mostly new, adjust for it openly and write down the staffing assumption next to the number.
+
+Clients vary too: consider a **1.25x buffer for difficult clients**. You can usually tell in the sales cycle.
 
 #### "What if their budget is just too low?"
 
 Every client has some constraint. Nobody has infinite time or money. If they're at 50k and you're at 100k, price the intangibles: a case study, a logo, a quote. Treat it as acquisition cost if the account could be worth millions later. But ask one more question: *can we deliver this properly?* If you're taking the deal to get into a deep account, that first project has to blow them away. A tight budget that makes that impossible is worse than no deal.
 
-#### "What if a competitor is cheaper?"
+#### "What if the client thinks we're padding the estimate?"
 
-We lost one of these recently. The client wanted a full rewrite in two and a half months on a small budget. Our honest estimate needed double the team or double the time. What we sent was a three-page breakdown showing every API and flow we'd understood. It didn't win the deal, but it didn't look like we pulled the number out of thin air either. The depth is what stops an honest estimate from reading as sandbagging. It works the other way too. Being slightly more expensive can still win when you show you understand the problem better.
+An estimate higher than the client hoped for can look like sandbagging: a number inflated so the team looks good later. Arguing doesn't fix that. Showing your work does.
+
+Take a client who wants a full rewrite in two and a half months on a small budget, where the real estimate needs twice the team or twice the time. Don't send a number. Send the breakdown behind it: every API and flow you've understood, the assumptions, and what each piece will take. Three pages is enough. Now the client can check the reasoning line by line, and a big number reads as thorough rather than padded.
+
+The same applies to buffers. If you add contingency, label it and say why. Hidden padding is what makes estimates look dishonest, and once a client finds one, they stop trusting the rest.
 
 #### "Should I leave any buffer?"
 
