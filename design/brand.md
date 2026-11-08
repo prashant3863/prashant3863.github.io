@@ -89,6 +89,7 @@ Write the way Prashant talks:
   - `2024–now` for an open range.
 - **Separators:** a middle dot with spaces (`Ladakh · July 2021`). Arrows `→` only on "more" links, and `↗` only on rows that leave the site (the archive).
 - **Typography:** curly quotes and apostrophes (’ “ ”). One space after full stops.
+- **Links that leave the site open in a new tab** (`_includes/new-tab-links.html` does it for every page). Links within the site stay in the same tab, except inside posts, where every link opens a new tab.
 - **X posts and talks get plain text links, not embeds.** Links to Prashant's own X posts, YouTube talks and GitHub should send traffic there.
 
 **Never publish**

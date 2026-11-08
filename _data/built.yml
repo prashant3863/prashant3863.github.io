@@ -1,10 +1,10 @@
 # "Things I've built" on the about page. Leave `url` out when there's nothing public to link to.
 - { title: autosub, sub: subtitles in the browser, meta: "2026", url: "/autosub/" }
 - { title: Creole Network, sub: a peer-to-peer private data network, meta: Shovel, url: "https://creole.network/" }
-- { title: Rolodex, sub: a private contact book for communities, meta: Shovel, url: "https://rolodex.shovel.company/" }
-- { title: Odet, sub: service registry and DORA metrics, meta: Shovel }
-- { title: Lens, sub: multi-tenant monitoring on Cortex, meta: Gojek, url: "https://cortexmetrics.io/docs/case-studies/gojek/" }
+- { title: Rolodex, sub: a private contact book for communities, meta: Shovel, url: "https://blog.shovel.company/p/rolodex-v02-your-internet-native" }
+- { title: Odet, sub: service registry and DORA metrics, meta: Shovel, url: "https://www.producthunt.com/products/playground-alpha?launch=odet-playground-1" }
+- { title: Lens, sub: multi-tenant monitoring on Cortex, meta: Gojek, url: "https://grafana.com/success/gojek/" }
 - { title: Ziggurat, sub: stream processing on Kafka, meta: Gojek, url: "https://ziggurat.dev/" }
-- { title: Ogi, sub: an ETL utility, meta: Gojek }
+- { title: Ogi, sub: an ETL utility, meta: Gojek, url: "https://github.com/gojekfarm/ogi" }
 - { title: Supertrader, sub: your own crypto fund, meta: ETHOnline }
-- { title: Claim Genie, sub: medical-claim processing, meta: Devfolio }
+- { title: Claim Genie, sub: medical-claim processing, meta: Devfolio, url: "https://youtu.be/F3Z1heKcL64" }

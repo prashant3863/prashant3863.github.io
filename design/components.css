@@ -130,6 +130,13 @@ html:has(.ns-page) { scroll-behavior: smooth; }
 }
 .ns-page .ns-row { opacity: .82; }                 /* rows without a link (e.g. a talk with no recording) match linked ones */
 .ns-page a.ns-row { text-decoration: none; }
+/* Every link is underlined except the nav, the logo and the timeline. In a row only the title is,
+   so rows that aren't links (a talk with no recording) read as plain text. */
+.ns-page a.ns-row .ns-row__title {
+  text-decoration: underline; text-decoration-color: var(--ns-underline); text-underline-offset: .2em;
+  transition: text-decoration-color var(--ns-t-link) ease;
+}
+.ns-page a.ns-row:hover .ns-row__title { text-decoration-color: var(--ns-underline-hover); }
 .ns-page a.ns-row:hover { opacity: 1; }
 .ns-row__sub { color: var(--ns-muted); }
 .ns-row__meta { font-size: var(--ns-text-meta); color: var(--ns-muted); white-space: nowrap; font-variant-numeric: tabular-nums; }

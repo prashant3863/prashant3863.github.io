@@ -1,4 +1,4 @@
 # Talks on the about page, newest first. Link the recording when there is one (plain link, no embed).
 - { title: "Creole Network: a filesystem for every account", meta: "LoFi/18, 2024", url: "https://www.youtube.com/watch?v=CZgiOpxq7cM" }
-- { title: Kubernetes 101 workshop, meta: DevOpsDays 2017 }
-- { title: "Monitoring, alerting and debugging", meta: DevOpsDays 2016 }
+- { title: Kubernetes 101 workshop, meta: DevOpsDays 2017, url: "https://www.youtube.com/watch?v=Av3Vm4wb79w" }
+- { title: "Monitoring, alerting and debugging", meta: DevOpsDays 2016, url: "https://youtu.be/e8K1nhL3Jh0" }

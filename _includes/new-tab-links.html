@@ -1,8 +1,12 @@
 <script>
-    // Open every link in a post in a new tab, except in-page anchors like the contents list.
-    document.querySelectorAll('article.ns-prose a[href]').forEach(function (a) {
+    // Links that leave the site open in a new tab (design/brand.md → Voice and copy).
+    // Inside a post every link does, as before, except in-page anchors like the contents list.
+    // Elsewhere, links within notshant.xyz (nav, logo, writing rows) stay in the same tab.
+    document.querySelectorAll('a[href]').forEach(function (a) {
         if (a.getAttribute('href').charAt(0) === '#') return;
+        if (a.protocol !== 'http:' && a.protocol !== 'https:') return;
+        if (a.host === location.host && !a.closest('article.ns-prose')) return;
         a.target = '_blank';
-        a.rel = 'noopener noreferrer';
+        a.rel = 'noopener';
     });
 </script>

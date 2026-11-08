@@ -142,14 +142,16 @@ All markup snippets assume they sit inside `<body class="ns-page">`.
 **Rows** (writing, things built, talks):
 ```html
 <div class="ns-rows">
-  <a class="ns-row" href="…"><span>Title <span class="ns-row__sub">· short descriptor</span></span><time class="ns-row__meta" datetime="2026-10">Oct 2026</time></a>
+  <a class="ns-row" href="…"><span><span class="ns-row__title">Title</span> <span class="ns-row__sub">· short descriptor</span></span><time class="ns-row__meta" datetime="2026-10">Oct 2026</time></a>
 </div>
 ```
-Rows sit at 82% opacity and go to 100% on hover. Unpublished posts show `Soon` in the meta slot.
+Rows sit at 82% opacity and go to 100% on hover. A linked row underlines its title (the soft link underline); a row without a link has none. Use `_includes/ns/row.html` rather than writing rows by hand.
+
+**Links are always underlined** (ink at 25%, 75% on hover), except the nav, the logo and the timeline / on-this-page list. Unpublished posts show `Soon` in the meta slot.
 
 Rows that leave the site (archive) use the platform and year as meta, open in a new tab with `rel="noopener"`, and end with an `aria-hidden` ↗:
 ```html
-<a class="ns-row" href="https://medium.com/…" target="_blank" rel="noopener"><span>Title</span><span class="ns-row__meta">Medium · <time datetime="2018">2018</time> <span aria-hidden="true">↗</span></span></a>
+<a class="ns-row" href="https://medium.com/…" target="_blank" rel="noopener"><span><span class="ns-row__title">Title</span></span><span class="ns-row__meta">Medium · <time datetime="2018">2018</time> <span aria-hidden="true">↗</span></span></a>
 ```
 
 **List.** `ul.ns-list` (square, faint markers). Add `.ns-list--cols` for two columns. Use it for short link lists inside prose sections.

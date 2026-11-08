@@ -3,7 +3,7 @@
   meta (right-hand text), datetime (optional, wraps meta in <time>), external (true adds a new tab and ↗).
 {%- endcomment -%}
 {%- capture inner -%}
-<span>{{ include.title }}{% if include.sub %} <span class="ns-row__sub">· {{ include.sub }}</span>{% endif %}</span>
+<span><span class="ns-row__title">{{ include.title }}</span>{% if include.sub %} <span class="ns-row__sub">· {{ include.sub }}</span>{% endif %}</span>
 {%- if include.meta %}<span class="ns-row__meta">{% if include.datetime %}<time datetime="{{ include.datetime }}">{{ include.meta }}</time>{% else %}{{ include.meta }}{% endif %}{% if include.external %} <span aria-hidden="true">↗</span>{% endif %}</span>{% endif %}
 {%- endcapture -%}
 {%- if include.url -%}
