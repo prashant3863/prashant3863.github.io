@@ -23,6 +23,7 @@ html:has(.ns-page) { scroll-behavior: smooth; }
   transition: text-decoration-color var(--ns-t-link) ease, opacity var(--ns-t-link) ease, color var(--ns-t-link) ease;
 }
 .ns-page a:hover { text-decoration-color: var(--ns-underline-hover); }
+.ns-page button:focus:not(:focus-visible) { outline: none; }   /* no ring after a mouse click (Tailwind's preflight adds one) */
 .ns-page a:focus-visible,
 .ns-page button:focus-visible,
 .ns-page summary:focus-visible {
@@ -163,22 +164,44 @@ html:has(.ns-page) { scroll-behavior: smooth; }
 }
 .ns-shot:hover img { transform: scale(1.025); }
 
+/* Photo viewer: count + Close on top, the photo fitted to whatever space is left, caption and
+   Previous / Next underneath. Nothing ever sits on the photo. Built by assets/js/ns-photos.js. */
 .ns-lightbox {
   position: fixed; inset: 0; z-index: 50;
-  display: flex; flex-direction: column;
-  padding: 12px clamp(16px, 4vw, 40px) 16px; box-sizing: border-box;
-  background: rgba(255, 255, 255, 0.97);
+  display: grid; grid-template-rows: auto minmax(0, 1fr) auto;
+  padding: 4px clamp(16px, 4vw, 40px) 8px; box-sizing: border-box;
+  background: var(--ns-bg);
   font-family: var(--ns-font); color: var(--ns-ink);
   animation: ns-fade .25s ease both;
 }
-.ns-lightbox__bar { display: flex; justify-content: space-between; align-items: center; gap: 8px 16px; flex-wrap: wrap; font-size: var(--ns-text-meta); color: var(--ns-muted); }
-.ns-lightbox__stage { flex: 1 1 auto; min-height: 0; display: grid; place-items: center; padding: 8px 0; }
-.ns-lightbox__stage img { display: block; max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 4px; }
-.ns-lightbox button {
-  font: inherit; font-size: var(--ns-text-meta); color: var(--ns-ink); background: none; border: 0;
-  padding: 12px 4px; cursor: pointer; text-decoration: underline; text-decoration-color: var(--ns-underline); text-underline-offset: .2em;
+.ns-lightbox__bar { display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: var(--ns-text-meta); color: var(--ns-muted); font-variant-numeric: tabular-nums; }
+.ns-lightbox__stage { position: relative; min-height: 0; margin: 4px 0; }
+.ns-lightbox__stage img {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: contain; border-radius: 4px;
 }
-.ns-lightbox button:focus-visible { outline: 2px solid var(--ns-accent); outline-offset: 3px; border-radius: var(--ns-radius-xs); }
+/* Invisible tap zones over the left and right thirds of the photo; the real buttons are in the footer. */
+.ns-lightbox__zone { position: absolute; top: 0; bottom: 0; width: 33%; padding: 0; border: 0; background: none; cursor: w-resize; -webkit-tap-highlight-color: transparent; }
+.ns-lightbox__zone--next { right: 0; cursor: e-resize; }
+.ns-lightbox__zone:focus { outline: none; }   /* pointer-only shortcut, never a focus target */
+.ns-lightbox__zone--prev { left: 0; }
+.ns-lightbox__foot {
+  display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 4px 20px;
+}
+.ns-lightbox__cap { text-align: center; font-size: var(--ns-text-meta); color: var(--ns-ink-2); }
+.ns-lightbox .ns-lightbox__btn {
+  font: inherit; font-size: var(--ns-text-body); color: var(--ns-ink); background: none; border: 0;
+  padding: 12px 4px; cursor: pointer; white-space: nowrap;
+  text-decoration: underline; text-decoration-color: var(--ns-underline); text-underline-offset: .2em;
+}
+.ns-lightbox .ns-lightbox__btn:hover { text-decoration-color: var(--ns-underline-hover); }
+.ns-lightbox .ns-lightbox__btn:focus-visible { outline: 2px solid var(--ns-accent); outline-offset: 3px; border-radius: var(--ns-radius-xs); }
+.ns-lightbox__btn--next { justify-self: end; }
+@media (max-width: 560px) {
+  .ns-lightbox__foot { grid-template-columns: 1fr 1fr; }
+  .ns-lightbox__cap { grid-column: 1 / -1; grid-row: 1; }
+  .ns-lightbox__btn--prev { justify-self: start; }
+}
 @keyframes ns-fade { from { opacity: 0; } to { opacity: 1; } }
 
 /* The glider panel and its note -------------------------------------------------------- */
