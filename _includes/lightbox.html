@@ -1,5 +1,5 @@
 <style>
-    article.prose img { cursor: zoom-in; }
+    article.ns-prose img { cursor: zoom-in; }
     .lightbox {
         position: fixed; inset: 0; z-index: 50;
         display: flex; align-items: center; justify-content: center;
@@ -58,7 +58,7 @@
         }
 
         document.addEventListener('click', function (e) {
-            var img = e.target.closest && e.target.closest('article.prose img');
+            var img = e.target.closest && e.target.closest('article.ns-prose img');
             if (img && !overlay) open(img);
         });
 

@@ -1,0 +1,33 @@
+---
+layout: default
+title: Lab notes
+permalink: /notes/
+nav: notes
+description: Working notes by Prashant Mittal from building Shovel Company and Creole Network, 2022 to 2024.
+# Groups, in the order they appear. Each note in _notes/ sets `group:` to one of these.
+groups: [Identity, Networks, Data, Cryptography and Web3]
+# Not built until there are notes. Delete this line when the first note goes into _notes/ (the nav item appears by itself).
+published: false
+---
+<div class="ns-split">
+  <main class="ns-split__main">
+    <h1 class="ns-intro">Lab notes</h1>
+    <p>Working notes from building Shovel Company and Creole Network, 2022 to 2024. Rough, and kept that way.</p>
+
+    {%- for g in page.groups %}
+    {%- assign items = site.notes | where: "group", g | sort: "title" %}
+    {%- if items.size > 0 %}
+    <section class="ns-section--tight">
+      <h2 class="ns-h2">{{ g }}</h2>
+      <div class="ns-rows">
+        {%- for n in items %}
+        {% include ns/row.html title=n.title url=n.url %}
+        {%- endfor %}
+      </div>
+    </section>
+    {%- endif %}
+    {%- endfor %}
+
+    {% include ns/footer.html %}
+  </main>
+</div>

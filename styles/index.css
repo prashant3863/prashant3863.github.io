@@ -2,6 +2,10 @@
  * https://jwarby.github.io/jekyll-pygments-themes/languages/java.html */
 @import "./syntax.css";
 
+/* notshant design system: tokens and ns- components (design/). Outside the Tailwind layers, so purge keeps them. */
+@import "../design/tokens.css";
+@import "../design/components.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

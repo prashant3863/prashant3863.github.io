@@ -1,0 +1,21 @@
+# Photographs, one entry per series, newest first. Spec: design/system.md → Content structure.
+# Files: assets/photos/<folder>/NN.jpg (1600px) and NN-s.jpg (720px).
+# `home: true` puts a photo in the four-photo strip on the home page (use four in total).
+- title: The Greatest Gig in the Sky
+  meta: Ladakh · July 2021
+  folder: 2021-greatest-gig-in-the-sky
+  photos:
+    - { file: "01", ratio: "4 / 5", alt: "A single long cloud over poplars and a brown ridge", place: "Ladakh, 2021" }
+    - { file: "02", ratio: "3 / 4", alt: "Clouds over a valley road and power lines outside Leh", place: "Ladakh, 2021", home: true }
+    - { file: "03", ratio: "4 / 3", alt: "Clouds over poplars and a snow-capped range", place: "Ladakh, 2021" }
+    - { file: "04", ratio: "4 / 3", alt: "A whitewashed chorten beside a dirt road", place: "Ladakh, 2021", home: true }
+    - { file: "05", ratio: "4 / 3", alt: "Rooftops of Leh at dusk under a snow-capped range", place: "Leh, 2021" }
+
+- title: Places I’ve been
+  meta: Berlin, Amsterdam, Singapore · before 2020
+  folder: 2019-places-ive-been
+  photos:
+    - { file: "01", ratio: "4 / 3", alt: "Railway tracks at sunset, with the TV tower on the skyline", place: "Berlin" }
+    - { file: "02", ratio: "4 / 3", alt: "A turreted canal house behind flower boxes on a bridge", place: "Amsterdam", home: true }
+    - { file: "03", ratio: "4 / 3", alt: "A rooftop reflecting pool, with an old domed building and towers behind", place: "Singapore" }
+    - { file: "04", ratio: "4 / 3", alt: "Marina Bay at night, with the ArtScience Museum lit up", place: "Singapore", home: true }

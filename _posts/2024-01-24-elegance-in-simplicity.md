@@ -2,6 +2,7 @@
 layout: post
 title: Elegance in Simplicity
 permalink: /posts/elegance-in-simplicity
+list_title: Elegance in simplicity
 ---
 
 Simplicity is often underrated in software.

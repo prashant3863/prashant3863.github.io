@@ -10,7 +10,10 @@ module.exports = {
     purge: [
         '{,!(node_modules|_site)/**/}*.{html,md}',
     ],
-    theme: {},
+    theme: {
+        // notshant design tokens (design/tailwind.tokens.js), namespaced as `ns-*`.
+        extend: require('./design/tailwind.tokens.js'),
+    },
     plugins: [
         require('@tailwindcss/typography'),
     ],

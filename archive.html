@@ -1,0 +1,24 @@
+---
+layout: default
+title: Archive
+permalink: /posts/past-life
+nav: writing
+description: Writing and talks by Prashant Mittal from before this site, 2015 to 2018.
+---
+<div class="ns-split">
+  <main class="ns-split__main">
+    <h1 class="ns-intro">Archive</h1>
+    <p>Writing and talks from before this site, 2015 to 2018. Each one opens where it was first published.</p>
+
+    <section class="ns-section--tight">
+      <div class="ns-rows">
+        {%- for a in site.data.archive %}
+        {%- capture m %}{{ a.where }} · {{ a.year }}{% endcapture %}
+        {% include ns/row.html title=a.title url=a.url meta=m external=true %}
+        {%- endfor %}
+      </div>
+    </section>
+
+    {% include ns/footer.html %}
+  </main>
+</div>

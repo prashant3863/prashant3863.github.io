@@ -1,0 +1,9 @@
+{%- comment -%}
+  Head additions for the notshant design system. Include inside <head>, before the stylesheet.
+  - html.ns-js lets the logo start hidden only when JS will draw it (no flash, and no blank logo without JS).
+  - Inter 400/500/600 is the only typeface. Mono uses the system stack.
+{%- endcomment -%}
+<script>document.documentElement.classList.add('ns-js')</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">

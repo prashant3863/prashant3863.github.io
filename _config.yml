@@ -7,11 +7,28 @@ twitter:
   username: prashant_mit
   card: summary_large_image
 
+# Lab notes (design/system.md → Content structure). The "notes" nav item appears once this has a note in it.
+collections:
+  notes:
+    output: true
+    permalink: /notes/:name
+
 defaults:
   - scope:
       path: "assets/estimates/deck.html"
     values:
       sitemap: false
+  - scope:
+      path: ""
+      type: posts
+    values:
+      nav: writing
+  - scope:
+      path: ""
+      type: notes
+    values:
+      layout: post
+      nav: notes
 
 plugins:
   - jekyll-seo-tag
@@ -24,4 +41,6 @@ exclude: [
   package-lock.json,
   postcss.config.js,
   readme.md,
+  CLAUDE.md,
+  design,
 ]

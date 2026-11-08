@@ -1,0 +1,85 @@
+---
+layout: default
+title: About
+permalink: /about
+nav: about
+ns_js: [toc]
+last_modified_at: 2026-11-08
+---
+{%- assign has_notes = site.notes.size | default: 0 %}
+<div class="ns-split">
+  <main class="ns-split__main">
+    <h1 class="ns-intro">Hi, I’m Prashant. I build software and the teams that build it. I live in Bengaluru.</h1>
+
+    <section id="now" class="ns-section--tight">
+      <h2 class="ns-h2">Now</h2>
+      <p>Wrangling AI at <a href="https://realfast.ai">realfast</a>. I lead a team that builds agents and an AI harness that carries work from analysis through development and QA, and I’m redesigning how we hire AI-native developers. Writing about scope creep on client projects, after <a href="/posts/software-estimation">an essay on estimation</a>.</p>
+    </section>
+
+    <section id="shovel" class="ns-section--tight">
+      <div class="ns-h2-row"><h2 class="ns-h2">Shovel Company</h2><span class="ns-meta">2021–2024</span></div>
+      <p>I co-founded <a href="https://www.shovel.company">Shovel Company</a> and took our products from idea to prototype to delivery. The main one was <a href="https://creole.network">Creole Network</a>, a peer-to-peer, user-controlled private data network. Any two people can connect over an end-to-end encrypted channel using keys they own, and their social graph comes with them instead of living inside one app. I <a href="https://www.youtube.com/watch?v=CZgiOpxq7cM">gave a talk on it</a> at LoFi, the local-first meetup, in 2024.</p>
+      <p>On top of it we built <a href="https://rolodex.shovel.company/">Rolodex</a>, a private contact book that 10 communities used as their members directory, with 400 sign-ups. We also built Odet, a service registry and developer platform for tracking DORA metrics.</p>
+      <p>We didn’t find a sustainable product-market fit, and closed the company in 2024. I kept {% if has_notes > 0 %}<a href="/notes/">lab notes</a>{% else %}lab notes{% endif %} the whole time, on identity, credentials, keys and peer-to-peer data.</p>
+    </section>
+
+    <section id="gojek" class="ns-section--tight">
+      <div class="ns-h2-row"><h2 class="ns-h2">Gojek</h2><span class="ns-meta">2016–2021</span></div>
+      <p>I was on the team that built and scaled Gojek’s infrastructure, and went from product engineer to engineering manager for observability, leading a team of ten. Some of what we built:</p>
+      <ul class="ns-list">
+        <li><span><a href="https://ziggurat.dev/">Ziggurat</a>, a stream-processing framework that cut the time to ship a Kafka app from 40 hours to 30 minutes. Over 200 services used it.</span></li>
+        <li><span>Lens, our multi-tenant monitoring on Cortex, which replaced Datadog and InfluxDB and took in about 2M samples a second. Cortex wrote <a href="https://cortexmetrics.io/docs/case-studies/gojek/">a case study</a> about it.</span></li>
+        <li><span>Uptime tracking for every public API, from 2M events a minute, and a platform for SLOs and error budgets.</span></li>
+        <li><span>One deployment platform across countries, clusters and clouds, which took deploy success from 65% to 90%.</span></li>
+      </ul>
+      <p>Early on, I was SRE and on call for over 100 services. I also taught Gojek’s yearly DevOps bootcamp, and spoke at DevOpsDays in 2016 and 2017.</p>
+    </section>
+
+    <section id="start" class="ns-section--tight">
+      <div class="ns-h2-row"><h2 class="ns-h2">Where I started</h2><span class="ns-meta">2015</span></div>
+      <p>After a B.Tech at IIT Jodhpur, I joined C42 Engineering. My first project was the service that brought Google Maps into Gojek’s app. I’ve been <a href="/posts/past-life">writing since 2015</a>.</p>
+    </section>
+
+    <section id="built" class="ns-section--tight">
+      <h2 class="ns-h2">Things I’ve built</h2>
+      <div class="ns-rows">
+        {%- for b in site.data.built %}
+        {% include ns/row.html title=b.title sub=b.sub url=b.url meta=b.meta %}
+        {%- endfor %}
+      </div>
+    </section>
+
+    <section id="talks" class="ns-section--tight">
+      <h2 class="ns-h2">Talks</h2>
+      <div class="ns-rows">
+        {%- for t in site.data.talks %}
+        {% include ns/row.html title=t.title url=t.url meta=t.meta %}
+        {%- endfor %}
+      </div>
+    </section>
+
+    <section id="off" class="ns-section--tight">
+      <h2 class="ns-h2">Off the clock</h2>
+      <p><a href="/photos/">Photography</a>, philosophy, economics and football. I also make <a href="https://soundcloud.com/prashant-mittal-3">music</a>, mix drinks, and go looking for new places to eat and drink.</p>
+    </section>
+
+    {% include ns/elsewhere.html %}
+    {% include ns/footer.html %}
+  </main>
+
+  <aside class="ns-split__side ns-split__side--hide">
+    <nav data-ns-toc aria-label="On this page">
+      <ol class="ns-tl">
+        <li><a href="#now"><span class="ns-tl__years">2024–now</span><span class="ns-tl__name">realfast</span></a></li>
+        <li><a href="#shovel"><span class="ns-tl__years">2021–2024</span><span class="ns-tl__name">Shovel Company</span></a></li>
+        <li><a href="#gojek"><span class="ns-tl__years">2016–2021</span><span class="ns-tl__name">Gojek</span></a></li>
+        <li><a href="#start"><span class="ns-tl__years">2015</span><span class="ns-tl__name">C42 Engineering</span></a></li>
+      </ol>
+      <ul class="ns-toc-more">
+        <li><a href="#built">Things I’ve built</a></li>
+        <li><a href="#talks">Talks</a></li>
+        <li><a href="#off">Off the clock</a></li>
+      </ul>
+    </nav>
+  </aside>
+</div>

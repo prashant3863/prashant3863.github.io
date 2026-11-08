@@ -13,6 +13,7 @@ image:
   width: 1200
   height: 630
 article_class: numbered
+toc: true
 ---
 
 # "How long will this take?"
@@ -29,7 +30,7 @@ When estimating, the goal isn't the lowest number, or the number the client want
 <span class="c-label">In this post</span>
 
 1. [Why estimates miss, even good ones](#why-estimates-miss-even-good-ones)
-2. [Three words we use interchangeably](#three-words-we-use-interchangeably)
+2. [Estimate, Target, Commitment](#estimate-target-commitment)
 3. [Four ways we make it worse](#four-ways-we-make-it-worse)
 4. [How to estimate](#how-to-estimate)
 5. [Estimating for an AI-native SDLC](#estimating-for-an-ai-native-sdlc)
@@ -76,7 +77,7 @@ Same study
 
 Projects can't finish much earlier than planned, but they can finish far later. You can't pad your way out of that. You have to spot the work likely to end up in the tail and treat it differently.
 
-### Three words we use interchangeably
+### Estimate, Target, Commitment
 
 We use estimate, target and commitment as if they mean the same thing. They don't, and mixing them up is where many estimation arguments start:
 

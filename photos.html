@@ -1,0 +1,27 @@
+---
+layout: default
+title: Photographs
+permalink: /photos/
+nav: photos
+ns_js: [photos]
+description: Photographs by Prashant Mittal, from Ladakh, Berlin, Amsterdam and Singapore.
+---
+<main data-ns-photos>
+  <div class="ns-measure">
+    <h1 class="ns-intro">Photographs</h1>
+    <p>Skies, streets and places I’ve been, newest first. Select a photograph to see it larger.</p>
+  </div>
+
+  {%- for s in site.data.photos %}
+  <section class="ns-section--tight">
+    <div class="ns-h2-row ns-measure"><h2 class="ns-h2">{{ s.title }}</h2><span class="ns-meta">{{ s.meta }}</span></div>
+    <div class="ns-photos">
+      {%- for ph in s.photos %}
+      <button type="button" class="ns-shot" data-full="/assets/photos/{{ s.folder }}/{{ ph.file }}.jpg" data-caption="{{ ph.place }} · {{ s.title }}" aria-label="Open: {{ ph.alt }}"><img src="/assets/photos/{{ s.folder }}/{{ ph.file }}-s.jpg" alt="{{ ph.alt }}" style="aspect-ratio: {{ ph.ratio }}" loading="lazy"></button>
+      {%- endfor %}
+    </div>
+  </section>
+  {%- endfor %}
+
+  {% include ns/footer.html %}
+</main>

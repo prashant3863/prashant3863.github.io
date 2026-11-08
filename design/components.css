@@ -1,0 +1,248 @@
+/*
+ * notshant components. Depends on design/tokens.css.
+ * Every class is prefixed `ns-` so it can sit next to Tailwind and the old post styles.
+ * Documented in design/system.md; rendered in design/styleguide.html.
+ */
+
+/* Page ------------------------------------------------------------------ */
+html:has(.ns-page) { scroll-behavior: smooth; }
+.ns-page {
+  background: var(--ns-bg);
+  color: var(--ns-ink);
+  font-family: var(--ns-font);
+  font-size: var(--ns-text-body);
+  line-height: var(--ns-leading);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+.ns-page a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--ns-underline);
+  text-underline-offset: .2em;
+  transition: text-decoration-color var(--ns-t-link) ease, opacity var(--ns-t-link) ease, color var(--ns-t-link) ease;
+}
+.ns-page a:hover { text-decoration-color: var(--ns-underline-hover); }
+.ns-page a:focus-visible,
+.ns-page button:focus-visible,
+.ns-page summary:focus-visible {
+  outline: 2px solid var(--ns-accent);
+  outline-offset: 3px;
+  border-radius: var(--ns-radius-xs);
+}
+.ns-container {
+  max-width: var(--ns-container);
+  margin: 0 auto;
+  padding: clamp(20px, 4vw, 40px) var(--ns-gutter) 48px;
+  box-sizing: border-box;
+}
+
+/* Header and nav ---------------------------------------------------------- */
+.ns-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 4px 24px;
+  margin-bottom: var(--ns-header-gap);
+}
+.ns-header .ns-logo-link { display: block; padding: 6px 0; text-decoration: none; }
+.ns-nav { display: flex; flex-wrap: wrap; gap: 0 22px; font-size: var(--ns-text-meta); color: var(--ns-muted); }
+.ns-nav a { padding: 12px 0; text-decoration: none; }
+.ns-nav a[aria-current="page"] { color: var(--ns-ink); text-decoration: underline; text-decoration-color: var(--ns-underline); }
+
+/* Logo: two shapes, the letters and the ¬ bar. See design/brand.md. -------- */
+.ns-logo { display: block; overflow: visible; }
+.ns-logo path {
+  fill: var(--ns-ink);
+  stroke: var(--ns-ink);
+  stroke-width: .6;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+}
+/* Hidden only once JS has said it will animate (html.ns-js is set in _includes/ns/head.html). */
+.ns-js .ns-logo:not(.is-drawn) path { stroke-dashoffset: 1; fill-opacity: 0; }
+.ns-logo.is-drawing path {
+  animation: ns-draw var(--ns-logo-draw) var(--ns-ease-draw) .15s both,
+             ns-fill var(--ns-logo-fill) ease var(--ns-logo-fill-at) both;
+}
+.ns-logo.is-redraw path {
+  animation: ns-draw var(--ns-logo-draw) var(--ns-ease-draw) both,
+             ns-fill var(--ns-logo-fill) ease var(--ns-logo-refill-at) both;
+}
+@keyframes ns-draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@keyframes ns-fill { from { fill-opacity: 0; } to { fill-opacity: 1; } }
+
+/* Split layout: text column on the left, one quiet thing on the right -------- */
+.ns-split {
+  display: grid;
+  grid-template-columns: minmax(0, var(--ns-measure)) minmax(0, 1fr);
+  gap: 0 var(--ns-col-gap);
+  align-items: start;
+}
+.ns-split__main { min-width: 0; }
+.ns-post--wide { max-width: var(--ns-measure-post); }   /* posts without a side column (design/system.md → Pages) */
+.ns-split--post { grid-template-columns: minmax(0, 1fr) var(--ns-toc-width); gap: 0 var(--ns-toc-gap); }
+.ns-split--post .ns-tl__name { font-size: var(--ns-text-meta); }
+.ns-measure { max-width: var(--ns-measure); }   /* keep text on the column when the page itself is full width (photos) */
+.ns-split__side { position: sticky; top: var(--ns-sticky-top); }
+@media (max-width: 880px) {
+  .ns-split, .ns-split--post { grid-template-columns: minmax(0, 1fr); }
+  .ns-split__side { position: static; }
+  .ns-split__side--first { order: -1; margin-bottom: 40px; }   /* the glider goes above the text */
+  .ns-split__side--hide { display: none; }                      /* the about timeline is dropped */
+}
+
+/* Text ---------------------------------------------------------------------- */
+.ns-intro {
+  margin: 0 0 1.1rem;
+  font-size: var(--ns-text-intro);
+  line-height: var(--ns-leading-tight);
+  font-weight: var(--ns-weight-medium);
+  letter-spacing: var(--ns-tracking-intro);
+  text-wrap: pretty;
+}
+.ns-page p { text-wrap: pretty; }
+:is(.ns-section, .ns-section--tight) :is(p, ul, ol) + :is(p, ul, ol) { margin-top: 1rem; }   /* paragraphs on home/about; posts use .ns-prose */
+.ns-section { margin-top: var(--ns-section); }
+.ns-section--tight { margin-top: var(--ns-section-tight); }
+.ns-section[id] { scroll-margin-top: var(--ns-sticky-top); }
+.ns-h2 { margin: 0 0 10px; font-size: var(--ns-text-h2); line-height: 1.4; font-weight: var(--ns-weight-bold); }
+.ns-h2-row { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; margin-bottom: 10px; }
+.ns-h2-row .ns-h2 { margin: 0; }
+.ns-meta { font-size: var(--ns-text-meta); color: var(--ns-muted); font-variant-numeric: tabular-nums; }
+.ns-page a.ns-meta { color: var(--ns-muted); }
+.ns-page a.ns-meta:hover { color: var(--ns-ink); }
+.ns-h2-row a.ns-meta { padding: 10px 0; }   /* "more" links: a comfortable tap target */
+.ns-lede { margin: 0 0 14px; font-size: 15px; color: var(--ns-muted); }
+.ns-dateline { margin: 0 0 6px; }
+.ns-links { margin: 0; display: flex; flex-wrap: wrap; gap: 4px 20px; }
+
+/* Rows: writing, things built, talks, notes ------------------------------------ */
+.ns-rows { display: flex; flex-direction: column; border-top: 1px solid var(--ns-rule); }
+.ns-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 20px;
+  align-items: baseline;
+  padding: var(--ns-row-y) 0;
+  border-bottom: 1px solid var(--ns-rule);
+}
+.ns-page .ns-row { opacity: .82; }                 /* rows without a link (e.g. a talk with no recording) match linked ones */
+.ns-page a.ns-row { text-decoration: none; }
+.ns-page a.ns-row:hover { opacity: 1; }
+.ns-row__sub { color: var(--ns-muted); }
+.ns-row__meta { font-size: var(--ns-text-meta); color: var(--ns-muted); white-space: nowrap; font-variant-numeric: tabular-nums; }
+
+/* Bulleted list (square, faint markers) --------------------------------------- */
+.ns-list { margin: 0; padding-left: 1.1em; list-style: square; color: var(--ns-faint); }
+.ns-list > li { margin-bottom: 6px; break-inside: avoid; }
+.ns-list > li > * { color: var(--ns-ink); }
+.ns-list--cols { columns: 2 220px; column-gap: 40px; }
+
+/* Photos ---------------------------------------------------------------------------- */
+.ns-strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(128px, 100%), 1fr)); gap: 8px; }
+.ns-thumb { display: block; aspect-ratio: 4 / 5; overflow: hidden; border-radius: var(--ns-radius-sm); background: var(--ns-surface-photo); }
+.ns-thumb img, .ns-shot img {
+  display: block; width: 100%; height: 100%; object-fit: cover;
+  transition: transform var(--ns-t-hover) var(--ns-ease-out);
+}
+.ns-thumb:hover img { transform: scale(1.035); }
+.ns-photos { columns: 3 240px; column-gap: 12px; }
+.ns-shot {
+  display: block; width: 100%; margin: 0 0 12px; padding: 0; border: 0;
+  border-radius: var(--ns-radius-sm); overflow: hidden; background: var(--ns-surface-photo);
+  cursor: zoom-in; break-inside: avoid;
+}
+.ns-shot:hover img { transform: scale(1.025); }
+
+.ns-lightbox {
+  position: fixed; inset: 0; z-index: 50;
+  display: flex; flex-direction: column;
+  padding: 12px clamp(16px, 4vw, 40px) 16px; box-sizing: border-box;
+  background: rgba(255, 255, 255, 0.97);
+  font-family: var(--ns-font); color: var(--ns-ink);
+  animation: ns-fade .25s ease both;
+}
+.ns-lightbox__bar { display: flex; justify-content: space-between; align-items: center; gap: 8px 16px; flex-wrap: wrap; font-size: var(--ns-text-meta); color: var(--ns-muted); }
+.ns-lightbox__stage { flex: 1 1 auto; min-height: 0; display: grid; place-items: center; padding: 8px 0; }
+.ns-lightbox__stage img { display: block; max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 4px; }
+.ns-lightbox button {
+  font: inherit; font-size: var(--ns-text-meta); color: var(--ns-ink); background: none; border: 0;
+  padding: 12px 4px; cursor: pointer; text-decoration: underline; text-decoration-color: var(--ns-underline); text-underline-offset: .2em;
+}
+.ns-lightbox button:focus-visible { outline: 2px solid var(--ns-accent); outline-offset: 3px; border-radius: var(--ns-radius-xs); }
+@keyframes ns-fade { from { opacity: 0; } to { opacity: 1; } }
+
+/* The glider panel and its note -------------------------------------------------------- */
+.ns-glider { margin: 0; display: flex; flex-direction: column; gap: 10px; }
+.ns-glider__canvas {
+  display: block; width: 100%; height: clamp(240px, 28vw, 340px);
+  border-radius: var(--ns-radius-lg); background: var(--ns-surface);
+}
+.ns-glider__caption { font-family: var(--ns-mono); font-size: var(--ns-text-xs); color: var(--ns-muted); }
+.ns-note summary { cursor: pointer; list-style: none; display: inline-flex; flex-wrap: wrap; gap: 0 10px; padding: 6px 0; }
+.ns-note summary::-webkit-details-marker { display: none; }
+.ns-note__q { color: var(--ns-ink); text-decoration: underline; text-decoration-color: var(--ns-underline); text-underline-offset: .2em; }
+.ns-note summary:hover .ns-note__q { text-decoration-color: var(--ns-underline-hover); }
+.ns-note__body {
+  margin: 4px 0 0; font-family: var(--ns-font); font-size: var(--ns-text-note); line-height: 1.6; color: var(--ns-ink-2);
+}
+.ns-note[open] .ns-note__body { animation: ns-note var(--ns-t-state) ease both; }
+@keyframes ns-note { from { opacity: 0; transform: translateY(-3px); } to { opacity: 1; transform: none; } }
+
+/* Timeline / on-this-page (about, long posts) ----------------------------------------- */
+.ns-tl { list-style: none; margin: 0; padding: 0; position: relative; }
+.ns-tl::before { content: ""; position: absolute; left: 5px; top: 22px; bottom: 22px; width: 1px; background: var(--ns-dot-line); }
+.ns-tl > li { position: relative; padding-left: 28px; }
+.ns-tl > li::before {
+  content: ""; position: absolute; left: 0; top: 50%; width: 11px; height: 11px; margin-top: -5.5px;
+  border-radius: 50%; background: var(--ns-bg); border: 1px solid var(--ns-dot); box-sizing: border-box;
+  transition: background-color var(--ns-t-state) ease, border-color var(--ns-t-state) ease, box-shadow var(--ns-t-state) ease;
+}
+.ns-tl > li.is-active::before { background: var(--ns-accent); border-color: var(--ns-accent); box-shadow: 0 0 0 4px var(--ns-accent-soft); }
+.ns-page .ns-tl a { display: flex; flex-direction: column; gap: 1px; padding: 9px 0; text-decoration: none; color: var(--ns-muted); }
+.ns-page .ns-tl a:hover, .ns-page .ns-tl li.is-active a { color: var(--ns-ink); }
+.ns-tl__years { font-family: var(--ns-mono); font-size: var(--ns-text-xs); line-height: 1.4; color: var(--ns-muted); }
+.ns-tl__name { font-size: var(--ns-text-h2); line-height: 1.4; }
+.ns-toc-more { list-style: none; margin: 18px 0 0 28px; padding: 14px 0 0; border-top: 1px solid var(--ns-rule); }
+.ns-page .ns-toc-more a { display: block; padding: 5px 0; font-size: var(--ns-text-meta); text-decoration: none; color: var(--ns-muted); }
+.ns-page .ns-toc-more a:hover, .ns-page .ns-toc-more li.is-active a { color: var(--ns-ink); }
+
+/* Long-form posts ----------------------------------------------------------------------- */
+.ns-prose { font-size: var(--ns-text-prose); line-height: var(--ns-leading-prose); }
+.ns-prose h1 { margin: 0 0 .6em; font-size: var(--ns-text-intro); line-height: var(--ns-leading-tight); font-weight: var(--ns-weight-medium); letter-spacing: var(--ns-tracking-intro); }
+.ns-prose h2 { margin: 2.2em 0 .6em; font-size: 20px; line-height: 1.35; font-weight: var(--ns-weight-bold); letter-spacing: -0.01em; }
+.ns-prose h3 { margin: 1.8em 0 .5em; font-size: var(--ns-text-prose); line-height: 1.4; font-weight: var(--ns-weight-bold); }
+.ns-prose h4 { margin: 1.6em 0 .4em; font-size: var(--ns-text-body); line-height: 1.45; font-weight: var(--ns-weight-bold); }
+.ns-prose :is(h2, h3, h4)[id] { scroll-margin-top: var(--ns-sticky-top); }
+.ns-prose p, .ns-prose ul, .ns-prose ol { margin: 0 0 1.1em; }
+.ns-prose li { margin-bottom: .35em; }
+.ns-prose ul, .ns-prose ol { padding-left: 1.3em; }
+.ns-prose ul { list-style: square; }
+.ns-prose ol { list-style: decimal; }
+.ns-prose li > ul, .ns-prose li > ol { margin: .35em 0 0; }
+.ns-prose ul li::marker, .ns-prose ol li::marker { color: var(--ns-faint); }
+.ns-prose blockquote { margin: 1.4em 0; padding: 0 0 0 18px; border-left: 2px solid var(--ns-rule); color: var(--ns-ink-2); }
+.ns-prose code { font-family: var(--ns-mono); font-size: .88em; background: var(--ns-surface); padding: .1em .35em; border-radius: 4px; }
+.ns-prose pre { font-family: var(--ns-mono); font-size: 14px; line-height: 1.6; background: var(--ns-surface); padding: 16px 18px; border-radius: var(--ns-radius-sm); overflow-x: auto; }
+.ns-prose pre code { background: none; padding: 0; font-size: inherit; }
+.ns-prose img { max-width: 100%; height: auto; border-radius: var(--ns-radius-sm); }
+.ns-prose figcaption { margin-top: 8px; font-size: var(--ns-text-sm); color: var(--ns-muted); }
+.ns-prose hr { border: 0; border-top: 1px solid var(--ns-rule); margin: 2.4em 0; }
+.ns-prose strong { font-weight: var(--ns-weight-bold); }
+.ns-prose table { width: 100%; margin: 1.4em 0; border-collapse: collapse; font-size: var(--ns-text-meta); }
+.ns-prose th, .ns-prose td { padding: 8px 12px 8px 0; border-bottom: 1px solid var(--ns-rule); text-align: left; vertical-align: top; }
+.ns-prose th { font-weight: var(--ns-weight-bold); }
+.ns-prose iframe { max-width: 100%; }
+
+/* Footer --------------------------------------------------------------------------------- */
+.ns-footer { margin-top: 64px; font-size: var(--ns-text-sm); color: var(--ns-muted); }
+
+/* Reduced motion: everything still works, nothing moves ------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto !important; }
+  .ns-js .ns-logo path, .ns-logo path { animation: none !important; stroke-dashoffset: 0 !important; fill-opacity: 1 !important; }
+  .ns-page a, .ns-thumb img, .ns-shot img, .ns-tl > li::before { transition: none !important; }
+  .ns-lightbox, .ns-note[open] .ns-note__body { animation: none !important; }
+}

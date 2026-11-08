@@ -1,0 +1,44 @@
+---
+layout: default
+ns_js: [glider]
+# One announced, unpublished post can sit at the top of Writing with "Soon". Delete the line to hide it.
+soon: The one about scope creep
+---
+<div class="ns-split">
+  <main class="ns-split__main">
+    <h1 class="ns-intro">Hi, I’m Prashant. I build software and the teams that build it.</h1>
+    <p>These days I’m wrangling AI at <a href="https://realfast.ai">realfast</a>. Before that I co-founded <a href="https://www.shovel.company">Shovel Company</a> and designed <a href="https://creole.network">Creole Network</a>, and ran SRE, platform engineering and dev tooling at Gojek.</p>
+
+    <section id="writing" class="ns-section">
+      <div class="ns-h2-row"><h2 class="ns-h2">Writing</h2><a class="ns-meta" href="/posts/past-life">Archive, 2015–2018 →</a></div>
+      <div class="ns-rows">
+        {%- if page.soon %}
+        {% include ns/row.html title=page.soon meta="Soon" %}
+        {%- endif %}
+        {%- assign writing = site.posts | where_exp: "p", "p.listed != false" %}
+        {%- for p in writing limit: 8 %}
+        {%- assign t = p.list_title | default: p.title %}
+        {%- assign m = p.date | date: "%b %Y" %}
+        {%- assign dt = p.date | date: "%Y-%m" %}
+        {% include ns/row.html title=t url=p.url meta=m datetime=dt %}
+        {%- endfor %}
+      </div>
+    </section>
+
+    <section class="ns-section">
+      <div class="ns-h2-row"><h2 class="ns-h2">Photographs</h2><a class="ns-meta" href="/photos/">All photographs →</a></div>
+      <div class="ns-strip">
+        {%- for s in site.data.photos %}{% for ph in s.photos %}{% if ph.home %}
+        <a class="ns-thumb" href="/photos/"><img src="/assets/photos/{{ s.folder }}/{{ ph.file }}-s.jpg" alt="{{ ph.alt }}, {{ ph.place }}" loading="lazy"></a>
+        {%- endif %}{% endfor %}{% endfor %}
+      </div>
+    </section>
+
+    {% include ns/elsewhere.html %}
+    {% include ns/footer.html %}
+  </main>
+
+  <aside class="ns-split__side ns-split__side--first" aria-label="Glider">
+    {% include ns/glider.html %}
+  </aside>
+</div>

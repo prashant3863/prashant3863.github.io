@@ -1,37 +1,40 @@
 <style>
-    /* Reusable post components. Inline so Tailwind's purge never strips them. */
-    article.prose {
-        --c-accent: #e3120b;
-        --c-ink: #111827;
-        --c-muted: #6b7280;
-        --c-rule: #e5e7eb;
-        --c-tint: #f7f5f0;
+    /* Reusable post components. Inline so Tailwind's purge never strips them.
+     * Colours come from the notshant tokens (design/tokens.css). The accent is the glider's light green:
+     * --c-accent for rules and borders, --c-tint behind the key idea. Neither is ever text on white.
+     * It replaced the red #e3120b (design/brand.md → Colour). Weights stop at 600. */
+    article.ns-prose {
+        --c-accent: var(--ns-mint-light);
+        --c-ink: var(--ns-ink);
+        --c-muted: var(--ns-muted);
+        --c-rule: var(--ns-rule);
+        --c-tint: var(--ns-mint-wash);
     }
 
     /* Pull-quote style facts with a source line underneath */
-    article.prose blockquote.fact {
-        font-size: 1.3em; line-height: 1.45; font-weight: 500;
-        border-left: 4px solid var(--c-accent); padding-left: 1em;
+    article.ns-prose blockquote.fact {
+        font-size: 1.15em; line-height: 1.5; font-weight: 500; color: var(--c-ink);
+        border-left: 3px solid var(--c-accent); padding-left: 1em;
     }
-    article.prose p.cite { font-size: 0.75em; color: #9ca3af; margin-top: -0.75em; }
-    article.prose p.cite a { color: #9ca3af; }
+    article.ns-prose p.cite { font-size: 0.8em; color: var(--c-muted); margin-top: -0.75em; }
+    article.ns-prose p.cite a { color: var(--c-muted); }
 
     /* The key idea of a post: large, bold, set apart */
-    article.prose p.c-key {
-        font-size: 1.45em; line-height: 1.4; font-weight: 700; color: var(--c-ink);
-        background: var(--c-tint); border-left: 6px solid var(--c-accent);
-        padding: 1.25rem 1.5rem; margin: 2rem 0; border-radius: 4px;
+    article.ns-prose p.c-key {
+        font-size: 1.15em; line-height: 1.5; font-weight: 600; color: var(--c-ink);
+        background: var(--c-tint); border-left: 3px solid var(--c-accent);
+        padding: 1.1rem 1.35rem; margin: 2rem 0; border-radius: var(--ns-radius-sm);
     }
 
     /* Subtitle directly under the post's H1 */
-    article.prose p.c-subtitle {
-        font-size: 1.35em; line-height: 1.35; color: var(--c-muted); font-weight: 500;
-        margin-top: -0.6em; margin-bottom: 1.75em;
+    article.ns-prose p.c-subtitle {
+        font-size: 1em; line-height: 1.5; color: var(--c-muted); font-weight: 400;
+        margin-top: -0.3em; margin-bottom: 1.75em;
     }
 
         /* Big standalone line, no quote marks */
-    article.prose p.pull {
-        font-size: 1.6em; line-height: 1.3; font-weight: 700; color: var(--c-ink);
+    article.ns-prose p.pull {
+        font-size: 1.3em; line-height: 1.35; font-weight: 600; color: var(--c-ink);
         border-top: 3px solid var(--c-accent); padding-top: 0.75em; margin: 2.5rem 0;
         max-width: 32ch;
     }
@@ -44,81 +47,81 @@
     }
     article.numbered h3::before {
         content: counter(section, decimal-leading-zero);
-        display: block; font-size: 0.7em; font-weight: 700; letter-spacing: 0.12em;
-        color: var(--c-accent); margin-bottom: 0.35rem;
+        display: block; font-family: var(--ns-mono); font-size: 0.7em; font-weight: 400; letter-spacing: 0.04em;
+        color: var(--c-muted); margin-bottom: 0.35rem;
     }
 
     /* Generic card and grids */
-    article.prose .c-grid { display: grid; gap: 1rem; margin: 1.5rem 0; }
-    article.prose .c-grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    article.prose .c-grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    article.ns-prose .c-grid { display: grid; gap: 1rem; margin: 1.5rem 0; }
+    article.ns-prose .c-grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    article.ns-prose .c-grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     @media (max-width: 640px) {
-        article.prose .c-grid-2, article.prose .c-grid-3 { grid-template-columns: 1fr; }
+        article.ns-prose .c-grid-2, article.ns-prose .c-grid-3 { grid-template-columns: 1fr; }
     }
-    article.prose .c-card {
-        border: 1px solid var(--c-rule); border-top: 3px solid var(--c-ink);
-        border-radius: 4px; padding: 1rem 1.1rem; background: #fff;
+    article.ns-prose .c-card {
+        border: 1px solid var(--c-rule); border-top: 2px solid var(--c-ink);
+        border-radius: var(--ns-radius-sm); padding: 1rem 1.1rem; background: var(--ns-bg);
     }
-    article.prose .c-card > :first-child { margin-top: 0; }
-    article.prose .c-card > :last-child { margin-bottom: 0; }
-    article.prose .c-card p { margin: 0.4em 0; font-size: 0.95em; }
-    article.prose .c-label {
-        display: block; font-size: 0.72em; font-weight: 700; letter-spacing: 0.12em;
-        text-transform: uppercase; color: var(--c-accent); margin-bottom: 0.25rem;
+    article.ns-prose .c-card > :first-child { margin-top: 0; }
+    article.ns-prose .c-card > :last-child { margin-bottom: 0; }
+    article.ns-prose .c-card p { margin: 0.4em 0; font-size: 0.95em; }
+    article.ns-prose .c-label {
+        display: block; font-size: 0.72em; font-weight: 600; letter-spacing: 0.08em;
+        text-transform: uppercase; color: var(--c-muted); margin-bottom: 0.25rem;
     }
-    article.prose .c-card .c-title { font-weight: 700; font-size: 1.05em; color: var(--c-ink); }
+    article.ns-prose .c-card .c-title { font-weight: 600; font-size: 1.05em; color: var(--c-ink); }
     /* A card with a fix line is a column, so the fix sits at the bottom of every card in a row */
-    article.prose .c-card:has(.c-fix) { display: flex; flex-direction: column; }
-    article.prose .c-card p.c-fix {
+    article.ns-prose .c-card:has(.c-fix) { display: flex; flex-direction: column; }
+    article.ns-prose .c-card p.c-fix {
         margin-top: auto; margin-bottom: 0;
         border-top: 1px solid var(--c-rule); padding-top: 0.5em; font-weight: 600;
     }
-    article.prose .c-card:has(.c-fix) p:nth-last-child(2) { margin-bottom: 0.9em; }
+    article.ns-prose .c-card:has(.c-fix) p:nth-last-child(2) { margin-bottom: 0.9em; }
 
     /* "In this post" summary box, kept quiet so the key idea leads */
-    article.prose .c-summary {
-        border: 1px solid var(--c-rule); border-radius: 4px;
+    article.ns-prose .c-summary {
+        border: 1px solid var(--c-rule); border-radius: var(--ns-radius-sm);
         padding: 0.75rem 1.1rem; margin: 1.5rem 0; font-size: 0.9em;
     }
-    article.prose .c-summary .c-label { color: var(--c-muted); }
-    article.prose .c-summary ol { margin: 0.25rem 0 0; }
-    article.prose .c-summary li { margin: 0.1rem 0; }
-    article.prose .c-summary a { color: var(--c-muted); }
+    article.ns-prose .c-summary .c-label { color: var(--c-muted); }
+    article.ns-prose .c-summary ol { margin: 0.25rem 0 0; }
+    article.ns-prose .c-summary li { margin: 0.1rem 0; }
+    article.ns-prose .c-summary a { color: var(--c-muted); }
 
     /* Numbered step cards */
-    article.prose .c-step {
+    article.ns-prose .c-step {
         display: grid; grid-template-columns: 3rem minmax(0, 1fr); gap: 1rem;
         border-top: 1px solid var(--c-rule); padding: 1.25rem 0;
     }
-    article.prose .c-step:last-of-type { border-bottom: 1px solid var(--c-rule); }
-    article.prose .c-step-num {
+    article.ns-prose .c-step:last-of-type { border-bottom: 1px solid var(--c-rule); }
+    article.ns-prose .c-step-num {
         width: 2.5rem; height: 2.5rem; border-radius: 999px; background: var(--c-ink); color: #fff;
-        display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.1em;
+        display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 1em;
     }
-    article.prose .c-step-body > :first-child { margin-top: 0.3rem; }
-    article.prose .c-step-body > :last-child { margin-bottom: 0; }
-    article.prose .c-step-body h4 { margin-top: 0.2rem; }
+    article.ns-prose .c-step-body > :first-child { margin-top: 0.3rem; }
+    article.ns-prose .c-step-body > :last-child { margin-bottom: 0; }
+    article.ns-prose .c-step-body h4 { margin-top: 0.2rem; }
 
     /* Checklist */
-    article.prose ul.c-check {
+    article.ns-prose ul.c-check {
         list-style: none; padding-left: 0; display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 2rem; row-gap: 0.6rem;
     }
-    @media (max-width: 640px) { article.prose ul.c-check { grid-template-columns: 1fr; } }
-    article.prose ul.c-check li { position: relative; padding-left: 1.8rem; margin: 0; }
-    article.prose ul.c-check li::before {
+    @media (max-width: 640px) { article.ns-prose ul.c-check { grid-template-columns: 1fr; } }
+    article.ns-prose ul.c-check li { position: relative; padding-left: 1.8rem; margin: 0; }
+    article.ns-prose ul.c-check li::before {
         content: ""; position: absolute; left: 0; top: 0.35em; width: 1rem; height: 1rem;
         border: 2px solid var(--c-ink); border-radius: 3px; background: none;
     }
 
     /* Highlight callout, e.g. the AI multiplier */
-    article.prose .c-callout {
+    article.ns-prose .c-callout {
         display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 1.5rem; align-items: center;
-        background: var(--c-ink); color: #f9fafb; border-radius: 6px; padding: 1.5rem 1.75rem; margin: 2rem 0;
+        background: var(--c-ink); color: #F5F5F5; border-radius: var(--ns-radius-md); padding: 1.5rem 1.75rem; margin: 2rem 0;
     }
-    @media (max-width: 640px) { article.prose .c-callout { grid-template-columns: 1fr; } }
-    article.prose .c-callout .c-big { font-size: 3.2em; font-weight: 800; line-height: 1; color: #fff; }
-    article.prose .c-callout p { margin: 0.3em 0; color: #e5e7eb; }
-    article.prose .c-callout strong { color: #fff; }
-    article.prose .c-callout .c-label { color: #fca5a5; }
+    @media (max-width: 640px) { article.ns-prose .c-callout { grid-template-columns: 1fr; } }
+    article.ns-prose .c-callout .c-big { font-size: 3em; font-weight: 600; line-height: 1; color: #fff; }
+    article.ns-prose .c-callout p { margin: 0.3em 0; color: #E4E4E4; }
+    article.ns-prose .c-callout strong { color: #fff; }
+    article.ns-prose .c-callout .c-label { color: var(--ns-mint-light); }   /* light green reads well on ink (10:1) */
 </style>

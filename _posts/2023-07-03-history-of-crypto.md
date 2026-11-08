@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Prominent Writings about Crypto
+list_title: Notes from historical writing about crypto
 permalink: /posts/history
 ---
 

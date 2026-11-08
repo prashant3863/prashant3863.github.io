@@ -1,0 +1,10 @@
+# "Things I've built" on the about page. Leave `url` out when there's nothing public to link to.
+- { title: autosub, sub: subtitles in the browser, meta: "2026", url: "/autosub/" }
+- { title: Creole Network, sub: a peer-to-peer private data network, meta: Shovel, url: "https://creole.network/" }
+- { title: Rolodex, sub: a private contact book for communities, meta: Shovel, url: "https://rolodex.shovel.company/" }
+- { title: Odet, sub: service registry and DORA metrics, meta: Shovel }
+- { title: Lens, sub: multi-tenant monitoring on Cortex, meta: Gojek, url: "https://cortexmetrics.io/docs/case-studies/gojek/" }
+- { title: Ziggurat, sub: stream processing on Kafka, meta: Gojek, url: "https://ziggurat.dev/" }
+- { title: Ogi, sub: an ETL utility, meta: Gojek }
+- { title: Supertrader, sub: your own crypto fund, meta: ETHOnline }
+- { title: Claim Genie, sub: medical-claim processing, meta: Devfolio }

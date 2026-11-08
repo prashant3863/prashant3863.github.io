@@ -1,0 +1,84 @@
+/*
+ * notshant design tokens — the single source of truth for colour, type, space and motion.
+ * Every value used by design/components.css, the JS in assets/js/ns-*.js and the Tailwind
+ * extension in design/tailwind.tokens.js comes from here. Change a value here first, then
+ * update design/system.md in the same commit.
+ */
+:root {
+  /* Colour ------------------------------------------------------------- */
+  --ns-bg: #FFFFFF;              /* page background. Always white. */
+  --ns-ink: #1C1C1C;             /* body text, headings, logo */
+  --ns-ink-2: #4A4A4A;           /* secondary prose: notes, captions under the glider */
+  --ns-muted: #6B6B6B;           /* meta, nav, dates, captions. Lightest colour allowed for text (5.3:1) */
+  --ns-faint: #9AA5A2;           /* decorative only: list markers. Never text (2.5:1) */
+  --ns-rule: #ECECEC;            /* hairlines between rows and sections */
+  --ns-surface: #F5F8F7;         /* the glider panel */
+  --ns-surface-photo: #EEF1F0;   /* image placeholder while a photo loads */
+  --ns-dot: #C9D4D1;             /* grid dots, inactive timeline dots */
+  --ns-dot-line: #E3E8E6;        /* timeline spine */
+  --ns-accent: #2E9C83;          /* mint: focus ring, active marker. Not for text (3.4:1) */
+  --ns-accent-soft: rgba(46, 156, 131, 0.14);
+  --ns-mint-light: #9EDDCB;      /* the glider's lit cube face: rules and markers in posts. Never text on white (1.6:1) */
+  --ns-mint-wash: #D9F5EC;       /* the glider's pale cube face: background of a post's key idea */
+  --ns-underline: rgba(28, 28, 28, 0.25);
+  --ns-underline-hover: rgba(28, 28, 28, 0.75);
+
+  /* The glider (isometric cubes) */
+  --ns-cube-top-1: #FFFFFF;
+  --ns-cube-top-2: #F3F6F6;
+  --ns-cube-left: #E9EEEF;
+  --ns-cube-right-1: #D9F5EC;
+  --ns-cube-right-2: #9EDDCB;
+  --ns-cube-shadow: rgba(20, 70, 58, 0.09);
+
+  /* Type --------------------------------------------------------------- */
+  --ns-font: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --ns-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --ns-text-xs: 12px;            /* mono captions, years */
+  --ns-text-sm: 13px;            /* footer, small print */
+  --ns-text-note: 13.5px;        /* the glider note */
+  --ns-text-meta: 14px;          /* nav, dates, row meta, links like "All photographs →" */
+  --ns-text-h2: 15px;            /* section headings */
+  --ns-text-body: 16px;          /* UI pages: home, about, notes, photos */
+  --ns-text-prose: 17px;         /* long-form posts */
+  --ns-text-intro: 20px;         /* the one-line h1 at the top of a page */
+  --ns-leading: 1.65;
+  --ns-leading-prose: 1.7;
+  --ns-leading-tight: 1.45;
+  --ns-tracking-intro: -0.012em;
+  --ns-weight: 400;
+  --ns-weight-medium: 500;
+  --ns-weight-bold: 600;         /* the heaviest weight on the site */
+
+  /* Space and layout ---------------------------------------------------- */
+  --ns-container: 1120px;        /* whole page, header included */
+  --ns-measure: 600px;           /* the text column. Everything reads from its left edge */
+  --ns-measure-post: 100%;       /* posts with no on-this-page list: the article takes the side column's space too */
+  --ns-toc-width: 220px;         /* the on-this-page list beside a post: narrow, so the article gets the room */
+  --ns-toc-gap: 56px;
+  --ns-gutter: clamp(20px, 4vw, 48px);
+  --ns-col-gap: clamp(48px, 7vw, 96px);
+  --ns-header-gap: clamp(36px, 7vw, 72px);
+  --ns-section: 56px;            /* between sections on home */
+  --ns-section-tight: 44px;      /* between sections on about and notes */
+  --ns-row-y: 11px;              /* vertical padding inside a list row */
+  --ns-sticky-top: 32px;
+  --ns-split-break: 880px;       /* below this the side column stacks (keep in sync with the media queries) */
+
+  /* Radius -------------------------------------------------------------- */
+  --ns-radius-xs: 2px;           /* focus outline */
+  --ns-radius-sm: 6px;           /* photo thumbnails */
+  --ns-radius-md: 12px;          /* a single large photo */
+  --ns-radius-lg: 20px;          /* the glider panel */
+
+  /* Motion -------------------------------------------------------------- */
+  --ns-ease-draw: cubic-bezier(.4, 0, .2, 1);
+  --ns-ease-out: cubic-bezier(.2, .7, .2, 1);
+  --ns-logo-draw: 4.8s;          /* outline draws in */
+  --ns-logo-fill: .9s;           /* fill fades in after the outline */
+  --ns-logo-fill-at: 3.7s;       /* on first load (after a .15s delay before the outline starts) */
+  --ns-logo-refill-at: 3.55s;    /* on hover replay (no delay) */
+  --ns-t-link: .25s;             /* underline colour */
+  --ns-t-state: .45s;            /* timeline dot, note reveal */
+  --ns-t-hover: .6s;             /* photo zoom on hover */
+}

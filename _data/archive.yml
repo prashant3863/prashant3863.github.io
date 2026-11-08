@@ -1,0 +1,9 @@
+# Writing and talks from before this site, newest first. Rendered at /posts/past-life (archive.html).
+- { title: "Tale of Two Lambdas: solving event-sourcing at Gojek", url: "https://medium.com/gojekengineering/a-tale-of-two-lambdas-solving-event-sourcing-at-go-jek-149884d898a1", where: Medium, year: 2018 }
+- { title: "Devops Journey, Gojek", url: "https://prezi.com/tiepzeriz-gx/the-devops-journey/", where: Prezi, year: 2017 }
+- { title: "Testing in Go", url: "https://redgreenrefactor.quora.com/Testing-in-Go", where: Quora, year: 2016 }
+- { title: "The art of fine-grain commits", url: "https://redgreenrefactor.quora.com/The-Art-of-Fine-Grain-Commits", where: Quora, year: 2015 }
+- { title: "In the shadow of the master", url: "https://redgreenrefactor.quora.com/In-the-Shadow-of-the-Master", where: Quora, year: 2015 }
+- { title: "What’s in the name!", url: "https://redgreenrefactor.quora.com/What-s-in-the-name", where: Quora, year: 2015 }
+- { title: "What’s that smell", url: "https://redgreenrefactor.quora.com/Whats-that-Smells", where: Quora, year: 2015 }
+- { title: "Red, Green, Refactor", url: "https://redgreenrefactor.quora.com/The-Learning-Begins", where: Quora, year: 2015 }

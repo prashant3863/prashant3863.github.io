@@ -1,12 +1,16 @@
-<header class="flex flex-row justify-between items-center h-12 md:h-20 text-sm md:text-lg font-semibold">
-  <div class="w-1/4 md:none">
-    <a href="/"><img src="/assets/shant_logo.svg"></a>
-  </div>
-  <div class="flex flex-row space-x-2 md:space-x-4 justify-end items-center">
-    <a href="{% post_url 0001-01-01-about %}" class="hover:text-red-500"> About </a>
-    <a href="/" class="hover:text-red-500">Posts</a>
-    <a href="{% post_url 2023-01-01-past-life %}" class="hover:text-red-500"> Archive </a>
-    <a href="https://twitter.com/prashant_mit" class="w-4 md:w-5"><img src="/assets/twitter_icon.svg"></a>
-    <a href="https://github.com/prashant3863" class="w-4 md:w-5"><img src="/assets/github_icon.svg"></a>
-  </div>
+{%- comment -%}
+  Site header: the logo on the left, lowercase nav on the right. Spec: design/system.md → Components → Header.
+  A page marks its nav item with front matter `nav: writing | notes | photos | about`.
+  "notes" only shows once the _notes collection has something in it.
+{%- endcomment -%}
+<header class="ns-header">
+  {% include ns/logo.html %}
+  <nav class="ns-nav" aria-label="Primary">
+    <a href="/#writing"{% if page.nav == "writing" %} aria-current="page"{% endif %}>writing</a>
+    {%- if site.notes.size > 0 %}
+    <a href="/notes/"{% if page.nav == "notes" %} aria-current="page"{% endif %}>notes</a>
+    {%- endif %}
+    <a href="/photos/"{% if page.nav == "photos" %} aria-current="page"{% endif %}>photos</a>
+    <a href="/about"{% if page.nav == "about" %} aria-current="page"{% endif %}>about</a>
+  </nav>
 </header>

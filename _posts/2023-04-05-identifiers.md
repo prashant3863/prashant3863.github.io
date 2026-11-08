@@ -1,10 +1,8 @@
 ---
 layout: post
-title: Identitfiers
+title: Identifiers
 permalink: /posts/identifiers
 ---
-
-## Identifiers
 
 **Name** is an identifier that is self-issued & controlled but not globally unique (multiple people can have the same name), human-friendly, made legible by claiming it so in your birth certificate.
 
