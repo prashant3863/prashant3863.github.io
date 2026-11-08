@@ -282,5 +282,6 @@ Post components (`.c-key`, `.fact`, `.pull`, `.c-card`, `.c-callout`, numbered s
 | 6 | Built into the site (8 Nov 2026) | Every page moved to N. URLs unchanged (`/about`, `/posts/…`, `/posts/past-life`); `/photos/` is new. Post components moved from red to the tokens. |
 | 7 | Wider posts (8 Nov 2026) | 600px felt cramped for posts. The on-this-page list narrowed to 220px so the text gets the room, and posts without a list stretch to the full width. |
 | 8 | Post accent (8 Nov 2026) | The estimation post’s red became the glider’s light green: quote bars, pull rules, key-idea block, callout label. Figures moved from red to mint. |
+| 9 | Favicon (8 Nov 2026) | The logo’s opening (s + ¬) as a square mark: SVG with a dark-mode colour, a root `favicon.ico` and an Apple touch icon. Replaced the missing `/assets/favicon.ico`. |
 
 When you change the system, update `tokens.css` first, then this file, and add a row here.

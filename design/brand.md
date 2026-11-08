@@ -46,6 +46,15 @@ The logo draws itself in. It's the brand's signature moment, so the timing is fi
 
 Don't swap this for a fade, a slide or an "unravel and redraw". Each of those was tried and rejected.
 
+### Favicon
+
+The favicon is the opening of the logo: the "s", the ¬ bar and the h's stem, which together make ¬. It uses the logo's own shapes; don't redraw it or swap in the glider.
+
+- `assets/favicon.svg`: ink (#1C1C1C), switching to #E7E7E4 when the browser is in dark mode.
+- `favicon.ico` at the site root (16, 32 and 48px) for browsers and pages without the head links, like the slide decks.
+- `assets/apple-touch-icon.png`: 180px, ink on white.
+- To change it, edit the SVG, then re-render the PNGs and the ICO from it.
+
 ## The glider
 
 The site's one motif is a **glider from Conway's Game of Life**. It's drawn as five soft white cubes with mint sides, from Prashant's 2022 Figma animation ([X post](https://x.com/prashant_mit/status/1518889653801132033)).
