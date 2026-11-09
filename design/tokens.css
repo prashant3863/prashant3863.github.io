@@ -112,6 +112,8 @@ html.dark {
   --ns-mint-wash: #1F3A33;       /* deep mint behind a post's key idea */
   --ns-callout-bg: #2C3031;
   --ns-callout-ink: #E7E7E4;
+  --ns-flood-core: rgba(231, 231, 228, 0.34);   /* the floodlight on the football switch: pool of light */
+  --ns-flood-mid: rgba(231, 231, 228, 0.12);    /* and its beam */
 
   /* the glider: lit cubes on a dark panel */
   --ns-cube-top-1: #E3E9E8;

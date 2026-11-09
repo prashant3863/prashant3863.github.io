@@ -231,7 +231,7 @@ Use only these. Anything new must be this slow and this quiet, and must stop und
 | **Rows** | Opacity .82→1. |
 | **Photos** | Scale 1.035 (strip) or 1.025 (grid) over .6s with cubic-bezier(.2,.7,.2,1). |
 | **Viewer** | Fades in over .25s. |
-| **Theme switch (football)** | A kick: over .8s (`--ns-t-kick`) the ball hops 6px while rolling one full turn, lands, bounces 2px, and settles. It rolls clockwise into dark mode and anticlockwise back to light. Hover nudges it −14°. Colours change instantly. Reduced motion: no kick, no nudge. |
+| **Theme switch (football)** | A kick: over .8s (`--ns-t-kick`) the ball hops 6px while rolling one full turn, lands, bounces 2px, and settles. It rolls clockwise into dark mode and anticlockwise back to light. Hover nudges it −14°. Colours change instantly. **Floodlight:** in dark mode a soft beam and pool of light (`--ns-flood-core`, `--ns-flood-mid`) sit behind the ball. After a kick into dark mode it stays off while the ball is in the air, then flickers on as it lands (45–72% of the kick). Going to light, it fades out over .2s. Reduced motion: no kick, nudge or flicker. |
 | **Anchor jumps** | Smooth scroll. |
 
 **Rejected (don't bring back)**
@@ -310,5 +310,6 @@ Post components (`.c-key`, `.fact`, `.pull`, `.c-card`, `.c-callout`, numbered s
 | 9 | Favicon (8 Nov 2026) | The logo’s opening (s + ¬) as a square mark: SVG with a dark-mode colour, a root `favicon.ico` and an Apple touch icon. Replaced the missing `/assets/favicon.ico`. |
 | 10 | Dark mode (9 Nov 2026) | Reverses "no dark mode". A soft charcoal (#1B1C1D), not pure black, with every colour swapped through the tokens. Follows the system until the visitor flips the header switch. |
 | 11 | Football switch (9 Nov 2026) | The dark-mode switch became a football with a kick animation, for Prashant’s love of football. Same button, label and behaviour. |
+| 12 | Floodlights (9 Nov 2026) | So the football reads as a light/dark switch: in dark mode it sits under a floodlight, which flickers on after the kick. No tooltip: a styled one was tried and felt out of place. Light mode is daytime: no beam. |
 
 When you change the system, update `tokens.css` first, then this file, and add a row here.

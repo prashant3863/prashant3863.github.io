@@ -17,20 +17,27 @@
   function saved() {
     try { var t = localStorage.getItem(KEY); return t === 'dark' || t === 'light' ? t : null; } catch (e) { return null; }
   }
+  function label(b, dark) {
+    b.setAttribute('aria-pressed', dark ? 'true' : 'false');
+  }
   function apply(dark) {
     root.classList.toggle('dark', dark);
-    buttons.forEach(function (b) { b.setAttribute('aria-pressed', dark ? 'true' : 'false'); });
+    buttons.forEach(function (b) { label(b, dark); });
     document.dispatchEvent(new CustomEvent('ns-themechange', { detail: { dark: dark } }));
   }
 
   buttons.forEach(function (b) {
-    b.setAttribute('aria-pressed', root.classList.contains('dark') ? 'true' : 'false');
-    b.addEventListener('animationend', function () { b.classList.remove('is-kicking'); });
+    label(b, root.classList.contains('dark'));
+    var settle = 0;
+    function endKick() { clearTimeout(settle); b.classList.remove('is-kicking'); }
+    b.addEventListener('animationend', function (e) { if (/^ns-kick/.test(e.animationName)) endKick(); });
     b.addEventListener('click', function () {
       var dark = !root.classList.contains('dark');
       b.classList.remove('is-kicking');
       void b.offsetWidth; // restart the kick if it's clicked again mid-roll
       b.classList.add('is-kicking');
+      clearTimeout(settle);
+      settle = setTimeout(endKick, 900); // backstop if animationend never arrives (--ns-t-kick is .8s)
       try { localStorage.setItem(KEY, dark ? 'dark' : 'light'); } catch (e) { /* private mode: lasts for this page */ }
       apply(dark);
     });

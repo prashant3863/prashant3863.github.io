@@ -51,14 +51,35 @@ html:has(.ns-page) { scroll-behavior: smooth; }
 .ns-nav { display: flex; flex-wrap: wrap; gap: 0 22px; font-size: var(--ns-text-meta); color: var(--ns-muted); }
 .ns-nav a { padding: 12px 0; text-decoration: none; }
 /* Light / dark switch: a football (Prashant loves football). A click kicks it: it hops and rolls,
-   to the right into dark mode and back to the left into light. Hover nudges it. */
+   to the right into dark mode and back to the left into light. Hover nudges it.
+   Dark mode is a night match: the ball sits under a floodlight, which flickers on as the ball lands. */
 .ns-theme {
+  position: relative;
   display: inline-flex; align-items: center; justify-content: center;
   width: 32px; height: 44px; margin: 0 -8px 0 -4px; padding: 0; border: 0; background: none;
   color: var(--ns-muted); cursor: pointer;
 }
 .ns-theme:hover { color: var(--ns-ink); }
-.ns-theme svg { display: block; transition: transform var(--ns-t-state) var(--ns-ease-out); }
+.ns-theme svg { position: relative; display: block; transition: transform var(--ns-t-state) var(--ns-ease-out); }
+.ns-theme::before {
+  content: ""; position: absolute; left: 50%; top: -6px; width: 44px; height: 46px; margin-left: -22px;
+  background:
+    radial-gradient(circle at 50% 70%, var(--ns-flood-core, transparent) 0, var(--ns-flood-mid, transparent) 30%, transparent 52%),
+    linear-gradient(to bottom, transparent, var(--ns-flood-mid, transparent) 70%, transparent);
+  clip-path: polygon(44% 0, 56% 0, 100% 100%, 0 100%);
+  opacity: 0; pointer-events: none; transition: opacity .2s ease;
+}
+html.dark .ns-theme { color: var(--ns-ink); }
+html.dark .ns-theme::before { opacity: 1; }
+html.dark .ns-theme.is-kicking::before { animation: ns-floodlights var(--ns-t-kick) linear both; }
+@keyframes ns-floodlights {
+  0%, 45% { opacity: 0; }
+  49% { opacity: .8; }
+  53% { opacity: .1; }
+  58% { opacity: 1; }
+  62% { opacity: .35; }
+  72%, 100% { opacity: 1; }
+}
 .ns-theme:hover svg { transform: rotate(-14deg); }
 .ns-theme.is-kicking svg { animation: ns-kick var(--ns-t-kick) cubic-bezier(.3, .7, .4, 1) both; }
 html:not(.dark) .ns-theme.is-kicking svg { animation-name: ns-kick-back; }
@@ -301,6 +322,6 @@ html:not(.dark) .ns-theme.is-kicking svg { animation-name: ns-kick-back; }
   .ns-js .ns-logo path, .ns-logo path { animation: none !important; stroke-dashoffset: 0 !important; fill-opacity: 1 !important; }
   .ns-page a, .ns-thumb img, .ns-shot img, .ns-tl > li::before, .ns-theme svg { transition: none !important; }
   .ns-theme:hover svg { transform: none; }
-  .ns-theme.is-kicking svg { animation: none !important; }
+  .ns-theme.is-kicking svg, .ns-theme.is-kicking::before { animation: none !important; }
   .ns-lightbox, .ns-note[open] .ns-note__body { animation: none !important; }
 }
