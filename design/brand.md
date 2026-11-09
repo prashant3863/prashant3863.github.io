@@ -22,7 +22,7 @@ The logo is the source file `assets/shant_logo.svg`. It has **two shapes**:
 
 | | |
 |---|---|
-| Colour | `--ns-ink` (#1C1C1C) on white. Use #E7E7E4 on #0E0E0F only if a dark surface is ever needed. |
+| Colour | `--ns-ink`: #1C1C1C on white, #E7E7E4 on the dark-mode charcoal. It follows the theme by itself. |
 | Size | 96px wide in the header. Never smaller than 64px wide. |
 | Clear space | At least the height of the ¬ bar × 2 on every side. |
 | Placement | Top left of every page. It links home. |
@@ -72,7 +72,8 @@ The site's one motif is a **glider from Conway's Game of Life**. It's drawn as f
 
 The palette is white, ink and greys, with mint as the only accent. See the tokens in [system.md](system.md#colour).
 
-- The background is always white. No cream, paper or dark mode. Prashant rejected the cream, serif, "Claude-looking" palette.
+- The background is white in light mode and a **soft charcoal (#1B1C1D) in dark mode, never pure black**. No cream or paper: Prashant rejected the cream, serif, "Claude-looking" palette.
+- **Dark mode** follows the visitor's system setting until they use the switch in the header, then remembers their choice. The switch is a **football**, because Prashant loves football: a click kicks it, it hops and rolls, right into dark mode and left back into light. Every colour comes from the same tokens, so nothing needs a separate dark design.
 - **Mint (#2E9C83) is never used for text.** It marks state: focus rings, the active timeline dot and the glider. Links are ink with a soft underline.
 - **Posts take their accent from the glider's light green** (#9EDDCB, with #D9F5EC as a wash). It marks quote bars, pull-quote rules and the key-idea block, and labels on the dark callout. It is never text on white (1.6:1). In figures, where light green is too faint for thin lines and small labels, use mint (#2E9C83).
 - No red. The old post accent #e3120b is gone from the site; the estimation talk's slide deck (`assets/estimates/deck.html`) keeps it, since it's the talk as given.

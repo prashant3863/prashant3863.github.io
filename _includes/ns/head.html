@@ -3,7 +3,17 @@
   - html.ns-js lets the logo start hidden only when JS will draw it (no flash, and no blank logo without JS).
   - Inter 400/500/600 is the only typeface. Mono uses the system stack.
 {%- endcomment -%}
-<script>document.documentElement.classList.add('ns-js')</script>
+<script>
+  /* ns-js: the logo may animate. dark: the saved choice, else the system setting (design/system.md → Dark mode). */
+  (function (d) {
+    d.classList.add('ns-js');
+    var t = null;
+    try { t = localStorage.getItem('ns-theme'); } catch (e) {}
+    if (t !== 'light' && t !== 'dark') t = window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    if (t === 'dark') d.classList.add('dark');
+  })(document.documentElement);
+</script>
+<meta name="color-scheme" content="light dark">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">

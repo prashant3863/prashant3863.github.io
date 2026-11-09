@@ -17,7 +17,7 @@ Code that lives outside this folder:
 
 ## The short version
 
-1. White page, ink text, one mint accent that is never used for text. Inter only.
+1. White page (a soft charcoal in dark mode, never pure black), ink text, one mint accent that is never used for text. Inter only.
 2. One 600px text column with everything on its left edge. The right column holds one quiet thing, or nothing. Posts run wider: a narrow on-this-page list, or full width when there is none.
 3. The ¬shant logo always includes the ¬ bar. It draws in once per visit and redraws on hover.
 4. The glider appears on the home page only, with its story in the "why a glider?" note.

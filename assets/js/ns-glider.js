@@ -18,15 +18,17 @@
     var v = getComputedStyle(document.documentElement).getPropertyValue(name);
     return v && v.trim() ? v.trim() : fallback;
   }
-  var C = {
-    top1: token('--ns-cube-top-1', '#FFFFFF'),
-    top2: token('--ns-cube-top-2', '#F3F6F6'),
-    left: token('--ns-cube-left', '#E9EEEF'),
-    right1: token('--ns-cube-right-1', '#D9F5EC'),
-    right2: token('--ns-cube-right-2', '#9EDDCB'),
-    shadow: token('--ns-cube-shadow', 'rgba(20, 70, 58, 0.09)'),
-    dot: token('--ns-dot', '#C9D4D1')
-  };
+  var C = {};
+  function readColors() {
+    C.top1 = token('--ns-cube-top-1', '#FFFFFF');
+    C.top2 = token('--ns-cube-top-2', '#F3F6F6');
+    C.left = token('--ns-cube-left', '#E9EEEF');
+    C.right1 = token('--ns-cube-right-1', '#D9F5EC');
+    C.right2 = token('--ns-cube-right-2', '#9EDDCB');
+    C.shadow = token('--ns-cube-shadow', 'rgba(20, 70, 58, 0.09)');
+    C.dot = token('--ns-dot', '#C9D4D1');
+  }
+  readColors();
 
   function key(i, j) { return i + ',' + j; }
   function life(s) {
@@ -147,6 +149,8 @@
     }
     document.addEventListener('visibilitychange', resume);
     window.addEventListener('resize', function () { if (reduce && !raf) raf = requestAnimationFrame(draw); });
+    // The light / dark switch (ns-theme.js) changes the --ns-cube-* tokens; repaint with the new ones.
+    document.addEventListener('ns-themechange', function () { readColors(); if (!raf) raf = requestAnimationFrame(draw); });
     raf = requestAnimationFrame(draw);
   }
 

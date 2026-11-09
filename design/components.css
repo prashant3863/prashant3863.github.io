@@ -50,6 +50,32 @@ html:has(.ns-page) { scroll-behavior: smooth; }
 .ns-header .ns-logo-link { display: block; padding: 6px 0; text-decoration: none; }
 .ns-nav { display: flex; flex-wrap: wrap; gap: 0 22px; font-size: var(--ns-text-meta); color: var(--ns-muted); }
 .ns-nav a { padding: 12px 0; text-decoration: none; }
+/* Light / dark switch: a football (Prashant loves football). A click kicks it: it hops and rolls,
+   to the right into dark mode and back to the left into light. Hover nudges it. */
+.ns-theme {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 32px; height: 44px; margin: 0 -8px 0 -4px; padding: 0; border: 0; background: none;
+  color: var(--ns-muted); cursor: pointer;
+}
+.ns-theme:hover { color: var(--ns-ink); }
+.ns-theme svg { display: block; transition: transform var(--ns-t-state) var(--ns-ease-out); }
+.ns-theme:hover svg { transform: rotate(-14deg); }
+.ns-theme.is-kicking svg { animation: ns-kick var(--ns-t-kick) cubic-bezier(.3, .7, .4, 1) both; }
+html:not(.dark) .ns-theme.is-kicking svg { animation-name: ns-kick-back; }
+@keyframes ns-kick {
+  0%   { transform: translateY(0) rotate(0); }
+  35%  { transform: translateY(-6px) rotate(220deg); }
+  65%  { transform: translateY(0) rotate(320deg); }
+  82%  { transform: translateY(-2px) rotate(348deg); }
+  100% { transform: translateY(0) rotate(360deg); }
+}
+@keyframes ns-kick-back {
+  0%   { transform: translateY(0) rotate(0); }
+  35%  { transform: translateY(-6px) rotate(-220deg); }
+  65%  { transform: translateY(0) rotate(-320deg); }
+  82%  { transform: translateY(-2px) rotate(-348deg); }
+  100% { transform: translateY(0) rotate(-360deg); }
+}
 .ns-nav a[aria-current="page"] { color: var(--ns-ink); text-decoration: underline; text-decoration-color: var(--ns-underline); }
 
 /* Logo: two shapes, the letters and the ¬ bar. See design/brand.md. -------- */
@@ -273,6 +299,8 @@ html:has(.ns-page) { scroll-behavior: smooth; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto !important; }
   .ns-js .ns-logo path, .ns-logo path { animation: none !important; stroke-dashoffset: 0 !important; fill-opacity: 1 !important; }
-  .ns-page a, .ns-thumb img, .ns-shot img, .ns-tl > li::before { transition: none !important; }
+  .ns-page a, .ns-thumb img, .ns-shot img, .ns-tl > li::before, .ns-theme svg { transition: none !important; }
+  .ns-theme:hover svg { transform: none; }
+  .ns-theme.is-kicking svg { animation: none !important; }
   .ns-lightbox, .ns-note[open] .ns-note__body { animation: none !important; }
 }

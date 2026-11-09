@@ -20,6 +20,8 @@
   --ns-accent-soft: rgba(46, 156, 131, 0.14);
   --ns-mint-light: #9EDDCB;      /* the glider's lit cube face: rules and markers in posts. Never text on white (1.6:1) */
   --ns-mint-wash: #D9F5EC;       /* the glider's pale cube face: background of a post's key idea */
+  --ns-callout-bg: #1C1C1C;      /* a post's dark callout block (.c-callout) */
+  --ns-callout-ink: #F5F5F5;
   --ns-underline: rgba(28, 28, 28, 0.25);
   --ns-underline-hover: rgba(28, 28, 28, 0.75);
 
@@ -81,4 +83,41 @@
   --ns-t-link: .25s;             /* underline colour */
   --ns-t-state: .45s;            /* timeline dot, note reveal */
   --ns-t-hover: .6s;             /* photo zoom on hover */
+  --ns-t-kick: .8s;              /* the football switch: one hop and a roll */
+}
+
+/*
+ * Dark mode. A soft charcoal, never pure black (Prashant's call, 9 Nov 2026).
+ * html.dark is set before first paint by _includes/ns/head.html: the visitor's saved choice, else their
+ * system setting. The switch in the header (assets/js/ns-theme.js) flips it. Same rules as light:
+ * muted is the lightest text, faint and mint are never text.
+ */
+html.dark {
+  color-scheme: dark;
+  --ns-bg: #1B1C1D;              /* soft charcoal */
+  --ns-ink: #E7E7E4;             /* text, headings, logo (the brand's dark-surface logo colour) */
+  --ns-ink-2: #BDBDB8;
+  --ns-muted: #9C9C97;           /* lightest text: 6.3:1 on the background */
+  --ns-faint: #5F6967;           /* list markers only */
+  --ns-rule: #2E3031;
+  --ns-surface: #232627;         /* glider panel, code, open-questions box */
+  --ns-surface-photo: #27292A;
+  --ns-dot: #4B5553;
+  --ns-dot-line: #34383A;
+  --ns-accent: #3DAF93;          /* mint, a touch brighter so marks hold on charcoal */
+  --ns-accent-soft: rgba(61, 175, 147, 0.18);
+  --ns-underline: rgba(231, 231, 228, 0.3);
+  --ns-underline-hover: rgba(231, 231, 228, 0.8);
+  --ns-mint-light: #9EDDCB;      /* unchanged: rules and borders read well on charcoal */
+  --ns-mint-wash: #1F3A33;       /* deep mint behind a post's key idea */
+  --ns-callout-bg: #2C3031;
+  --ns-callout-ink: #E7E7E4;
+
+  /* the glider: lit cubes on a dark panel */
+  --ns-cube-top-1: #E3E9E8;
+  --ns-cube-top-2: #CDD6D4;
+  --ns-cube-left: #A9B5B2;
+  --ns-cube-right-1: #7FCDB7;
+  --ns-cube-right-2: #4FB39A;
+  --ns-cube-shadow: rgba(0, 0, 0, 0.35);
 }

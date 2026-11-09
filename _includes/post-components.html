@@ -95,7 +95,7 @@
     }
     article.ns-prose .c-step:last-of-type { border-bottom: 1px solid var(--c-rule); }
     article.ns-prose .c-step-num {
-        width: 2.5rem; height: 2.5rem; border-radius: 999px; background: var(--c-ink); color: #fff;
+        width: 2.5rem; height: 2.5rem; border-radius: 999px; background: var(--c-ink); color: var(--ns-bg);
         display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 1em;
     }
     article.ns-prose .c-step-body > :first-child { margin-top: 0.3rem; }
@@ -117,11 +117,11 @@
     /* Highlight callout, e.g. the AI multiplier */
     article.ns-prose .c-callout {
         display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 1.5rem; align-items: center;
-        background: var(--c-ink); color: #F5F5F5; border-radius: var(--ns-radius-md); padding: 1.5rem 1.75rem; margin: 2rem 0;
+        background: var(--ns-callout-bg); color: var(--ns-callout-ink); border-radius: var(--ns-radius-md); padding: 1.5rem 1.75rem; margin: 2rem 0;
     }
     @media (max-width: 640px) { article.ns-prose .c-callout { grid-template-columns: 1fr; } }
-    article.ns-prose .c-callout .c-big { font-size: 3em; font-weight: 600; line-height: 1; color: #fff; }
-    article.ns-prose .c-callout p { margin: 0.3em 0; color: #E4E4E4; }
-    article.ns-prose .c-callout strong { color: #fff; }
+    article.ns-prose .c-callout .c-big { font-size: 3em; font-weight: 600; line-height: 1; color: var(--ns-callout-ink); }
+    article.ns-prose .c-callout p { margin: 0.3em 0; color: var(--ns-callout-ink); opacity: .9; }
+    article.ns-prose .c-callout strong { color: var(--ns-callout-ink); }
     article.ns-prose .c-callout .c-label { color: var(--ns-mint-light); }   /* light green reads well on ink (10:1) */
 </style>

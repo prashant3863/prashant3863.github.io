@@ -10,6 +10,8 @@ module.exports = {
     purge: [
         '{,!(node_modules|_site)/**/}*.{html,md}',
     ],
+    // Dark mode follows html.dark (set in _includes/ns/head.html), so any dark: utility matches the ns tokens.
+    darkMode: 'class',
     theme: {
         // notshant design tokens (design/tailwind.tokens.js), namespaced as `ns-*`.
         extend: require('./design/tailwind.tokens.js'),

@@ -43,4 +43,5 @@ exclude: [
   readme.md,
   CLAUDE.md,
   design,
+  docs,
 ]

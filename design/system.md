@@ -53,6 +53,30 @@ The brand rules (name, logo, glider, voice, photography) are in [brand.md](brand
 | `--ns-underline` / `-hover` | ink at 25% / 75% | Link underline. |
 | `--ns-cube-*` | see tokens.css | The glider's faces and shadow. |
 
+### Dark mode
+
+`html.dark` swaps the colour tokens (see the end of `tokens.css`). Nothing else changes: same type, layout and motion.
+
+- **How it's set:** `_includes/ns/head.html` sets it before first paint, using the saved choice (`localStorage` `ns-theme`) or else the system setting. The header switch, a football icon (`button.ns-theme[data-ns-theme]`, `assets/js/ns-theme.js`), flips it, saves the choice, and fires `ns-themechange`. The glider listens for that event and repaints.
+- **Tailwind:** `darkMode: 'class'`, so any `dark:` utility follows the same class.
+- **Rules:** the same as light. Muted is the lightest text, and faint and mint are never text. Never pure black.
+
+| Token | Light | Dark |
+|---|---|---|
+| `--ns-bg` | #FFFFFF | #1B1C1D (soft charcoal) |
+| `--ns-ink` | #1C1C1C | #E7E7E4 (13.8:1) |
+| `--ns-ink-2` | #4A4A4A | #BDBDB8 |
+| `--ns-muted` | #6B6B6B | #9C9C97 (6.2:1) |
+| `--ns-faint` | #9AA5A2 | #5F6967 |
+| `--ns-rule` | #ECECEC | #2E3031 |
+| `--ns-surface` | #F5F8F7 | #232627 |
+| `--ns-accent` | #2E9C83 | #3DAF93 |
+| `--ns-mint-wash` | #D9F5EC | #1F3A33 |
+| `--ns-callout-bg` / `-ink` | #1C1C1C / #F5F5F5 | #2C3031 / #E7E7E4 |
+| `--ns-cube-*` | white and mint | lit grey and mint on a dark panel |
+
+Figures and photos aren't recoloured; charts keep their own light backgrounds.
+
 ### Type
 
 Inter 400, 500 and 600, plus the system mono stack.
@@ -207,6 +231,7 @@ Use only these. Anything new must be this slow and this quiet, and must stop und
 | **Rows** | Opacity .82→1. |
 | **Photos** | Scale 1.035 (strip) or 1.025 (grid) over .6s with cubic-bezier(.2,.7,.2,1). |
 | **Viewer** | Fades in over .25s. |
+| **Theme switch (football)** | A kick: over .8s (`--ns-t-kick`) the ball hops 6px while rolling one full turn, lands, bounces 2px, and settles. It rolls clockwise into dark mode and anticlockwise back to light. Hover nudges it −14°. Colours change instantly. Reduced motion: no kick, no nudge. |
 | **Anchor jumps** | Smooth scroll. |
 
 **Rejected (don't bring back)**
@@ -283,5 +308,7 @@ Post components (`.c-key`, `.fact`, `.pull`, `.c-card`, `.c-callout`, numbered s
 | 7 | Wider posts (8 Nov 2026) | 600px felt cramped for posts. The on-this-page list narrowed to 220px so the text gets the room, and posts without a list stretch to the full width. |
 | 8 | Post accent (8 Nov 2026) | The estimation post’s red became the glider’s light green: quote bars, pull rules, key-idea block, callout label. Figures moved from red to mint. |
 | 9 | Favicon (8 Nov 2026) | The logo’s opening (s + ¬) as a square mark: SVG with a dark-mode colour, a root `favicon.ico` and an Apple touch icon. Replaced the missing `/assets/favicon.ico`. |
+| 10 | Dark mode (9 Nov 2026) | Reverses "no dark mode". A soft charcoal (#1B1C1D), not pure black, with every colour swapped through the tokens. Follows the system until the visitor flips the header switch. |
+| 11 | Football switch (9 Nov 2026) | The dark-mode switch became a football with a kick animation, for Prashant’s love of football. Same button, label and behaviour. |
 
 When you change the system, update `tokens.css` first, then this file, and add a row here.

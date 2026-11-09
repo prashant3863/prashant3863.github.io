@@ -6,7 +6,7 @@ Prashant Mittal's personal site: a Jekyll 4 site with a Tailwind 2 CSS build (pa
 
 The brand and design system live in `design/`. Start with `design/README.md`, then `design/brand.md` and `design/system.md`. In short:
 
-- **Values:** use the tokens in `design/tokens.css` (or the `ns-*` Tailwind classes). Never hard-code a new colour, size or timing.
+- **Values:** use the tokens in `design/tokens.css` (or the `ns-*` Tailwind classes). Never hard-code a new colour, size or timing: hard-coded colours break dark mode, which works by swapping the tokens under `html.dark`.
 - **Components:** use the `ns-` classes in `design/components.css` and the includes in `_includes/ns/`.
 - **Logo:** `{% include ns/logo.html %}`. It has two shapes, and the ¬ bar must never be dropped.
 - **Layout:** one 600px text column, left-aligned. The right column holds one quiet thing: the glider on home, the timeline on about, on-this-page on long posts. Posts run wider: the on-this-page list is a narrow 220px column, and posts without one span the full width.
@@ -21,6 +21,10 @@ The brand and design system live in `design/`. Start with `design/README.md`, th
 - Posts: `_posts/`, rendered by `_layouts/post.html`. Lab notes go in `_notes/`.
 - Lists: `_data/photos.yml`, `archive.yml`, `built.yml`, `talks.yml`. Photos live in `assets/photos/<yyyy>-<series>/`.
 - Front matter keys (`nav`, `ns_js`, `toc`, `list_title`, `listed`, `soon`) are listed in `design/system.md` → How the site is built.
+
+## Plans and runbooks
+
+`docs/` (not published) holds working plans, e.g. `docs/domain-dns-and-photo-hosting.md` for the DNS move to Cloudflare and photos on R2.
 
 ## Commands
 
