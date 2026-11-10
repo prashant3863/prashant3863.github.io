@@ -1,13 +1,16 @@
 {%- comment -%}
-  One masonry grid of photographs. Params: series (an entry from _data/photos.yml), photos (its photos, or one stop's).
+  One grid of photographs, laid out in rows. Params: series (a series in _data/photos.yml), photos (its photos, or one stop's).
   Spec: design/system.md → Components → Photographs page. Files come from site.photos_url (Cloudflare R2).
   srcset needs each file's real width, so portrait widths are worked out from the ratio (a 2 / 3 photo at 720px is 480 wide).
+  Photos sit in rows about --ns-photo-row tall (300px; 220px on phones), and a row can grow about 13% to fill the width,
+  so `sizes` is the photo's width at a 340px (phone: 250px) row.
 {%- endcomment -%}
 {%- assign base = site.photos_url | append: "/" | append: include.series.folder -%}
 <div class="ns-photos">
   {%- for ph in include.photos %}
   {%- assign r = ph.ratio | split: "/" %}{% assign a = r[0] | strip | plus: 0 %}{% assign b = r[1] | strip | plus: 0 %}
   {%- if a < b %}{% assign ws = 720 | times: a | divided_by: b %}{% assign wm = 1600 | times: a | divided_by: b %}{% else %}{% assign ws = 720 %}{% assign wm = 1600 %}{% endif %}
-  <button type="button" class="ns-shot" data-full="{{ base }}/{{ ph.file }}.jpg"{% if include.series.large %} data-large="{{ base }}/{{ ph.file }}-l.jpg"{% endif %} data-ratio="{{ a }}/{{ b }}" data-caption="{{ ph.place }} · {{ include.series.title }}" aria-label="Open: {{ ph.alt }}"><img src="{{ base }}/{{ ph.file }}-s.jpg" srcset="{{ base }}/{{ ph.file }}-s.jpg {{ ws }}w, {{ base }}/{{ ph.file }}.jpg {{ wm }}w" sizes="(max-width: 520px) 100vw, (max-width: 820px) 50vw, 340px" alt="{{ ph.alt }}" style="aspect-ratio: {{ ph.ratio }}" loading="lazy"></button>
+  {%- assign rf = a | times: 1.0 | divided_by: b | round: 4 %}{% assign sz = rf | times: 340 | round %}{% assign szs = rf | times: 250 | round %}
+  <button type="button" class="ns-shot" style="--r: {{ rf }}" data-full="{{ base }}/{{ ph.file }}.jpg"{% if include.series.large %} data-large="{{ base }}/{{ ph.file }}-l.jpg"{% endif %} data-ratio="{{ a }}/{{ b }}" data-caption="{{ ph.place }} · {{ include.series.title }}" aria-label="Open: {{ ph.alt }}"><img src="{{ base }}/{{ ph.file }}-s.jpg" srcset="{{ base }}/{{ ph.file }}-s.jpg {{ ws }}w, {{ base }}/{{ ph.file }}.jpg {{ wm }}w" sizes="(max-width: 600px) {{ szs }}px, {{ sz }}px" alt="{{ ph.alt }}" style="aspect-ratio: {{ ph.ratio }}" loading="lazy"></button>
   {%- endfor %}
 </div>

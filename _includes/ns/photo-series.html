@@ -1,0 +1,18 @@
+{%- comment -%}
+  One series on a collection page: its heading (when it has a title), then one grid, or one grid per stop.
+  Param: series (an entry in a collection's `series` in _data/photos.yml). Spec: design/system.md → Photographs page.
+{%- endcomment -%}
+{%- assign s = include.series %}
+<section class="ns-section--tight">
+  {%- if s.title %}
+  <div class="ns-h2-row ns-measure"><h2 class="ns-h2">{{ s.title }}</h2><span class="ns-meta">{{ s.meta }}</span></div>
+  {%- endif %}
+  {%- if s.stops %}
+  {%- for st in s.stops %}
+  <h3 class="ns-photos__stop">{{ st.name }}</h3>
+  {% include ns/photo-grid.html series=s photos=st.photos %}
+  {%- endfor %}
+  {%- else %}
+  {% include ns/photo-grid.html series=s photos=s.photos %}
+  {%- endif %}
+</section>

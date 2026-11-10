@@ -31,7 +31,7 @@ The repo's `CNAME` file holds `notshant.xyz`; GitHub Pages serves the site from 
   - The upload token is in the `r2` AWS CLI profile. The first token was deleted after it was pasted into a chat.
   - Verified: photos return 200, the second request is a cache `HIT`, and the header is `Cache-Control: public, max-age=31536000, immutable`.
   - All three series are uploaded (228 files, about 119 MB), and the site reads from `photos_url`. `assets/photos/` is gone from the repo.
-- Still open: one page per series, and a row-based grid.
+- Done since: a row-based grid, and a page per collection (`/photos/italy/` etc.; design/system.md decisions 15 and 16).
 
 ### 1. Before switching
 
@@ -92,7 +92,7 @@ Then Claude does the rest:
   - The viewer loads 3200px on large or high-resolution screens and 1600px otherwise.
 - [ ] **Move The Italian Summer to R2** and delete its copy from `assets/photos/`. If it was never committed, it never enters git history.
   - Optionally, move the two older series (about 5 MB) as well, so every photo comes from one place.
-- [ ] **Later:** one page per series, and a row-based grid.
+- [x] **Later:** a page per collection, and a row-based grid (10 Nov).
 
 ## Also pending: lab notes from Roam
 

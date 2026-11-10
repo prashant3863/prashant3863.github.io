@@ -1,5 +1,5 @@
 /*
- * Photo viewer for the photographs page. Spec: design/system.md → Components → Photographs.
+ * Photographs page: lays each grid out in rows, and runs the photo viewer. Spec: design/system.md → Components → Photographs.
  *
  * Markup (from _includes/ns/photo-grid.html): a container [data-ns-photos] holding buttons
  *   <button class="ns-shot" data-full="https://photos.notshant.xyz/…/dscf1229.jpg" data-large="…/dscf1229-l.jpg"
@@ -16,6 +16,76 @@
   'use strict';
   var root = document.querySelector('[data-ns-photos]');
   if (!root) return;
+
+  /* Rows ------------------------------------------------------------------------------------------------
+   * Each .ns-photos grid is laid out in rows, left to right in the order of photos.yml (components.css → Photo rows).
+   * Photos keep their real proportions. A row is scaled to the full width, and it breaks before or after a
+   * photo, whichever keeps its height nearer the target (--ns-photo-row). The last row keeps the target height.
+   * Rows are rebuilt when the grid's width changes. */
+  function ratioOf(s) {
+    var p = (s.getAttribute('data-ratio') || '').split('/'), r = p[0] / p[1];
+    return r > 0 ? r : 1.5;
+  }
+  function planRows(ratios, W, H, gap) {
+    var rows = [], cur = [];
+    function height(idx) {
+      var sum = 0;
+      idx.forEach(function (i) { sum += ratios[i]; });
+      return (W - gap * (idx.length - 1)) / sum;
+    }
+    ratios.forEach(function (r, i) {
+      cur.push(i);
+      var h = height(cur);
+      if (h > H) return;
+      if (cur.length > 1) {
+        var before = cur.slice(0, -1), hb = height(before);
+        if (Math.abs(hb - H) < Math.abs(h - H)) { rows.push({ idx: before, h: hb }); cur = [i]; return; }
+      }
+      rows.push({ idx: cur, h: h });
+      cur = [];
+    });
+    if (cur.length) rows.push({ idx: cur, h: Math.min(H, height(cur)) });
+    return rows;
+  }
+  function layout(grid) {
+    var items = Array.prototype.slice.call(grid.querySelectorAll('.ns-shot'));
+    var W = grid.clientWidth;
+    if (!items.length || !W) return;
+    var css = getComputedStyle(grid);
+    var H = parseFloat(css.getPropertyValue('--ns-photo-target')) || 300;
+    var gap = parseFloat(css.getPropertyValue('--ns-photo-gap')) || 8;
+    var focused = document.activeElement;
+    items.forEach(function (s) { grid.appendChild(s); });   // unwrap the old rows, keeping the order
+    Array.prototype.slice.call(grid.querySelectorAll('.ns-photos__row')).forEach(function (r) { r.remove(); });
+    var ratios = items.map(ratioOf);
+    planRows(ratios, W - 1, H, gap).forEach(function (row) {   // 1px spare, so rounding never overflows
+      var div = document.createElement('div');
+      div.className = 'ns-photos__row';
+      row.idx.forEach(function (i) {
+        items[i].style.width = (ratios[i] * row.h).toFixed(2) + 'px';
+        items[i].style.height = row.h.toFixed(2) + 'px';
+        div.appendChild(items[i]);
+      });
+      grid.appendChild(div);
+    });
+    grid.classList.add('is-rows');
+    if (focused && items.indexOf(focused) > -1) focused.focus({ preventScroll: true });
+  }
+  Array.prototype.slice.call(root.querySelectorAll('.ns-photos')).forEach(function (grid) {
+    var lastW = 0, frame = 0;
+    function update() {
+      var w = grid.clientWidth;
+      if (w === lastW) return;
+      lastW = w;
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(function () { layout(grid); });
+    }
+    update();
+    if (window.ResizeObserver) new ResizeObserver(update).observe(grid);
+    else window.addEventListener('resize', update);
+  });
+
+  /* Viewer ---------------------------------------------------------------------------------------------- */
   var shots = Array.prototype.slice.call(root.querySelectorAll('[data-full]'));
   if (!shots.length) return;
 

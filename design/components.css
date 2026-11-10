@@ -203,15 +203,26 @@ html:not(.dark) .ns-theme.is-kicking svg { animation-name: ns-kick-back; }
   transition: transform var(--ns-t-hover) var(--ns-ease-out);
 }
 .ns-thumb:hover img { transform: scale(1.035); }
-.ns-photos { columns: 3 240px; column-gap: 12px; }
+/* Photo rows: photos run left to right in the order of photos.yml, each row about --ns-photo-row tall and
+   the full width, and nothing is cropped. Each .ns-shot carries --r (width / height).
+   Without JS: flexbox approximates it (widths grow in proportion to --r, so a row shares one height).
+   With JS, ns-photos.js picks better row breaks, wraps each row in .ns-photos__row and sets exact sizes. */
+.ns-photos { --ns-photo-target: var(--ns-photo-row); display: flex; flex-wrap: wrap; gap: var(--ns-photo-gap); }
+.ns-photos::after { content: ""; flex-grow: 1000000; }   /* keeps the last row at its natural size instead of stretched */
+@media (max-width: 600px) { .ns-photos { --ns-photo-target: var(--ns-photo-row-sm); } }
+.ns-photos.is-rows { display: block; }
+.ns-photos.is-rows::after { content: none; }
+.ns-photos__row { display: flex; gap: var(--ns-photo-gap); }
+.ns-photos__row + .ns-photos__row { margin-top: var(--ns-photo-gap); }
 /* A stop inside a long series (e.g. Venice in The Italian Summer): a quiet label above its own grid. */
 .ns-photos__stop { margin: 28px 0 10px; font-size: var(--ns-text-meta); font-weight: var(--ns-weight-medium); color: var(--ns-muted); }
 .ns-h2-row + .ns-photos__stop { margin-top: 0; }
 .ns-shot {
-  display: block; width: 100%; margin: 0 0 12px; padding: 0; border: 0;
+  display: block; flex: var(--r, 1) 1 calc(var(--r, 1) * var(--ns-photo-target)); margin: 0; padding: 0; border: 0;
   border-radius: var(--ns-radius-sm); overflow: hidden; background: var(--ns-surface-photo);
-  cursor: zoom-in; break-inside: avoid;
+  cursor: zoom-in;
 }
+.ns-photos__row .ns-shot { flex: none; }
 .ns-shot:hover img { transform: scale(1.025); }
 
 /* Photo viewer: count + Close on top, the photo fitted to whatever space is left, caption and

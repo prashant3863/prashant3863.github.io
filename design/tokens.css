@@ -66,6 +66,9 @@
   --ns-row-y: 11px;              /* vertical padding inside a list row */
   --ns-sticky-top: 32px;
   --ns-split-break: 880px;       /* below this the side column stacks (keep in sync with the media queries) */
+  --ns-photo-row: 300px;         /* photographs page: rows aim for this height; each row then fills the width */
+  --ns-photo-row-sm: 220px;      /* ...on screens under 600px, so two portraits share a row */
+  --ns-photo-gap: 8px;           /* between photos, across and down */
 
   /* Radius -------------------------------------------------------------- */
   --ns-radius-xs: 2px;           /* focus outline */

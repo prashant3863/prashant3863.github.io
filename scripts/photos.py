@@ -6,7 +6,8 @@ Setup, once:   python3 -m venv .venv && .venv/bin/pip install Pillow
                aws configure --profile r2        (keys from Cloudflare → R2 → API tokens; never commit them)
 
 make     .venv/bin/python scripts/photos.py make <series-folder> <photo or folder>...
-         Writes three sizes of each photo to .photos-build/<series-folder>/ and prints draft YAML entries.
+         Writes three sizes of each photo to .photos-build/<series-folder>/ and prints draft YAML entries, indented
+         to paste under a series' `photos:` in _data/photos.yml (fill in alt and place).
          Folders are read in capture-time order; single photos keep the order given. Each file is named after
          the camera's file name (DSCF1229.JPG → dscf1229.jpg), so a name never changes when photos are
          added, removed or reordered. That matters: R2 files are cached for a year.
@@ -67,7 +68,7 @@ def make(series, args):
                 if icc:
                     kw["icc_profile"] = icc
                 copy.save(out / f"{stem}{suffix}.jpg", "JPEG", **kw)
-            print(f'    - {{ file: "{stem}", ratio: "{ratio(*im.size)}", alt: "", place: "" }}')
+            print(f'        - {{ file: "{stem}", ratio: "{ratio(*im.size)}", alt: "", place: "" }}')
 
 
 def upload(series):

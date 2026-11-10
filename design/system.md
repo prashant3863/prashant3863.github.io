@@ -13,7 +13,8 @@ These are the rules for building notshant.xyz pages: tokens, layout, components 
 | `assets/js/ns-logo.js` | Logo draw-on and hover redraw. |
 | `assets/js/ns-glider.js` | The glider animation. |
 | `assets/js/ns-toc.js` | Active-section tracking for the timeline / on-this-page list. |
-| `assets/js/ns-photos.js` | Photo viewer. |
+| `assets/js/ns-photos.js` | Photo rows and the photo viewer. |
+| `_plugins/photo_collections.rb` | Makes one page per photo collection (`/photos/<slug>/`) from `_data/photos.yml`. |
 | `design/styleguide.html` | Every token and component on one page. Open it locally in a browser. |
 
 The brand rules (name, logo, glider, voice, photography) are in [brand.md](brand.md).
@@ -111,6 +112,8 @@ Inter 400, 500 and 600, plus the system mono stack.
 | `--ns-row-y` | 11px row padding |
 | `--ns-sticky-top` | 32px |
 | `--ns-split-break` | 880px, where the side column stacks |
+| `--ns-photo-row` / `-sm` | 300px / 220px under 600px: the height photo rows aim for on the photographs page |
+| `--ns-photo-gap` | 8px between photos |
 | `--ns-radius-sm` / `-md` / `-lg` | 6px thumbnails / 12px single photo / 20px glider panel |
 
 ## Layout
@@ -142,7 +145,8 @@ Inter 400, 500 and 600, plus the system mono stack.
 | About `/about/` | Career timeline (`ns-tl`) + more links, active section in mint | Intro → Now → Shovel Company → Gojek → Where I started → Things I’ve built → Talks → Off the clock → Elsewhere. **Text only, no photo, no glider.** |
 | Archive `/posts/past-life` (keep this URL; it is linked from elsewhere) | none | Intro (one line) → one list of older writing and talks on other platforms, newest first. Reached from the Writing heading on home, **not from the nav**; "writing" shows as current. |
 | Notes `/notes/` | none | Intro → groups: Identity, Networks, Data, Cryptography and Web3. **Unpublished until the first note exists** (`published: false` in `notes.html`); the nav item appears by itself. |
-| Photos `/photos/` | none (grid spans the container) | Intro → one section per series, newest first → viewer |
+| Photos `/photos/` | none | Intro → one section per collection, in the order of `photos.yml`: its title (a link) with “70 photos →” at the right, then a strip of up to four covers. No viewer. |
+| A photo collection `/photos/<slug>/`, e.g. `/photos/italy/` | none (grid spans the container) | Title (h1, plus an optional intro line) → one section per series → “← All photographs” → viewer. Made by `_plugins/photo_collections.rb`; no page file. |
 | Post | On-this-page list for long posts (`toc: true`; same `ns-tl` look, no years, 14px labels). **Posts run wider than other pages:** with the list, the text takes everything but a 220px list column (`.ns-split--post`); with no list, it spans the whole container (`.ns-post--wide`). | Date line (`3 Oct 2026`) → title (intro size; skipped when the post writes its own `# h1`) → `.ns-prose` |
 
 ## Components
@@ -180,12 +184,18 @@ Rows that leave the site (archive) use the platform and year as meta, open in a 
 
 **List.** `ul.ns-list` (square, faint markers). Add `.ns-list--cols` for two columns. Use it for short link lists inside prose sections.
 
-**Photo strip** (home). `.ns-strip` holding four `a.ns-thumb` (4:5, cover crop, 6px radius). The thumbnails zoom 3.5% on hover.
+**Photo strip** (home, and each collection on `/photos/`). `.ns-strip` holding four `a.ns-thumb` (4:5, cover crop, 6px radius). The thumbnails zoom 3.5% on hover. On home each links to its photo’s collection; on `/photos/` they link to their collection, kept out of the tab order (the heading and count are the links).
 
-**Photographs page.**
-- Masonry grid: `.ns-photos[data-ns-photos]` with CSS columns (3 × 240px min). It holds `button.ns-shot`, each with `data-full` (1600px), optional `data-large` (3200px), `data-ratio`, `data-caption`, and an `img` thumbnail at its real aspect ratio. The thumbnail has a `srcset` (720px and 1600px, with each file's real width), so high-resolution screens get the sharper file. Markup: `{% include ns/photo-grid.html series=s photos=… %}`.
+**Photographs: collections.** Photos are organised into collections, like folders: a place (Italy, Ladakh), a theme, or Others. `/photos/` lists them, and each has its own page, so a page holds one collection and the viewer’s Next stays inside it. A collection holds one or more series, e.g. one per trip.
+
+**Photographs: a collection page.**
+- **Rows**, read left to right in the order of `photos.yml`. Every row fills the width, and its photos share one height, near `--ns-photo-row` (300px, or 220px on phones). Nothing is cropped.
+  - `ns-photos.js` decides where rows break: before or after a photo, whichever keeps the row's height nearer the target. It wraps each row in `.ns-photos__row`, sets each photo's exact size, and redoes the layout when the width changes. The last row keeps the target height, left-aligned.
+  - Without JS, flexbox approximates the rows (`flex-grow` in proportion to each photo's `--r`). It's rougher about where rows break, but it never crops or reorders.
+  - Columns (masonry) were replaced because they read top to bottom, which scrambled the order of a trip's stops.
+- Grid markup: `.ns-photos` inside `[data-ns-photos]`. It holds `button.ns-shot` (with `style="--r: …"`), each with `data-full` (1600px), optional `data-large` (3200px), `data-ratio`, `data-caption`, and an `img` thumbnail at its real aspect ratio. The thumbnail has a `srcset` (720px and 1600px, with each file's real width), so high-resolution screens get the sharper file. Markup: `{% include ns/photo-series.html series=s %}`, which uses `{% include ns/photo-grid.html series=s photos=… %}` for each grid.
 - The viewer loads `data-large` only when the photo, fitted to the screen, needs more than 1600 physical pixels: large windows, high-resolution screens and landscape photos. Otherwise it loads the 1600px file.
-- A series with `stops` gets one grid per stop, each under `h3.ns-photos__stop` (meta size, medium weight, muted). The viewer still steps through the whole page.
+- A series with `stops` gets one grid per stop, each under `h3.ns-photos__stop` (meta size, medium weight, muted). The viewer still steps through the whole page (one collection). A series without a `title` has no heading, just its grid.
 - The viewer is created by `ns-photos.js`:
   - Counter and Close at the top; Previous, the caption and Next at the bottom.
   - Keys: ← →, and Esc to close.
@@ -262,15 +272,21 @@ Use only these. Anything new must be this slow and this quiet, and must stop und
   - Files live on **Cloudflare R2**, served from `site.photos_url` (`https://photos.notshant.xyz`), in `<yyyy>-<series-slug>/`: `<file>-s.jpg` (720px), `<file>.jpg` (1600px), and `<file>-l.jpg` (3200px) when the series has `large: true`. None are in the repo.
   - **Make and upload them with `scripts/photos.py`** (see its header, and `docs/domain-dns-and-photo-hosting.md`). It strips all metadata, makes the three sizes, and uploads with a one-year immutable cache.
   - **A file name is never reused for a different photo.** Cached copies would keep showing the old one for a year. New photos are named after the camera file (`dscf1229`), so adding, removing or reordering never renames anything. The order on the page comes from `photos.yml`. The two older series keep `01`, `02`, … because they will never change.
-  - Metadata goes in `_data/photos.yml`, one entry per series:
+  - Metadata goes in `_data/photos.yml`: a list of **collections**, each holding one or more **series**:
     ```yaml
-    - title: The Greatest Gig in the Sky
-      meta: Ladakh · July 2021
-      folder: 2021-greatest-gig-in-the-sky
-      photos:
-        - { file: "01", ratio: "4 / 5", alt: "A single long cloud over poplars and a brown ridge", place: "Ladakh, 2021" }
-        - { file: "02", ratio: "3 / 4", alt: "…", place: "Ladakh, 2021", home: true }   # home: true = in the home strip (four in total)
+    - title: Ladakh                  # the collection: its page is /photos/ladakh/
+      slug: ladakh
+      intro: …                       # optional, one line under the title
+      series:
+        - title: The Greatest Gig in the Sky       # title and meta are optional
+          meta: Ladakh · July 2021
+          folder: 2021-greatest-gig-in-the-sky     # its folder on R2
+          photos:
+            - { file: "01", ratio: "4 / 5", alt: "A single long cloud over poplars and a brown ridge", place: "Ladakh, 2021" }
+            - { file: "02", ratio: "3 / 4", alt: "…", place: "Ladakh, 2021", home: true, cover: true }
     ```
+    `cover: true` puts a photo in its collection’s strip on `/photos/` (up to four; with none marked, the first four). `home: true` puts it in the home strip (four in total).
+  - **A new collection is just a new entry**: `_plugins/photo_collections.rb` makes its page, and `/photos/` lists it. A new trip to a place that has a collection goes in as another series in it.
   - A long trip can use `stops` instead of `photos`: a list of `{ name, photos }`, in route order. All its files stay in the one series folder.
 - **Things built and talks:** `_data/built.yml` and `_data/talks.yml` (`title`, `sub`, `meta`, optional `url`). A row without a `url` isn't a link.
 
@@ -283,6 +299,7 @@ Direction N is wired into the Jekyll site. Where things live:
 | Page shell: head, header, container, scripts | `_layouts/default.html`, `_includes/head.html`, `_includes/header.html` |
 | Posts and notes | `_layouts/post.html` (+ `_includes/post-components.html`, `lightbox.html`, `new-tab-links.html`) |
 | Home, about, photos, archive, notes | `index.html`, `about.html`, `photos.html`, `archive.html`, `notes.html` |
+| Photo collection pages | `_plugins/photo_collections.rb` → `_layouts/photo-collection.html` (+ `_includes/ns/photo-series.html`, `photo-grid.html`) |
 | Shared bits | `_includes/ns/`: `logo.html`, `glider.html`, `row.html`, `elsewhere.html`, `footer.html`, `head.html` |
 | Styles | `styles/index.css` imports `design/tokens.css` and `design/components.css` (outside the Tailwind layers) → `dist/index.css` |
 
@@ -318,5 +335,7 @@ Post components (`.c-key`, `.fact`, `.pull`, `.c-card`, `.c-callout`, numbered s
 | 12 | Floodlights (9 Nov 2026) | So the football reads as a light/dark switch: in dark mode it sits under a floodlight, which flickers on after the kick. No tooltip: a styled one was tried and felt out of place. Light mode is daytime: no beam. |
 | 13 | The Italian Summer (9 Nov 2026) | 72 picks from Italy, Sep 2025, as one series split into stops (Lake Como → Amalfi Coast, in route order), each a quiet label above its own grid. |
 | 14 | Photos on R2 (10 Nov 2026) | Every photo is served from `photos.notshant.xyz` (a Cloudflare R2 bucket, edge-cached) instead of the repo, so the repo stops growing with each trip. The Italian Summer adds a 3200px size for big and high-resolution screens. Files are named after the camera file and cached for a year, never renamed. |
+| 15 | Photo rows (10 Nov 2026) | Replaces the masonry columns (canvas Round 7, option B). Columns read down, so a trip's photos came out of order. Rows read across, aim for 300px (220px on phones) and never crop. Portrait thumbnails get smaller (about 200px wide), so high-resolution screens load the 720px file again, and the page is lighter. |
+| 16 | Photo collections (10 Nov 2026) | `/photos/` became a list of collections, each with its own page: Italy, Ladakh, Others. Collections are folders for organising, not trips: a place, a theme, or a catch-all, each holding one or more series. One long page was getting heavy, and a collection can now be shared as a link (its first cover is the link preview). |
 
 When you change the system, update `tokens.css` first, then this file, and add a row here.

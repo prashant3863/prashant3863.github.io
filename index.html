@@ -28,12 +28,12 @@ soon: The one about scope creep
     <section class="ns-section">
       <div class="ns-h2-row"><h2 class="ns-h2">Photographs</h2><a class="ns-meta" href="/photos/">All photographs →</a></div>
       <div class="ns-strip">
-        {%- for s in site.data.photos %}
+        {%- for c in site.data.photos %}{% for s in c.series %}
         {%- assign shots = s.photos %}
         {%- if s.stops %}{% assign shots = "" | split: "" %}{% for st in s.stops %}{% assign shots = shots | concat: st.photos %}{% endfor %}{% endif %}
         {%- for ph in shots %}{% if ph.home %}
-        <a class="ns-thumb" href="/photos/"><img src="{{ site.photos_url }}/{{ s.folder }}/{{ ph.file }}-s.jpg" alt="{{ ph.alt }}, {{ ph.place }}" loading="lazy"></a>
-        {%- endif %}{% endfor %}{% endfor %}
+        <a class="ns-thumb" href="{{ c.url }}"><img src="{{ site.photos_url }}/{{ s.folder }}/{{ ph.file }}-s.jpg" alt="{{ ph.alt }}, {{ ph.place }}" loading="lazy"></a>
+        {%- endif %}{% endfor %}{% endfor %}{% endfor %}
       </div>
     </section>
 

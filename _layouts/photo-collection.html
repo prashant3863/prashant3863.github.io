@@ -1,0 +1,24 @@
+---
+layout: default
+---
+{%- comment -%}
+  A collection page, /photos/<slug>/. The pages are made by _plugins/photo_collections.rb from _data/photos.yml.
+  Spec: design/system.md → Photographs page.
+{%- endcomment -%}
+{%- assign c = site.data.photos | where: "slug", page.photo_collection | first %}
+<main data-ns-photos>
+  <div class="ns-measure">
+    <h1 class="ns-intro">{{ c.title }}</h1>
+    {%- if c.intro %}
+    <p>{{ c.intro }}</p>
+    {%- endif %}
+  </div>
+
+  {%- for s in c.series %}
+  {% include ns/photo-series.html series=s %}
+  {%- endfor %}
+
+  <p class="ns-section--tight"><a class="ns-meta" href="/photos/">← All photographs</a></p>
+
+  {% include ns/footer.html %}
+</main>

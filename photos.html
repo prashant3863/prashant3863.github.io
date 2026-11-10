@@ -3,26 +3,26 @@ layout: default
 title: Photographs
 permalink: /photos/
 nav: photos
-ns_js: [photos]
 description: Photographs by Prashant Mittal, from Italy, Ladakh, Berlin, Amsterdam and Singapore.
 ---
-<main data-ns-photos>
+{%- comment -%}
+  The list of photo collections, in the order of _data/photos.yml. Each collection has its own page
+  (_layouts/photo-collection.html); url, count and covers come from _plugins/photo_collections.rb.
+{%- endcomment %}
+<main>
   <div class="ns-measure">
     <h1 class="ns-intro">Photographs</h1>
     <p>Skies, streets and places I’ve been.</p>
   </div>
 
-  {%- for s in site.data.photos %}
+  {%- for c in site.data.photos %}
   <section class="ns-section--tight">
-    <div class="ns-h2-row ns-measure"><h2 class="ns-h2">{{ s.title }}</h2><span class="ns-meta">{{ s.meta }}</span></div>
-    {%- if s.stops %}
-    {%- for st in s.stops %}
-    <h3 class="ns-photos__stop">{{ st.name }}</h3>
-    {% include ns/photo-grid.html series=s photos=st.photos %}
-    {%- endfor %}
-    {%- else %}
-    {% include ns/photo-grid.html series=s photos=s.photos %}
-    {%- endif %}
+    <div class="ns-h2-row"><h2 class="ns-h2"><a href="{{ c.url }}">{{ c.title }}</a></h2><a class="ns-meta" href="{{ c.url }}">{{ c.count }} photos →</a></div>
+    <div class="ns-strip">
+      {%- for ph in c.covers %}
+      <a class="ns-thumb" href="{{ c.url }}" tabindex="-1" aria-hidden="true"><img src="{{ ph.src }}" alt="" loading="lazy"></a>
+      {%- endfor %}
+    </div>
   </section>
   {%- endfor %}
 
