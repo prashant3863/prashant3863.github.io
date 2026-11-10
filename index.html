@@ -32,7 +32,7 @@ soon: The one about scope creep
         {%- assign shots = s.photos %}
         {%- if s.stops %}{% assign shots = "" | split: "" %}{% for st in s.stops %}{% assign shots = shots | concat: st.photos %}{% endfor %}{% endif %}
         {%- for ph in shots %}{% if ph.home %}
-        <a class="ns-thumb" href="/photos/"><img src="/assets/photos/{{ s.folder }}/{{ ph.file }}-s.jpg" alt="{{ ph.alt }}, {{ ph.place }}" loading="lazy"></a>
+        <a class="ns-thumb" href="/photos/"><img src="{{ site.photos_url }}/{{ s.folder }}/{{ ph.file }}-s.jpg" alt="{{ ph.alt }}, {{ ph.place }}" loading="lazy"></a>
         {%- endif %}{% endfor %}{% endfor %}
       </div>
     </section>

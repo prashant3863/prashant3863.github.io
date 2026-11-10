@@ -1,10 +1,13 @@
 /*
  * Photo viewer for the photographs page. Spec: design/system.md → Components → Photographs.
  *
- * Markup: a container [data-ns-photos] holding buttons
- *   <button class="ns-shot" data-full="/assets/photos/…/03.jpg" data-caption="Ladakh, 2021 · The Greatest Gig in the Sky">
- *     <img src="/assets/photos/…/03-s.jpg" alt="…" loading="lazy">
+ * Markup (from _includes/ns/photo-grid.html): a container [data-ns-photos] holding buttons
+ *   <button class="ns-shot" data-full="https://photos.notshant.xyz/…/dscf1229.jpg" data-large="…/dscf1229-l.jpg"
+ *           data-ratio="2/3" data-caption="Tuscany, 2025 · The Italian Summer">
+ *     <img src="…/dscf1229-s.jpg" srcset="…" alt="…" loading="lazy">
  *   </button>
+ * data-full is 1600px on the long edge. data-large (3200px) is optional; it is used only when the photo, fitted
+ * to the viewer, would need more than 1600 physical pixels (big or high-resolution screens).
  * Layout: count + Close on top, the photo fitted to the space left, caption + Previous / Next underneath.
  * Keys: ← → to move, Esc to close. Swipe left or right on touch screens. Tap the left or right third of the
  * photo to move. The neighbouring photos are fetched in advance. Focus returns to the photo that opened it.
@@ -16,16 +19,25 @@
   var shots = Array.prototype.slice.call(root.querySelectorAll('[data-full]'));
   if (!shots.length) return;
 
-  var box = null, img = null, cap = null, count = null, index = 0, opener = null, touchX = null;
+  var box = null, stage = null, img = null, cap = null, count = null, index = 0, opener = null, touchX = null;
 
+  function source(s) {
+    // The 1600px file, unless the photo as fitted to the stage needs more physical pixels than that.
+    var full = s.getAttribute('data-full'), large = s.getAttribute('data-large');
+    if (!large || !stage) return full;
+    var parts = (s.getAttribute('data-ratio') || '3/2').split('/'), r = parts[0] / parts[1] || 1.5;
+    var area = stage.getBoundingClientRect();
+    var w = Math.min(area.width, area.height * r), longEdge = Math.max(w, w / r);
+    return longEdge * (window.devicePixelRatio || 1) > 1700 ? large : full;
+  }
   function preload(i) {
     var s = shots[(i + shots.length) % shots.length];
     var p = new Image();
-    p.src = s.getAttribute('data-full');
+    p.src = source(s);
   }
   function render() {
     var s = shots[index], thumb = s.querySelector('img');
-    img.src = s.getAttribute('data-full');
+    img.src = source(s);
     img.alt = thumb ? thumb.alt : '';
     cap.textContent = s.getAttribute('data-caption') || '';
     count.textContent = (index + 1) + ' / ' + shots.length;
@@ -35,7 +47,7 @@
   function move(d) { index = (index + d + shots.length) % shots.length; render(); }
   function close() {
     if (!box) return;
-    box.remove(); box = null;
+    box.remove(); box = null; stage = null;
     document.body.style.overflow = '';
     document.removeEventListener('keydown', onKey);
     if (opener) opener.focus();
@@ -75,7 +87,7 @@
     var closeBtn = button('Close', 'ns-lightbox__btn', close);
     top.appendChild(count); top.appendChild(closeBtn);
 
-    var stage = el('div', 'ns-lightbox__stage');
+    stage = el('div', 'ns-lightbox__stage');
     img = el('img');
     stage.appendChild(img);
     stage.appendChild(zone('ns-lightbox__zone--prev', -1));

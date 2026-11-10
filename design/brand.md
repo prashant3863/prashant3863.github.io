@@ -114,4 +114,4 @@ Write the way Prashant talks:
 - **Crop only on the home strip** (four at 4:5). The photographs page keeps every photo's real proportions.
 - **Captions:** `Place, Year`.
 - **Alt text** says what is in the frame in one plain sentence, e.g. "A whitewashed chorten beside a dirt road".
-- **Sizes:** 720px for thumbnails (`-s.jpg`) and 1600px for the viewer, JPEG at about 80% quality.
+- **Sizes:** 720px for thumbnails (`-s.jpg`), 1600px for the viewer, and 3200px (`-l.jpg`) for the viewer on big or high-resolution screens. JPEG at about 80–85% quality, with all metadata removed. They're served from `photos.notshant.xyz` (Cloudflare R2).

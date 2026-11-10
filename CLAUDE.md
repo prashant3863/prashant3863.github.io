@@ -19,7 +19,7 @@ The brand and design system live in `design/`. Start with `design/README.md`, th
 
 - Pages: `index.html` (home), `about.html`, `photos.html`, `archive.html` (`/posts/past-life`), `notes.html` (unpublished until there are notes).
 - Posts: `_posts/`, rendered by `_layouts/post.html`. Lab notes go in `_notes/`.
-- Lists: `_data/photos.yml`, `archive.yml`, `built.yml`, `talks.yml`. Photos live in `assets/photos/<yyyy>-<series>/`.
+- Lists: `_data/photos.yml`, `archive.yml`, `built.yml`, `talks.yml`. Photos are **not in the repo**: they live in the Cloudflare R2 bucket `notshant-photos`, served from `photos.notshant.xyz` (`site.photos_url`). They're made and uploaded with `scripts/photos.py`, and file names are never reused (see `design/system.md` → Photographs).
 - Front matter keys (`nav`, `ns_js`, `toc`, `list_title`, `listed`, `soon`) are listed in `design/system.md` → How the site is built.
 
 ## Plans and runbooks
@@ -31,3 +31,4 @@ The brand and design system live in `design/`. Start with `design/README.md`, th
 - `npm run start`: CSS watch + `jekyll serve`.
 - `npm run build`: production CSS + `jekyll build`.
 - Open `design/styleguide.html` directly in a browser to check components.
+- Photos: `.venv/bin/python scripts/photos.py make <series-folder> <photos or folders…>`, then `… upload <series-folder>`. Uploads use the `r2` AWS CLI profile (Cloudflare R2 keys in `~/.aws/credentials`, never in the repo). Prashant picks photos by hearting them in Photos; export them through Photos with osascript, JPEGs only (each photo is RAW+JPEG).

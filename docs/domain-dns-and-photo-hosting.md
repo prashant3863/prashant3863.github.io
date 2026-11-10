@@ -22,12 +22,24 @@ The repo's `CNAME` file holds `notshant.xyz`; GitHub Pages serves the site from 
 
 ## Checklist
 
+**Status, 10 Nov 2026:** steps 1–3 are done.
+- Cloudflare had found no records, so the four `A` records and `www` were added by hand, all DNS only.
+- The nameservers are `coraline.ns.cloudflare.com` and `rodney.ns.cloudflare.com`. The registry switched at 08:30.
+- Verified: the site returns 200 with GitHub's Let's Encrypt certificate (valid to Jan 2027), and `www` redirects to the apex.
+- Step 4 (R2) is also done:
+  - The bucket is `notshant-photos` (APAC), served from `photos.notshant.xyz`. `r2.dev` is disabled.
+  - The upload token is in the `r2` AWS CLI profile. The first token was deleted after it was pasted into a chat.
+  - Verified: photos return 200, the second request is a cache `HIT`, and the header is `Cache-Control: public, max-age=31536000, immutable`.
+  - All three series are uploaded (228 files, about 119 MB), and the site reads from `photos_url`. `assets/photos/` is gone from the repo.
+- Still open: one page per series, and a row-based grid.
+
 ### 1. Before switching
 
 - [ ] In Squarespace → Domains → notshant.xyz → DNS: screenshot every record, for rollback.
 - [ ] In Squarespace's domain settings: make sure **DNSSEC is off**.
   - If it was on and you just turned it off, wait until the DS record is gone before step 3. Check with `dig DS notshant.xyz @1.1.1.1 +short`; it should print nothing. Then wait a few more hours for caches.
   - As of 8 Nov there's already no DS record, so this may be instant.
+  - Rechecked 10 Nov: still no DS record, so it's safe to switch. The Cloudflare account exists.
 
 ### 2. Set up Cloudflare
 
@@ -52,14 +64,35 @@ The repo's `CNAME` file holds `notshant.xyz`; GitHub Pages serves the site from 
 
 ### 4. Photos on R2 (after DNS is active)
 
-- [ ] Cloudflare → R2: create a bucket, e.g. `notshant-photos`. R2 may ask for a payment method even on the free tier (10 GB storage, no bandwidth charges).
-- [ ] Bucket → Settings → connect the custom domain `photos.notshant.xyz`. Keep the `r2.dev` address **disabled**.
-- [ ] Create an R2 API token scoped to that bucket. Keep it on your machine only, never in the repo.
-- [ ] Then, with Claude: build the photo command.
-  - It takes a folder of originals and strips all metadata, including GPS.
-  - It makes a thumbnail, a mid size and a ~3200px long-edge version.
+You do these in the Cloudflare dashboard:
+
+- [ ] **Turn on R2.** Cloudflare → R2 Object Storage. It asks for a payment method even on the free tier. The free tier is 10 GB of storage, 1M writes and 10M reads a month, and **no bandwidth charges**. The Italian Summer at three sizes is about 130 MB.
+- [ ] **Create the bucket** `notshant-photos`. Use location Automatic and the Standard storage class.
+- [ ] **Connect the domain.** Bucket → Settings → Custom Domains → Connect → `photos.notshant.xyz`.
+  - This only works once the zone is Active (step 3). Cloudflare adds the DNS record and the certificate itself.
+  - Leave the "Public Development URL" (`r2.dev`) **disabled**.
+- [ ] **Create an API token.** R2 → Manage API tokens → Create token. Give it **Object Read & Write**, applied to the `notshant-photos` bucket only.
+  - The token page shows an Access Key ID, a Secret Access Key and an S3 endpoint (`https://<account-id>.r2.cloudflarestorage.com`).
+  - The secret is shown only once.
+- [ ] **Save the keys on your Mac.** In your own Terminal (not in the chat with Claude), run `aws configure --profile r2`.
+  - Paste the key ID and the secret, set the region to `auto`, and press Enter for the output format.
+  - This stores them in `~/.aws/credentials`, outside the repo. Never paste the secret into the chat or the repo.
+- [ ] **Tell Claude the endpoint URL.** The account ID in it isn't secret.
+
+Then Claude does the rest:
+
+- [ ] **Test the bucket.** Upload one test file, read it back through `photos.notshant.xyz`, and check that Cloudflare caches it (`cf-cache-status: HIT`). Every file is uploaded with `Cache-Control: public, max-age=31536000, immutable`, because a file's name never gets reused for different content.
+- [ ] **Build the photo command.**
+  - It takes the hearted export folder and strips all metadata, including GPS.
+  - It makes three sizes: 720px for the grid, 1600px, and 3200px for big and high-resolution screens.
   - It uploads them to R2 and writes the entries into `_data/photos.yml`.
-  - After that, Claude changes the Photos page to one page per series and a row-based grid.
+- [ ] **Change the site to use R2.**
+  - Add `photos_url: https://photos.notshant.xyz` in `_config.yml`.
+  - The grid gets `srcset`, so high-resolution screens get the sharper size.
+  - The viewer loads 3200px on large or high-resolution screens and 1600px otherwise.
+- [ ] **Move The Italian Summer to R2** and delete its copy from `assets/photos/`. If it was never committed, it never enters git history.
+  - Optionally, move the two older series (about 5 MB) as well, so every photo comes from one place.
+- [ ] **Later:** one page per series, and a row-based grid.
 
 ## Also pending: lab notes from Roam
 

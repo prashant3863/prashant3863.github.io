@@ -3,6 +3,8 @@ google_analytics: G-JGZRXWFK8F
 title: Not Shant Blog
 description: Personal Blog of Prashant Mittal
 url: https://notshant.xyz
+# Photographs are served from Cloudflare R2 (docs/domain-dns-and-photo-hosting.md). No trailing slash.
+photos_url: https://photos.notshant.xyz
 twitter:
   username: prashant_mit
   card: summary_large_image
@@ -44,4 +46,5 @@ exclude: [
   CLAUDE.md,
   design,
   docs,
+  scripts,
 ]
