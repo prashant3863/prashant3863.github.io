@@ -183,7 +183,8 @@ Rows that leave the site (archive) use the platform and year as meta, open in a 
 **Photo strip** (home). `.ns-strip` holding four `a.ns-thumb` (4:5, cover crop, 6px radius). The thumbnails zoom 3.5% on hover.
 
 **Photographs page.**
-- Masonry grid: `.ns-photos[data-ns-photos]` with CSS columns (3 × 240px min). It holds `button.ns-shot`, each with `data-full`, `data-caption` and an `img` thumbnail at its real aspect ratio.
+- Masonry grid: `.ns-photos[data-ns-photos]` with CSS columns (3 × 240px min). It holds `button.ns-shot`, each with `data-full`, `data-caption` and an `img` thumbnail at its real aspect ratio. Markup: `{% include ns/photo-grid.html series=s photos=… %}`.
+- A series with `stops` gets one grid per stop, each under `h3.ns-photos__stop` (meta size, medium weight, muted). The viewer still steps through the whole page.
 - The viewer is created by `ns-photos.js`:
   - Counter and Close at the top; Previous, the caption and Next at the bottom.
   - Keys: ← →, and Esc to close.
@@ -267,6 +268,7 @@ Use only these. Anything new must be this slow and this quiet, and must stop und
         - { file: "01", ratio: "4 / 5", alt: "A single long cloud over poplars and a brown ridge", place: "Ladakh, 2021" }
         - { file: "02", ratio: "3 / 4", alt: "…", place: "Ladakh, 2021", home: true }   # home: true = in the home strip (four in total)
     ```
+  - A long trip can use `stops` instead of `photos`: a list of `{ name, photos }`, in route order. Files stay in one folder, numbered through the whole series (The Italian Summer: Lake Como is 01–03, Venice 04–13, …).
 - **Things built and talks:** `_data/built.yml` and `_data/talks.yml` (`title`, `sub`, `meta`, optional `url`). A row without a `url` isn't a link.
 
 ## How the site is built
@@ -311,5 +313,6 @@ Post components (`.c-key`, `.fact`, `.pull`, `.c-card`, `.c-callout`, numbered s
 | 10 | Dark mode (9 Nov 2026) | Reverses "no dark mode". A soft charcoal (#1B1C1D), not pure black, with every colour swapped through the tokens. Follows the system until the visitor flips the header switch. |
 | 11 | Football switch (9 Nov 2026) | The dark-mode switch became a football with a kick animation, for Prashant’s love of football. Same button, label and behaviour. |
 | 12 | Floodlights (9 Nov 2026) | So the football reads as a light/dark switch: in dark mode it sits under a floodlight, which flickers on after the kick. No tooltip: a styled one was tried and felt out of place. Light mode is daytime: no beam. |
+| 13 | The Italian Summer (9 Nov 2026) | 72 picks from Italy, Sep 2025, as one series split into stops (Lake Como → Amalfi Coast, in route order), each a quiet label above its own grid. Kept in the repo at the usual 1600/720px until photos move to R2. |
 
 When you change the system, update `tokens.css` first, then this file, and add a row here.

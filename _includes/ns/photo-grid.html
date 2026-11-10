@@ -1,0 +1,9 @@
+{%- comment -%}
+  One masonry grid of photographs. Params: series (an entry from _data/photos.yml), photos (its photos, or one stop's).
+  Spec: design/system.md → Components → Photographs page.
+{%- endcomment -%}
+<div class="ns-photos">
+  {%- for ph in include.photos %}
+  <button type="button" class="ns-shot" data-full="/assets/photos/{{ include.series.folder }}/{{ ph.file }}.jpg" data-caption="{{ ph.place }} · {{ include.series.title }}" aria-label="Open: {{ ph.alt }}"><img src="/assets/photos/{{ include.series.folder }}/{{ ph.file }}-s.jpg" alt="{{ ph.alt }}" style="aspect-ratio: {{ ph.ratio }}" loading="lazy"></button>
+  {%- endfor %}
+</div>

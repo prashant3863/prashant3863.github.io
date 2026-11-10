@@ -110,7 +110,7 @@ Write the way Prashant talks:
 ## Photography
 
 - Prashant's own photographs only. Show them as shot, with no added filters, frames or watermarks.
-- **Group by series** (a trip or a post), newest first. Each series has a title and a meta line, e.g. "The Greatest Gig in the Sky · Ladakh · July 2021".
+- **Group by series** (a trip or a post), newest first. Each series has a title and a meta line, e.g. "The Greatest Gig in the Sky · Ladakh · July 2021". A long trip splits into stops in the order travelled, e.g. The Italian Summer: Lake Como, Venice, Florence, Tuscany, Rome, Amalfi Coast.
 - **Crop only on the home strip** (four at 4:5). The photographs page keeps every photo's real proportions.
 - **Captions:** `Place, Year`.
 - **Alt text** says what is in the frame in one plain sentence, e.g. "A whitewashed chorten beside a dirt road".

@@ -1,6 +1,96 @@
 # Photographs, one entry per series, newest first. Spec: design/system.md → Content structure.
 # Files: assets/photos/<folder>/NN.jpg (1600px) and NN-s.jpg (720px).
 # `home: true` puts a photo in the four-photo strip on the home page (use four in total).
+# A long trip can be split into `stops` (each a `name` and its `photos`). Files are numbered through the whole series.
+
+# Italy, September 2025. Camera JPEGs as shot, picked in Photos (hearts). Stops in route order.
+- title: The Italian Summer
+  meta: Italy · September 2025
+  folder: 2025-the-italian-summer
+  stops:
+    - name: Lake Como
+      photos:
+        - { file: "01", ratio: "2 / 3", alt: "A woman in a white dress walking up a grassy path between cypresses", place: "Lake Como, 2025" }
+        - { file: "02", ratio: "2 / 3", alt: "Cypresses and rooftops above the lake, with mountains behind", place: "Lake Como, 2025" }
+        - { file: "03", ratio: "2 / 3", alt: "A mountain under clouds across the lake, behind a waterfront railing", place: "Lake Como, 2025" }
+    - name: Venice
+      photos:
+        - { file: "04", ratio: "2 / 3", alt: "Tables and wine barrels outside a bar, under ochre and pink walls", place: "Venice, 2025" }
+        - { file: "05", ratio: "3 / 2", alt: "A dog and people on the waterfront at sunset, with domes and a bell tower across the water", place: "Venice, 2025" }
+        - { file: "06", ratio: "2 / 3", alt: "A gondola crossing open water, with a ferry behind", place: "Venice, 2025" }
+        - { file: "07", ratio: "2 / 3", alt: "A brick church with two small spires, under streaks of cloud", place: "Venice, 2025" }
+        - { file: "08", ratio: "2 / 3", alt: "Boats on the Grand Canal, with the domes of Santa Maria della Salute at the end", place: "Venice, 2025" }
+        - { file: "09", ratio: "2 / 3", alt: "A wider view down the Grand Canal to the Salute, under a small cloud", place: "Venice, 2025" }
+        - { file: "10", ratio: "3 / 2", alt: "The red-and-gold flag of Venice, with a gull overhead", place: "Venice, 2025" }
+        - { file: "11", ratio: "2 / 3", alt: "A bride and groom at a marble church door, with guests in the square", place: "Venice, 2025" }
+        - { file: "12", ratio: "2 / 3", alt: "Wedding guests and soap bubbles in a square of ochre houses", place: "Venice, 2025" }
+        - { file: "13", ratio: "2 / 3", alt: "The brick apse and dome of a Gothic church, under wispy clouds", place: "Venice, 2025" }
+    - name: Florence
+      photos:
+        - { file: "14", ratio: "3 / 2", alt: "The cathedral dome and Giotto’s bell tower above a garden wall", place: "Florence, 2025" }
+        - { file: "15", ratio: "3 / 2", alt: "The Ponte Vecchio reflected in the Arno", place: "Florence, 2025" }
+        - { file: "16", ratio: "3 / 2", alt: "A pink sunset reflected in the Arno, with a bridge in the distance", place: "Florence, 2025" }
+        - { file: "17", ratio: "3 / 2", alt: "Ochre and red villas in late sun, against a cloudy sky", place: "Florence, 2025" }
+        - { file: "18", ratio: "2 / 3", alt: "The bronze David on its pedestal, against a blue sky", place: "Florence, 2025" }
+        - { file: "19", ratio: "3 / 2", alt: "Florence from the hills, with the cathedral dome and the Palazzo Vecchio tower", place: "Florence, 2025" }
+        - { file: "20", ratio: "3 / 2", alt: "The cathedral dome between dark trees, in evening light", place: "Florence, 2025" }
+    - name: Tuscany
+      photos:
+        - { file: "21", ratio: "2 / 3", alt: "Café umbrellas seen from below, with washing hung between stone houses", place: "Tuscany, 2025" }
+        - { file: "22", ratio: "2 / 3", alt: "Ivy over a stone passage between village houses", place: "Tuscany, 2025" }
+        - { file: "23", ratio: "2 / 3", alt: "A paved lane between stone houses, under an overhanging tree", place: "Tuscany, 2025" }
+        - { file: "24", ratio: "2 / 3", alt: "A brick arch framing hills and cypresses, with a woman walking through", place: "Tuscany, 2025" }
+        - { file: "25", ratio: "2 / 3", alt: "A wooden door at the top of red steps, with hills and clouds behind", place: "Tuscany, 2025" }
+        - { file: "26", ratio: "2 / 3", alt: "A small three-wheeled van in a grassy yard beside a stone shed", place: "Tuscany, 2025" }
+        - { file: "27", ratio: "2 / 3", alt: "A brick tower between ochre houses, seen from below, with a contrail", place: "Tuscany, 2025" }
+        - { file: "28", ratio: "2 / 3", alt: "A shaded lane through a run of arches, with hills at the far end", place: "Tuscany, 2025" }
+        - { file: "29", ratio: "2 / 3", alt: "A blue-and-green zigzag flag hanging from a shuttered house", place: "Tuscany, 2025" }
+        - { file: "30", ratio: "2 / 3", alt: "Terracotta roofs above a valley of fields and cypresses", place: "Tuscany, 2025" }
+        - { file: "31", ratio: "2 / 3", alt: "A road lined with tall cypresses, in black and white", place: "Tuscany, 2025" }
+        - { file: "32", ratio: "2 / 3", alt: "A narrow lane to a cream house with green shutters, with an older person walking by", place: "Tuscany, 2025" }
+        - { file: "33", ratio: "2 / 3", alt: "A sunny street leading to a white bell tower, with plants spilling over stone walls", place: "Tuscany, 2025" }
+        - { file: "34", ratio: "3 / 2", alt: "Green fields under clouds, with a hill town on the horizon", place: "Tuscany, 2025" }
+        - { file: "35", ratio: "3 / 2", alt: "Open grassland under small white clouds", place: "Tuscany, 2025" }
+        - { file: "36", ratio: "2 / 3", alt: "A small chapel among cypresses on a grassy rise", place: "Tuscany, 2025" }
+        - { file: "37", ratio: "3 / 2", alt: "Rolling hills and a distant mountain, framed by shrubs", place: "Tuscany, 2025" }
+        - { file: "38", ratio: "3 / 2", alt: "A swimming pool at dusk under a pink sky, beside a stone farmhouse", place: "Tuscany, 2025" }
+        - { file: "39", ratio: "2 / 3", alt: "Two people lying in a warm spring on white mineral rock", place: "Tuscany, 2025" }
+        - { file: "40", ratio: "3 / 2", alt: "A hill town on a ridge above pale fields and a winding road", place: "Tuscany, 2025" }
+        - { file: "41", ratio: "3 / 2", alt: "A red sunset streaked over dark hills", place: "Tuscany, 2025" }
+    - name: Rome
+      photos:
+        - { file: "42", ratio: "2 / 3", alt: "A bride and groom crossing in front of a marble fountain", place: "Rome, 2025" }
+        - { file: "43", ratio: "2 / 3", alt: "An equestrian statue in silhouette between umbrella pines at dusk", place: "Rome, 2025" }
+        - { file: "44", ratio: "2 / 3", alt: "A narrow ochre street with a dome at the far end", place: "Rome, 2025" }
+        - { file: "45", ratio: "2 / 3", alt: "The Colosseum in black and white, above a crowd of visitors", place: "Rome, 2025" }
+        - { file: "46", ratio: "2 / 3", alt: "The Colosseum under a deep blue sky, with cypresses and visitors", place: "Rome, 2025" }
+        - { file: "47", ratio: "2 / 3", alt: "A sunlit terracotta building seen from inside a dark archway", place: "Rome, 2025" }
+        - { file: "48", ratio: "2 / 3", alt: "The dome of St Peter’s above dark trees", place: "Vatican City, 2025" }
+        - { file: "49", ratio: "2 / 3", alt: "A giant bronze pine cone in a courtyard niche, with a woman walking past", place: "Vatican City, 2025" }
+        - { file: "50", ratio: "2 / 3", alt: "St Peter’s dome above a courtyard wall, with visitors below", place: "Vatican City, 2025" }
+        - { file: "51", ratio: "2 / 3", alt: "A golden sphere sculpture in a courtyard, with St Peter’s dome behind", place: "Vatican City, 2025" }
+        - { file: "52", ratio: "3 / 2", alt: "A coffered dome with a round skylight at its centre", place: "Vatican City, 2025" }
+        - { file: "53", ratio: "2 / 3", alt: "A spiral staircase seen from above", place: "Vatican City, 2025" }
+        - { file: "54", ratio: "3 / 2", alt: "Looking up into the gilded dome of St Peter’s", place: "Vatican City, 2025" }
+        - { file: "55", ratio: "2 / 3", alt: "The dome of St Peter’s, with the top of the bronze canopy beneath it", place: "Vatican City, 2025" }
+        - { file: "56", ratio: "2 / 3", alt: "A marble saint holding a large cross, in black and white", place: "Vatican City, 2025" }
+        - { file: "57", ratio: "3 / 2", alt: "The square seen between the dark columns of the Pantheon’s portico, in black and white", place: "Rome, 2025" }
+        - { file: "58", ratio: "2 / 3", alt: "The coffered dome of the Pantheon, with light through the oculus", place: "Rome, 2025" }
+    - name: Amalfi Coast
+      photos:
+        - { file: "59", ratio: "2 / 3", alt: "Scooters parked on a bend above a church and the sea", place: "Amalfi Coast, 2025" }
+        - { file: "60", ratio: "2 / 3", alt: "A town stacked on the cliffs above a bay, under a pale sky", place: "Amalfi Coast, 2025" }
+        - { file: "61", ratio: "3 / 2", alt: "Two people on a dark beach at dusk, under a pink cloud", place: "Amalfi Coast, 2025" }
+        - { file: "62", ratio: "3 / 2", alt: "A pink-lit cloud over a breakwater at dusk", place: "Amalfi Coast, 2025" }
+        - { file: "63", ratio: "2 / 3", alt: "Houses stacked up a steep hillside above a beach, under low cloud", place: "Amalfi Coast, 2025" }
+        - { file: "64", ratio: "3 / 2", alt: "Boats moored in a bay below steep green hills", place: "Amalfi Coast, 2025" }
+        - { file: "65", ratio: "2 / 3", alt: "A cliffside town seen through pine branches, with low cloud on the hills", place: "Amalfi Coast, 2025" }
+        - { file: "66", ratio: "2 / 3", alt: "A red-and-white boat on turquoise water, seen through pines above a railing hung with padlocks", place: "Amalfi Coast, 2025" }
+        - { file: "67", ratio: "2 / 3", alt: "Two boats on turquoise water, framed by pines and a railing hung with padlocks", place: "Amalfi Coast, 2025" }
+        - { file: "68", ratio: "2 / 3", alt: "A white boat on dark turquoise water, seen from above through pine branches", place: "Amalfi Coast, 2025" }
+        - { file: "69", ratio: "3 / 2", alt: "Boats and a sailing yacht in a bay, with low cloud over the hills", place: "Amalfi Coast, 2025" }
+        - { file: "70", ratio: "2 / 3", alt: "A woman sitting on a pebble beach, with sunbathers and green cliffs behind", place: "Amalfi Coast, 2025" }
+
 - title: The Greatest Gig in the Sky
   meta: Ladakh · July 2021
   folder: 2021-greatest-gig-in-the-sky

@@ -204,6 +204,9 @@ html:not(.dark) .ns-theme.is-kicking svg { animation-name: ns-kick-back; }
 }
 .ns-thumb:hover img { transform: scale(1.035); }
 .ns-photos { columns: 3 240px; column-gap: 12px; }
+/* A stop inside a long series (e.g. Venice in The Italian Summer): a quiet label above its own grid. */
+.ns-photos__stop { margin: 28px 0 10px; font-size: var(--ns-text-meta); font-weight: var(--ns-weight-medium); color: var(--ns-muted); }
+.ns-h2-row + .ns-photos__stop { margin-top: 0; }
 .ns-shot {
   display: block; width: 100%; margin: 0 0 12px; padding: 0; border: 0;
   border-radius: var(--ns-radius-sm); overflow: hidden; background: var(--ns-surface-photo);
