@@ -20,6 +20,7 @@ The brand and design system live in `design/`. Start with `design/README.md`, th
 - Pages: `index.html` (home), `about.html`, `photos.html`, `archive.html` (`/posts/past-life`), `notes.html` (unpublished until there are notes).
 - Posts: `_posts/`, rendered by `_layouts/post.html`. Lab notes go in `_notes/`.
 - Lists: `_data/photos.yml`, `archive.yml`, `built.yml`, `talks.yml`. `photos.yml` is a list of collections (Italy, Ladakh, Others…); each gets its own page at `/photos/<slug>/`, made by `_plugins/photo_collections.rb`. Photos are **not in the repo**: they live in the Cloudflare R2 bucket `notshant-photos`, served from `photos.notshant.xyz` (`site.photos_url`). They're made and uploaded with `scripts/photos.py`, and file names are never reused (see `design/system.md` → Photographs).
+- `robots.txt`: the AI crawler policy (Prashant's choice, 11 Nov 2026). Search and AI assistants may read and cite the site; AI training crawlers are blocked, and `Content-Signal` says `ai-train=no`. Don't loosen or tighten it without asking. Analytics: Cloudflare Web Analytics and Google Analytics (`_includes/scripts.html`; the two decks in `assets/*/deck.html` carry their own copy).
 - Front matter keys (`nav`, `ns_js`, `toc`, `list_title`, `listed`, `soon`) are listed in `design/system.md` → How the site is built.
 
 ## Plans and runbooks
