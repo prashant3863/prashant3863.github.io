@@ -6,3 +6,7 @@
 
   gtag('config', 'G-JGZRXWFK8F');
 </script>
+{%- comment -%} Cloudflare Web Analytics: no cookies. Only on the live site (CI builds with JEKYLL_ENV=production), so local visits aren't counted. {%- endcomment %}
+{%- if jekyll.environment == "production" and site.cloudflare_analytics_token and site.cloudflare_analytics_token != "" %}
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "{{ site.cloudflare_analytics_token }}"}'></script>
+{%- endif %}

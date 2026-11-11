@@ -350,6 +350,26 @@ table.rct tr:last-child td{border-bottom:0}
 .mini3>div{border-top:3px solid var(--rf-ed-ink);padding-top:14px;font-size:24px;line-height:1.3}
 .mini3 .n{font-family:var(--font-mono);font-size:17px;color:var(--rf-ed-muted);margin-bottom:6px}
 </style>
+<!-- Analytics: Cloudflare Web Analytics and Google Analytics, the same IDs as _config.yml and _includes/scripts.html.
+     Only when the deck is opened on its own on the live site: not when it's embedded in a post (the post's visit counts
+     there), and not locally. This file isn't processed by Jekyll, so the IDs are written out here. -->
+<script>
+(function () {
+  if (window.self !== window.top || !/(^|\.)notshant\.xyz$/.test(location.hostname)) return;
+  function load(src, attrs) {
+    var s = document.createElement('script');
+    s.src = src; s.async = true;
+    for (var k in attrs) s.setAttribute(k, attrs[k]);
+    document.head.appendChild(s);
+  }
+  load('https://static.cloudflareinsights.com/beacon.min.js', { 'data-cf-beacon': '{"token": "103f07f4e916416aafb97b5d43847c19"}' });
+  load('https://www.googletagmanager.com/gtag/js?id=G-JGZRXWFK8F', {});
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function () { window.dataLayer.push(arguments); };
+  window.gtag('js', new Date());
+  window.gtag('config', 'G-JGZRXWFK8F');
+})();
+</script>
 </head>
 <body>
 <div class="stage" id="stage">

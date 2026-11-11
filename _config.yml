@@ -1,4 +1,6 @@
 google_analytics: G-JGZRXWFK8F
+# Cloudflare Web Analytics (_includes/scripts.html). The token is public: it ends up in every page.
+cloudflare_analytics_token: 103f07f4e916416aafb97b5d43847c19
 
 title: Not Shant Blog
 description: Personal Blog of Prashant Mittal
