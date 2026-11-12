@@ -10,7 +10,7 @@ author:
   url: https://notshant.xyz/about
 image:
   path: /assets/scope-creep/social-card.png
-  alt: "The one about scope creep: why scope grows and gets out of hand, five steps for every new ask, and what changes when agents write the code, with a month's plan where a new ask pushes the last item past the end of the month"
+  alt: "The one about scope creep: why scope grows and gets out of hand, five steps for every new ask, and what changes when agents write the code, over a row of dominoes that grows from a small fallen one to a tall red one"
   width: 1200
   height: 630
 article_class: numbered
