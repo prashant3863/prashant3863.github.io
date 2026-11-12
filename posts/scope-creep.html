@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<script>
+  /* ns-js: the logo may animate. dark: the saved choice, else the system setting (design/system.md → Dark mode). */
+  (function (d) {
+    d.classList.add('ns-js');
+    var t = null;
+    try { t = localStorage.getItem('ns-theme'); } catch (e) {}
+    if (t !== 'light' && t !== 'dark') t = window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    if (t === 'dark') d.classList.add('dark');
+  })(document.documentElement);
+</script>
+<meta name="color-scheme" content="light dark">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
+
+<link rel="stylesheet" href="/dist/index.css">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>The one about scope creep: how to manage it without moving the launch | Not Shant Blog</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="The one about scope creep: how to manage it without moving the launch" />
+<meta name="author" content="Prashant Mittal" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="How to manage scope creep on software projects: why scope grows, five steps for handling a new ask, and what changes when AI agents write the code." />
+<meta property="og:description" content="How to manage scope creep on software projects: why scope grows, five steps for handling a new ask, and what changes when AI agents write the code." />
+<link rel="canonical" href="https://notshant.xyz/posts/scope-creep" />
+<meta property="og:url" content="https://notshant.xyz/posts/scope-creep" />
+<meta property="og:site_name" content="Not Shant Blog" />
+<meta property="og:image" content="https://notshant.xyz/assets/scope-creep/social-card.png" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:alt" content="The one about scope creep: why scope grows and gets out of hand, five steps for every new ask, and what changes when agents write the code, over a row of dominoes that grows from a small fallen one to a tall red one" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2026-11-12T00:00:00+00:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="https://notshant.xyz/assets/scope-creep/social-card.png" />
+<meta name="twitter:image:alt" content="The one about scope creep: why scope grows and gets out of hand, five steps for every new ask, and what changes when agents write the code, over a row of dominoes that grows from a small fallen one to a tall red one" />
+<meta property="twitter:title" content="The one about scope creep: how to manage it without moving the launch" />
+<meta name="twitter:site" content="@prashant_mit" />
+<meta name="twitter:creator" content="@prashant_mit" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Prashant Mittal","url":"https://notshant.xyz/about"},"dateModified":"2026-11-12T00:00:00+00:00","datePublished":"2026-11-12T00:00:00+00:00","description":"How to manage scope creep on software projects: why scope grows, five steps for handling a new ask, and what changes when AI agents write the code.","headline":"The one about scope creep: how to manage it without moving the launch","image":{"alt":"The one about scope creep: why scope grows and gets out of hand, five steps for every new ask, and what changes when agents write the code, over a row of dominoes that grows from a small fallen one to a tall red one","width":1200,"height":630,"url":"https://notshant.xyz/assets/scope-creep/social-card.png","@type":"imageObject"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://notshant.xyz/posts/scope-creep"},"url":"https://notshant.xyz/posts/scope-creep"}</script>
+<!-- End Jekyll SEO tag -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-JGZRXWFK8F"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-JGZRXWFK8F');
+</script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "103f07f4e916416aafb97b5d43847c19"}'></script>
+
+
+</head>
+
+<body class="ns-page">
+    <div class="ns-container">
+        <header class="ns-header">
+  <a href="/" class="ns-logo-link" aria-label="notshant, home">
+<svg class="ns-logo" viewBox="0 0 117 49" width="96" height="40" aria-hidden="true" focusable="false"><path pathLength="1" d="M9.88 39.28C8.09333 39.28 6.37333 39.0533 4.72 38.6C3.09333 38.12 1.8 37.5467 0.84 36.88L2.76 33.08C3.72 33.6933 4.86667 34.2 6.2 34.6C7.53333 35 8.86667 35.2 10.2 35.2C11.7733 35.2 12.9067 34.9867 13.6 34.56C14.32 34.1333 14.68 33.56 14.68 32.84C14.68 32.2533 14.44 31.8133 13.96 31.52C13.48 31.2 12.8533 30.96 12.08 30.8C11.3067 30.64 10.44 30.4933 9.48 30.36C8.54667 30.2267 7.6 30.0533 6.64 29.84C5.70667 29.6 4.85333 29.2667 4.08 28.84C3.30667 28.3867 2.68 27.7867 2.2 27.04C1.72 26.2933 1.48 25.3067 1.48 24.08C1.48 22.72 1.86667 21.5467 2.64 20.56C3.41333 19.5467 4.49333 18.7733 5.88 18.24C7.29333 17.68 8.96 17.4 10.88 17.4C12.32 17.4 13.7733 17.56 15.24 17.88C16.7067 18.2 17.92 18.6533 18.88 19.24L16.96 23.04C15.9467 22.4267 14.92 22.0133 13.88 21.8C12.8667 21.56 11.8533 21.44 10.84 21.44C9.32 21.44 8.18667 21.6667 7.44 22.12C6.72 22.5733 6.36 23.1467 6.36 23.84C6.36 24.48 6.6 24.96 7.08 25.28C7.56 25.6 8.18667 25.8533 8.96 26.04C9.73333 26.2267 10.5867 26.3867 11.52 26.52C12.48 26.6267 13.4267 26.8 14.36 27.04C15.2933 27.28 16.1467 27.6133 16.92 28.04C17.72 28.44 18.36 29.0133 18.84 29.76C19.32 30.5067 19.56 31.48 19.56 32.68C19.56 34.0133 19.16 35.1733 18.36 36.16C17.5867 37.1467 16.48 37.92 15.04 38.48C13.6 39.0133 11.88 39.28 9.88 39.28ZM35.9859 17.4C37.6926 17.4 39.2126 17.7333 40.5459 18.4C41.9059 19.0667 42.9726 20.0933 43.7459 21.48C44.5193 22.84 44.9059 24.6 44.9059 26.76V39H39.9059V27.4C39.9059 25.5067 39.4526 24.0933 38.5459 23.16C37.6659 22.2267 36.4259 21.76 34.8259 21.76C33.6526 21.76 32.6126 22 31.7059 22.48C30.7993 22.96 30.0926 23.68 29.5859 24.64C29.1059 25.5733 28.8659 26.76 28.8659 28.2V39H23.8659V9.32H28.8659V23.4L27.7859 21.64C28.5326 20.28 29.6126 19.24 31.0259 18.52C32.4659 17.7733 34.1193 17.4 35.9859 17.4ZM64.4088 39V34.68L64.1288 33.76V26.2C64.1288 24.7333 63.6888 23.6 62.8088 22.8C61.9288 21.9733 60.5954 21.56 58.8088 21.56C57.6088 21.56 56.4221 21.7467 55.2488 22.12C54.1021 22.4933 53.1288 23.0133 52.3288 23.68L50.3688 20.04C51.5154 19.16 52.8754 18.5067 54.4488 18.08C56.0488 17.6267 57.7021 17.4 59.4088 17.4C62.5021 17.4 64.8888 18.1467 66.5688 19.64C68.2754 21.1067 69.1288 23.3867 69.1288 26.48V39H64.4088ZM57.6888 39.28C56.0888 39.28 54.6888 39.0133 53.4888 38.48C52.2888 37.92 51.3554 37.16 50.6888 36.2C50.0488 35.2133 49.7288 34.1067 49.7288 32.88C49.7288 31.68 50.0088 30.6 50.5688 29.64C51.1554 28.68 52.1021 27.92 53.4088 27.36C54.7154 26.8 56.4488 26.52 58.6088 26.52H64.8088V29.84H58.9688C57.2621 29.84 56.1154 30.12 55.5288 30.68C54.9421 31.2133 54.6488 31.88 54.6488 32.68C54.6488 33.5867 55.0088 34.3067 55.7288 34.84C56.4488 35.3733 57.4488 35.64 58.7288 35.64C59.9554 35.64 61.0488 35.36 62.0088 34.8C62.9954 34.24 63.7021 33.4133 64.1288 32.32L64.9688 35.32C64.4888 36.5733 63.6221 37.5467 62.3688 38.24C61.1421 38.9333 59.5821 39.28 57.6888 39.28ZM87.6656 17.4C89.3723 17.4 90.8923 17.7333 92.2256 18.4C93.5856 19.0667 94.6523 20.0933 95.4256 21.48C96.199 22.84 96.5856 24.6 96.5856 26.76V39H91.5856V27.4C91.5856 25.5067 91.1323 24.0933 90.2256 23.16C89.3456 22.2267 88.1056 21.76 86.5056 21.76C85.3323 21.76 84.2923 22 83.3856 22.48C82.479 22.96 81.7723 23.68 81.2656 24.64C80.7856 25.5733 80.5456 26.76 80.5456 28.2V39H75.5456V17.64H80.3056V23.4L79.4656 21.64C80.2123 20.28 81.2923 19.24 82.7056 18.52C84.1456 17.7733 85.799 17.4 87.6656 17.4ZM110.968 39.28C108.622 39.28 106.808 38.68 105.528 37.48C104.248 36.2533 103.608 34.4533 103.608 32.08V12.92H108.608V31.96C108.608 32.9733 108.862 33.76 109.368 34.32C109.902 34.88 110.635 35.16 111.568 35.16C112.688 35.16 113.622 34.8667 114.368 34.28L115.768 37.84C115.182 38.32 114.462 38.68 113.608 38.92C112.755 39.16 111.875 39.28 110.968 39.28ZM100.088 21.8V17.8H114.328V21.8H100.088Z"></path><path pathLength="0.1088" d="M0 8H29V13H0Z"></path></svg>
+</a>
+
+  <nav class="ns-nav" aria-label="Primary">
+    <a href="/#writing" aria-current="page">writing</a>
+    <a href="/photos/">photos</a>
+    <a href="/about">about</a>
+    <button type="button" class="ns-theme" data-ns-theme aria-label="Dark mode" aria-pressed="false"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><defs><clipPath id="ns-ball"><circle cx="12" cy="12" r="10.25"/></clipPath></defs><circle cx="12" cy="12" r="10.25" fill="none" stroke="currentColor" stroke-width="1.5"/><g clip-path="url(#ns-ball)"><path d="M12.00 8.00 L15.80 10.76 L14.35 15.24 L9.65 15.24 L8.20 10.76Z M12.00 5.60 L8.96 3.39 L10.12 -0.19 L13.88 -0.19 L15.04 3.39Z M18.09 10.02 L19.25 6.44 L23.01 6.44 L24.17 10.02 L21.13 12.23Z M15.76 17.18 L19.52 17.18 L20.69 20.76 L17.64 22.97 L14.60 20.76Z M8.24 17.18 L9.40 20.76 L6.36 22.97 L3.31 20.76 L4.48 17.18Z M5.91 10.02 L2.87 12.23 L-0.17 10.02 L0.99 6.44 L4.75 6.44Z" fill="currentColor"/><path d="M12.00 8.00 L12.00 5.60 M15.04 3.39 L19.25 6.44 M15.80 10.76 L18.09 10.02 M21.13 12.23 L19.52 17.18 M14.35 15.24 L15.76 17.18 M14.60 20.76 L9.40 20.76 M9.65 15.24 L8.24 17.18 M4.48 17.18 L2.87 12.23 M8.20 10.76 L5.91 10.02 M4.75 6.44 L8.96 3.39" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></g></svg></button>
+  </nav>
+</header>
+
+        
+<div>
+    <main class="ns-post--wide">
+        <p class="ns-meta ns-dateline"><time datetime="2026-11-12">12 Nov 2026</time></p>
+        <article class="ns-prose numbered">
+            <h1 id="the-one-about-scope-creep">The one about scope creep</h1>
+
+<p class="c-subtitle">Why scope grows and gets out of hand, five steps for every new ask, and what changes when agents write the code</p>
+
+<p>Ten minutes before the end of a weekly call, the sponsor unmutes: “Can we add a bulk export? Should be quick.”</p>
+
+<p>I made this one up, but you’ve heard something like it. It sounds small, so the easy answer is yes. But “quick” is a guess, and the bulk export turns out to be four days of work. If nobody plans for those four days, the project finishes four days late. Say yes to a few of these and the launch you promised slips, one small yes at a time.</p>
+
+<p>I gave a talk at work on what to do in that moment, for the people who run our client projects (<a href="#the-slides">the slides</a> are at the end). Once we’ve agreed a scope and a date with a client, a slip because the scope grew is on us. The same moves work inside a product company. I’ll say “client” for whoever is asking. On a product team, that’s the product manager or the stakeholder behind them.</p>
+
+<p class="c-key">Managing scope isn’t saying no or saying yes. It’s finding out what each ask is for and what it costs while it’s still small, so you can trade for it and finish on time.</p>
+
+<div class="c-summary">
+  <p><span class="c-label">In this post</span></p>
+
+  <ol>
+    <li><a href="#why-scope-grows">Why scope grows</a></li>
+    <li><a href="#why-scope-gets-out-of-hand">Why scope gets out of hand</a>
+      <ul>
+        <li><a href="#1-small-yeses-add-up">Small yeses add up</a></li>
+        <li><a href="#2-each-side-reads-the-agreement-their-way">Each side reads the agreement their way</a></li>
+      </ul>
+    </li>
+    <li><a href="#pushing-back-is-part-of-the-job">Pushing back is part of the job</a></li>
+    <li><a href="#how-to-handle-a-new-ask">How to handle a new ask</a>
+      <ul>
+        <li><a href="#1-start-with-no">Start with no</a></li>
+        <li><a href="#2-look-for-the-win-win">Look for the win-win</a></li>
+        <li><a href="#3-ask-what-its-worth">Ask what it’s worth</a></li>
+        <li><a href="#4-absorb-swap-or-extend">Absorb, swap or extend</a></li>
+        <li><a href="#5-write-the-decision-down">Write the decision down</a></li>
+      </ul>
+    </li>
+    <li><a href="#when-agents-write-the-code">When agents write the code</a></li>
+    <li><a href="#questions-youre-probably-asking">Questions you’re probably asking</a></li>
+    <li><a href="#five-phrases-to-retire">Five phrases to retire</a></li>
+    <li><a href="#the-slides">The slides</a></li>
+  </ol>
+</div>
+
+<h3 id="why-scope-grows">Why scope grows</h3>
+
+<p>Scope creep happens on every software project, so expect it from day one.</p>
+
+<p>Software is hard to describe before it exists. The requirements get written before anyone has used a working screen, so they can’t cover everything. Building it turns up what nobody thought of: an edge case, an integration that doesn’t behave the way its docs say, data messier than anyone admitted. And people learn what they want by seeing it. The first demo produces new ideas, because now there’s something to react to.</p>
+
+<blockquote class="fact">
+  <p>Scope grows naturally. Scope creep isn’t the fault of bad clients, bad managers, or bad programmers. Projects are opaque at the macro scale.</p>
+</blockquote>
+
+<p class="cite">Ryan Singer, <a href="https://basecamp.com/shapeup/3.5-chapter-14">Shape Up</a>, chapter 14</p>
+
+<h3 id="why-scope-gets-out-of-hand">Why scope gets out of hand</h3>
+
+<h4 id="1-small-yeses-add-up">1. Small yeses add up</h4>
+
+<p>Say yes to four small changes, and the fifth, bigger one feels normal, to you and to the client. Psychologists call this the foot-in-the-door effect. In 1966, two psychologists asked homeowners in California to put a big, ugly “Drive Carefully” sign on their front lawn. Some were asked cold. Others had been asked two weeks earlier for something tiny: a small “Be a safe driver” sign in the window.</p>
+
+<p><img src="/assets/scope-creep/foot-in-the-door.svg" alt="Foot-in-the-door study: asked cold, 17% agreed to a big lawn sign; after agreeing to a small sign first, 76% agreed" /></p>
+
+<p class="cite">Freedman &amp; Fraser, <a href="https://pubmed.ncbi.nlm.nih.gov/5969145/">Compliance without pressure: the foot-in-the-door technique</a>, 1966</p>
+
+<p>A small yes made the big one more than four times as likely. You can still say yes to small things, as long as you keep count of them. That’s step 5 below.</p>
+
+<h4 id="2-each-side-reads-the-agreement-their-way">2. Each side reads the agreement their way</h4>
+
+<p>Every piece of work starts from something written down. On a client project, it’s the statement of work (SoW). On a product team, it’s the spec, or the ticket from the product manager. Each side reads it the way that suits them. On a fixed-scope contract, the client reads every requirement “as broadly as possible”, and the supplier reads it “as narrowly as possible”. Kent Beck and Dave Cleal <a href="https://web.archive.org/web/20070810142557/http://www.syntropy.co.uk/papers/optionalscope.pdf">wrote that in 1999</a>. A ticket gets the same treatment. The product manager pictures a feature, and the engineer looks for the smallest change that closes it.</p>
+
+<p>Nobody is acting in bad faith. Say the SoW has one line: “Reporting.” You read three CSV exports, and the client reads a live dashboard. Both readings are honest, and they’re six days of work apart.</p>
+
+<p><img src="/assets/scope-creep/two-readings.svg" alt="Scope creep from a vague SoW: the word Reporting read as a live dashboard (8 days) by the client and three CSV exports (2 days) by the supplier, illustrative" /></p>
+
+<p>Arguing about what the words meant goes nowhere. Agree that both readings are fair, then size the bigger one: “I can see why you read it that way. We read it as exports. Let’s size the dashboard and decide what it replaces.”</p>
+
+<h3 id="pushing-back-is-part-of-the-job">Pushing back is part of the job</h3>
+
+<p>There are two ways to work with a client. A <code class="language-plaintext highlighter-rouge">vendor</code> builds the list of features it’s given, and adds each new ask to the list. A <code class="language-plaintext highlighter-rouge">partner</code> starts from the problem the list is meant to solve, and asks what each new ask is for, what it costs and what it’s worth.</p>
+
+<p>Product companies have the same split. Marty Cagan calls it <a href="https://www.svpg.com/product-vs-feature-teams/">feature teams and product teams</a>: a feature team ships the roadmap it’s handed, while a product team owns a problem until it goes away.</p>
+
+<p><strong>Knowing what’s worth building is what you’re paid for.</strong> Anyone can write a list of features. A client hires a consultancy, and a company hires product engineers, because they know what software can do and what it costs. Clients want that knowledge applied to every ask, not only the ones in the first plan.</p>
+
+<p>When you push back well, nobody hears it as a fight, because you don’t stop at no. You keep going until you find a version that works for both sides, and the five steps below are how.</p>
+
+<p>It helps to know why the date matters to you too. A late launch costs whoever builds it. On a fixed-price project, it costs your margin. On a retainer, it puts the renewal at risk. Inside a product company, it upsets the plans of every team waiting on you. You don’t need to say this out loud. People see it in how you work: each time you push back on an ask, you also bring a way to launch on time.</p>
+
+<h3 id="how-to-handle-a-new-ask">How to handle a new ask</h3>
+
+<p>These are the five steps I take for every ask, in this order. The first happens on the call, the next two before you come back the next day, and the last two with the client.</p>
+
+<h4 id="1-start-with-no">1. Start with no</h4>
+
+<p>The no is to the current scope, not to the person, and it never comes on its own. On the call, it sounds like this:</p>
+
+<blockquote class="pull">
+  <p>“Not in this scope. Tell me what it’s for, and I’ll come back tomorrow with what it would take.”</p>
+</blockquote>
+
+<p>A bare no feels like hitting a wall. The question after it turns the no into the start of a conversation, and it buys you two things:</p>
+
+<ol>
+  <li><strong>The problem.</strong> “Tell me what it’s for” gets you the reason behind the ask, so you can check whether a bulk export is the right fix or only the first one they thought of.</li>
+  <li><strong>A day.</strong> You don’t have to answer on the call, which is when you’re most likely to guess low and give one more small yes. Tomorrow you come back with a size and some options.</li>
+</ol>
+
+<p>It also shows the client you want to understand the problem before you build anything.</p>
+
+<p>The first position on the table pulls the rest of the conversation towards it, the same <a href="/posts/software-estimation#1-anchoring">anchoring effect</a> that skews estimates. If you start at yes, you can only move further past the scope you agreed. A no leaves room to land somewhere sensible: a smaller version, a swap, or a change request that surprises nobody.</p>
+
+<p>Product teams start with no as well, for a different reason:</p>
+
+<blockquote class="fact">
+  <p>Each time you say yes to a feature, you’re adopting a child.</p>
+</blockquote>
+
+<p class="cite">37signals, <a href="https://basecamp.com/gettingreal/05.3-start-with-no">Getting Real</a>, “Start With No”</p>
+
+<p>Every feature has to be designed, built and tested, and then looked after for as long as the software runs. A no on the call gives you a day to work out that cost before anyone commits to it.</p>
+
+<h4 id="2-look-for-the-win-win">2. Look for the win-win</h4>
+
+<p>There’s a version of the ask that works for both sides more often than you’d think, because you both want to finish on time. It’s easy to assume the client wants the feature and only you care about the date. Their sponsor has promised the launch to someone above them, though, and an earlier launch brings their revenue forward. So don’t treat the ask as a choice between the feature and the date.</p>
+
+<p><img src="/assets/scope-creep/both-want-the-date.svg" alt="Venn diagram: the client wants the feature and a launch they promised; the delivery team wants to deliver on time and win the next phase; both want to finish on time with the problem solved" /></p>
+
+<p>To find that version, ask what the request is for. Negotiators tell a story about this, from <a href="https://en.wikipedia.org/wiki/Getting_to_Yes">Getting to Yes</a>. Two sisters want the same orange. They argue, then cut it in half. One squeezes her half for juice and throws away the peel. The other grates her peel into a cake and throws away the fruit. If either had asked what the other wanted it for, both could have had all of what they needed.</p>
+
+<p><img src="/assets/scope-creep/orange.svg" alt="The orange negotiation story: splitting it gives each sister half; asking what each wants it for gives one all the juice and the other all the peel" /></p>
+
+<p>Leigh Thompson and Reid Hastie found that <a href="https://www.kellogg.northwestern.edu/faculty/research/detail/1990/social-perception-in-negotiation">most negotiators walk in assuming</a> the other side wants the opposite of what they want. The ones who learned early what the other side cared about got better deals.</p>
+
+<p>Scope asks work the same way. Clients ask for a solution because it’s the easiest way to describe what they need. Working back to the problem is your part of the job, because you know what software can do. A few made-up examples:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>They ask for</th>
+      <th>What’s going on</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>One more column on this table.</td>
+      <td>The ops team can’t find who owns an order.</td>
+    </tr>
+    <tr>
+      <td>A full audit log.</td>
+      <td>A compliance review needs one report a quarter, not the whole shebang.</td>
+    </tr>
+    <tr>
+      <td>A dashboard for the sales team.</td>
+      <td>Managers want one number every Monday.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>What was the bulk export for? Finance matches orders by hand every Monday morning. A weekly summary email with the totals they check against would fix that, for one day of work instead of four.</p>
+
+<h4 id="3-ask-what-its-worth">3. Ask what it’s worth</h4>
+
+<p>Next, ask the client what solving the problem is worth. That could be hours saved, money made or risk removed, and a rough number is fine. Finance says the export would save them about six hours a week.</p>
+
+<p>Discount that number before you use it. Microsoft ran controlled experiments on its product ideas to see which ones worked:</p>
+
+<p><img src="/assets/scope-creep/one-in-three.svg" alt="About one idea in three improved the metric it was designed to improve, from controlled experiments at Microsoft" /></p>
+
+<p class="cite">Kohavi, Crook &amp; Longbotham, <a href="https://exp-platform.com/Documents/ExPThinkWeek2009Public.pdf">Online Experimentation at Microsoft</a>, 2009</p>
+
+<p>Whoever asks for a feature is betting on a rosy future, and so are we when we agree to build it. Here’s the arithmetic for the export, with illustrative numbers. Six hours a week is about 300 hours a year. If only a third of that turns up, it’s 100 hours. The full export is four days, about 32 hours, so even the discounted value is three times the cost.</p>
+
+<p><img src="/assets/scope-creep/worth-vs-cost.svg" alt="Worth versus cost of a feature request, illustrative: claimed value 300 hours a year, discounted to 100, against a 32-hour build" /></p>
+
+<p>So the export is worth building, but not before launch. Those four days still push the date unless something else moves. The one-day email gets finance most of the value now, and the full export can wait for the next phase.</p>
+
+<h4 id="4-absorb-swap-or-extend">4. Absorb, swap or extend</h4>
+
+<p>Every ask ends in one of three places. You <strong>absorb</strong> it: the team does the extra work, and the date or your margin pays for it. You <strong>swap</strong> it for something of the same size. Or you <strong>extend</strong>, with more time, more money, or both.</p>
+
+<p>On a fixed price, absorbing comes out of your margin, so it’s easy to see. A retainer hides it. The client pays a monthly fee for a team and nobody counts hours, so it’s tempting to think scope doesn’t matter there. But every ask you quietly absorb sets a precedent for how fast the team works and how much fits in a month. A product team’s quarter works the same way: absorbed asks don’t show up anywhere until the roadmap slips.</p>
+
+<p>Make the swap visible instead. Put the export on the plan next to this month’s work: the checkout redesign, search filters, alerts and the audit log. Then show the client which one falls off the end of the month. Now the question is which one they want more, and they can answer that in a minute.</p>
+
+<p><img src="/assets/scope-creep/retainer-month.svg" alt="Managing scope on a retainer: adding a 4-day bulk export to a 20-day month pushes the audit log past the end of the month, illustrative" /></p>
+
+<h4 id="5-write-the-decision-down">5. Write the decision down</h4>
+
+<p>Whatever happens, write the ask down on one page the same day, with the decision at the top:</p>
+
+<ol>
+  <li><strong>The recommendation and the decision</strong>, with the name of whoever made it: weekly summary email now, full export next phase.</li>
+  <li><strong>The options</strong>: absorb (the date slips four days), swap (the audit log moves to the next milestone), extend, or the smaller version.</li>
+  <li><strong>What it costs</strong>, all of it: two days to build, a day to test, a day to release. It’s easy to <a href="/posts/software-estimation#3-estimating-the-code-not-the-project">size only the code</a> and forget everything around it.</li>
+  <li><strong>What it’s worth</strong>: about six hours a week.</li>
+  <li><strong>The problem</strong>: finance matching orders by hand every Monday.</li>
+  <li><strong>The ask</strong>, in the client’s words.</li>
+</ol>
+
+<p>Log the small yeses as well, even the half-hour ones, and list them in your weekly update so the client sees what they got beyond the plan.</p>
+
+<p>That keeps your side of the road clean. Over a project, the pages and the log add up to every yes, every no and every swap. When someone asks at the end whether you could have been faster, that’s what you open.</p>
+
+<h3 id="when-agents-write-the-code">When agents write the code</h3>
+
+<p>With an agent, the export’s two days of build can drop to an afternoon. The test day and the release day stay. Every ask looks smaller than it used to, and saying yes starts to look free.</p>
+
+<p><img src="/assets/scope-creep/agent-build.svg" alt="With an AI agent, the build of a feature shrinks from two days to an afternoon, but testing and release still take a day each: 4 days becomes 2.5, illustrative" /></p>
+
+<p>Sometimes a same-day yes is worth it: a client who asks on Tuesday and has it on Wednesday tells that story to their boss. But the agent only writes the code. Review, tests, release, docs and upkeep take the time they always took. It’s the rule from my estimation post: <a href="/posts/software-estimation#estimating-for-an-ai-native-sdlc">apply the AI speed-up to the build work only</a>. Getting Real calls the rest <a href="https://basecamp.com/gettingreal/05.4-hidden-costs">hidden costs</a>.</p>
+
+<p>Agents turn more asks into half-hour jobs, and each one is another small yes. They go in the log from step 5 like everything else.</p>
+
+<h3 id="questions-youre-probably-asking">Questions you’re probably asking</h3>
+
+<h4 id="wont-saying-no-all-the-time-hurt-the-relationship">“Won’t saying no all the time hurt the relationship?”</h4>
+
+<p>It can, if it’s always the same person saying it. People who work with a client every day get close to them, and it’s hard to keep saying “no, but” to people you like.</p>
+
+<p>Let someone else be the bad cop sometimes: “I’d love to do this, let me check with my lead whether we can fit it in.” You stay on the client’s side of the table, and the ask gets a day before anyone answers.</p>
+
+<p>A colleague described a version from their consulting days, the four Ds:</p>
+
+<ol>
+  <li><strong>Deny</strong> it at first.</li>
+  <li><strong>Defer</strong> it to whoever decides.</li>
+  <li><strong>Delay</strong> it if the timing is wrong.</li>
+  <li><strong>Do</strong> it, if it still matters after all that, as a change request. By then the change request surprises nobody.</li>
+</ol>
+
+<p>There’s a fifth D to avoid: dismiss. Even when you can see straight away that an ask won’t help, take it in and come back with a reasoned answer.</p>
+
+<h4 id="what-if-they-dont-know-what-they-want-until-they-see-it">“What if they don’t know what they want until they see it?”</h4>
+
+<p>Often they don’t, and that’s the opacity from the start of this post. There’s no neat answer, but you can show them something sooner. A clickable prototype or a quick demo lets the client react before you build, for a fraction of the cost of a rebuild.</p>
+
+<p>Dig deeper before the build starts, too. Clients often know the problem even when they can’t picture the software, and getting it out of them is our job. Ask who, what, when, where, why and how, and keep asking. Better still, sit with the people who’ll use the software and watch how they work today. Once you understand the current process, designing the new one gets much easier. Small corrections along the way are fine. What you want to avoid is a big swing in month three.</p>
+
+<h3 id="five-phrases-to-retire">Five phrases to retire</h3>
+
+<p>These are the five I hear most on calls, and what to say instead.</p>
+
+<div class="c-grid c-grid-2">
+  <div class="c-card">
+    <span class="c-label">Instead of</span>
+    <p class="c-title">"Sure, we'll squeeze it in."</p>
+    <p>"Yes, and here's what it moves." The work goes somewhere: scope, the date or the cost.</p>
+  </div>
+  <div class="c-card">
+    <span class="c-label">Instead of</span>
+    <p class="c-title">"Should be quick."</p>
+    <p>"Let me size all of it." Quick is a guess made before anyone has thought about testing or release.</p>
+  </div>
+  <div class="c-card">
+    <span class="c-label">Instead of</span>
+    <p class="c-title">"That's out of scope."</p>
+    <p>"Not in this scope. What's it for?" The first version ends the conversation, and the client stops telling you what they need.</p>
+  </div>
+  <div class="c-card">
+    <span class="c-label">Instead of</span>
+    <p class="c-title">"We'll try to fit it in."</p>
+    <p>"Here are three options, and I'd pick this one." The client chooses with the trade-offs in front of them.</p>
+  </div>
+  <div class="c-card">
+    <span class="c-label">Instead of</span>
+    <p class="c-title">"No problem."</p>
+    <p>"Who signs off on this?" Sometimes it is no problem. If it changes the plan, someone should own that change.</p>
+  </div>
+</div>
+
+<p>The asks that hurt a project are the ones nobody decided. A yes you weighed and wrote down is fine, even a big one. The next time someone says “should be quick”, write down four things before you answer:</p>
+
+<p class="pull"><code class="language-plaintext highlighter-rouge">problem, worth, cost, decision</code></p>
+
+<h3 id="the-slides">The slides</h3>
+
+<p>Here’s the deck from the talk. Use the arrow keys or click to move through it, and press <code class="language-plaintext highlighter-rouge">N</code> for the speaker notes. You can also <a href="/assets/scope-creep/deck.html">open it full screen</a>.</p>
+
+<div style="position: relative; width: 100%; aspect-ratio: 16 / 9; margin: 1.5rem 0; border: 1px solid #e5e7eb; border-radius: 4px; overflow: hidden;">
+  <iframe src="/assets/scope-creep/deck.html" title="The one about scope creep, slide deck" loading="lazy" style="position: absolute; inset: 0; width: 100%; height: 100%; border: 0;" allowfullscreen=""></iframe>
+</div>
+
+        </article>
+        <footer class="ns-footer">© 2026 · notshant.xyz · Bengaluru</footer>
+
+    </main>
+</div>
+
+<style>
+    /* Reusable post components. Inline so Tailwind's purge never strips them.
+     * Colours come from the notshant tokens (design/tokens.css). The accent is the glider's light green:
+     * --c-accent for rules and borders, --c-tint behind the key idea. Neither is ever text on white.
+     * It replaced the red #e3120b (design/brand.md → Colour). Weights stop at 600. */
+    article.ns-prose {
+        --c-accent: var(--ns-mint-light);
+        --c-ink: var(--ns-ink);
+        --c-muted: var(--ns-muted);
+        --c-rule: var(--ns-rule);
+        --c-tint: var(--ns-mint-wash);
+    }
+
+    /* Pull-quote style facts with a source line underneath */
+    article.ns-prose blockquote.fact {
+        font-size: 1.15em; line-height: 1.5; font-weight: 500; color: var(--c-ink);
+        border-left: 3px solid var(--c-accent); padding-left: 1em;
+    }
+    article.ns-prose p.cite { font-size: 0.8em; color: var(--c-muted); margin-top: -0.75em; }
+    article.ns-prose p.cite a { color: var(--c-muted); }
+
+    /* The key idea of a post: large, bold, set apart */
+    article.ns-prose p.c-key {
+        font-size: 1.15em; line-height: 1.5; font-weight: 600; color: var(--c-ink);
+        background: var(--c-tint); border-left: 3px solid var(--c-accent);
+        padding: 1.1rem 1.35rem; margin: 2rem 0; border-radius: var(--ns-radius-sm);
+    }
+
+    /* Subtitle directly under the post's H1 */
+    article.ns-prose p.c-subtitle {
+        font-size: 1em; line-height: 1.5; color: var(--c-muted); font-weight: 400;
+        margin-top: -0.3em; margin-bottom: 1.75em;
+    }
+
+        /* Big standalone line, no quote marks */
+    article.ns-prose p.pull {
+        font-size: 1.3em; line-height: 1.35; font-weight: 600; color: var(--c-ink);
+        border-top: 3px solid var(--c-accent); padding-top: 0.75em; margin: 2.5rem 0;
+        max-width: 32ch;
+    }
+
+    /* Numbered section headings */
+    article.numbered { counter-reset: section; }
+    article.numbered h3 {
+        counter-increment: section;
+        border-top: 1px solid var(--c-rule); padding-top: 1.75rem; margin-top: 3rem;
+    }
+    article.numbered h3::before {
+        content: counter(section, decimal-leading-zero);
+        display: block; font-family: var(--ns-mono); font-size: var(--ns-text-meta); font-weight: 400; letter-spacing: 0.04em;
+        color: var(--c-muted); margin-bottom: 0.5rem;
+    }
+
+    /* Long posts: headings a clear step above the 17px body (design/system.md, round 17) */
+    article.numbered h1 {
+        font-size: clamp(28px, 3.6vw, 36px); line-height: 1.2; font-weight: 600; letter-spacing: -0.02em;
+        margin-bottom: 0.45em;
+    }
+    article.numbered p.c-subtitle { font-size: 1.1em; }
+    article.numbered h3 {
+        font-size: clamp(22px, 2.6vw, 26px); line-height: 1.3; font-weight: 600; letter-spacing: -0.015em;
+        margin-bottom: 0.75em;
+    }
+    article.numbered h4 { font-size: 20px; line-height: 1.4; margin: 2.2em 0 0.5em; }
+    article.numbered h3 + h4 { margin-top: 0.9em; }
+
+    /* The contents box numbers its sections the way the headings do (01, 02 …) */
+    article.numbered .c-summary > ol { list-style: decimal-leading-zero; padding-left: 2.1em; }
+    article.numbered .c-summary > ol > li::marker { font-family: var(--ns-mono); font-size: 0.9em; }
+
+    /* Generic card and grids */
+    article.ns-prose .c-grid { display: grid; gap: 1rem; margin: 1.5rem 0; }
+    article.ns-prose .c-grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    article.ns-prose .c-grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    @media (max-width: 640px) {
+        article.ns-prose .c-grid-2, article.ns-prose .c-grid-3 { grid-template-columns: 1fr; }
+    }
+    article.ns-prose .c-card {
+        border: 1px solid var(--c-rule); border-top: 2px solid var(--c-ink);
+        border-radius: var(--ns-radius-sm); padding: 1rem 1.1rem; background: var(--ns-bg);
+    }
+    article.ns-prose .c-card > :first-child { margin-top: 0; }
+    article.ns-prose .c-card > :last-child { margin-bottom: 0; }
+    article.ns-prose .c-card p { margin: 0.4em 0; font-size: 0.95em; }
+    article.ns-prose .c-label {
+        display: block; font-size: 0.72em; font-weight: 600; letter-spacing: 0.08em;
+        text-transform: uppercase; color: var(--c-muted); margin-bottom: 0.25rem;
+    }
+    article.ns-prose .c-card .c-title { font-weight: 600; font-size: 1.05em; color: var(--c-ink); }
+    /* A card with a fix line is a column, so the fix sits at the bottom of every card in a row */
+    article.ns-prose .c-card:has(.c-fix) { display: flex; flex-direction: column; }
+    article.ns-prose .c-card p.c-fix {
+        margin-top: auto; margin-bottom: 0;
+        border-top: 1px solid var(--c-rule); padding-top: 0.5em; font-weight: 600;
+    }
+    article.ns-prose .c-card:has(.c-fix) p:nth-last-child(2) { margin-bottom: 0.9em; }
+
+    /* "In this post" summary box, kept quiet so the key idea leads */
+    article.ns-prose .c-summary {
+        border: 1px solid var(--c-rule); border-radius: var(--ns-radius-sm);
+        padding: 0.75rem 1.1rem; margin: 1.5rem 0; font-size: 0.9em;
+    }
+    article.ns-prose .c-summary .c-label { color: var(--c-muted); }
+    article.ns-prose .c-summary ol { margin: 0.25rem 0 0; }
+    article.ns-prose .c-summary li { margin: 0.1rem 0; }
+    article.ns-prose .c-summary a { color: var(--c-muted); }
+    /* A section's sub-headings sit on one line under it, separated by dots */
+    article.ns-prose .c-summary li > ul { display: flex; flex-wrap: wrap; list-style: none; padding: 0; margin: 0.1rem 0 0.35rem; font-size: 0.92em; }
+    article.ns-prose .c-summary li > ul > li { margin: 0; }
+    article.ns-prose .c-summary li > ul > li:not(:last-child)::after { content: "·"; margin: 0 0.55em; color: var(--ns-faint); }
+
+    /* Numbered step cards */
+    article.ns-prose .c-step {
+        display: grid; grid-template-columns: 3rem minmax(0, 1fr); gap: 1rem;
+        border-top: 1px solid var(--c-rule); padding: 1.25rem 0;
+    }
+    article.ns-prose .c-step:last-of-type { border-bottom: 1px solid var(--c-rule); }
+    article.ns-prose .c-step-num {
+        width: 2.5rem; height: 2.5rem; border-radius: 999px; background: var(--c-ink); color: var(--ns-bg);
+        display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 1em;
+    }
+    article.ns-prose .c-step-body > :first-child { margin-top: 0.3rem; }
+    article.ns-prose .c-step-body > :last-child { margin-bottom: 0; }
+    article.ns-prose .c-step-body h4 { margin-top: 0.2rem; }
+
+    /* Checklist */
+    article.ns-prose ul.c-check {
+        list-style: none; padding-left: 0; display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 2rem; row-gap: 0.6rem;
+    }
+    @media (max-width: 640px) { article.ns-prose ul.c-check { grid-template-columns: 1fr; } }
+    article.ns-prose ul.c-check li { position: relative; padding-left: 1.8rem; margin: 0; }
+    article.ns-prose ul.c-check li::before {
+        content: ""; position: absolute; left: 0; top: 0.35em; width: 1rem; height: 1rem;
+        border: 2px solid var(--c-ink); border-radius: 3px; background: none;
+    }
+
+    /* Highlight callout, e.g. the AI multiplier */
+    article.ns-prose .c-callout {
+        display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 1.5rem; align-items: center;
+        background: var(--ns-callout-bg); color: var(--ns-callout-ink); border-radius: var(--ns-radius-md); padding: 1.5rem 1.75rem; margin: 2rem 0;
+    }
+    @media (max-width: 640px) { article.ns-prose .c-callout { grid-template-columns: 1fr; } }
+    article.ns-prose .c-callout .c-big { font-size: 3em; font-weight: 600; line-height: 1; color: var(--ns-callout-ink); }
+    article.ns-prose .c-callout p { margin: 0.3em 0; color: var(--ns-callout-ink); opacity: .9; }
+    article.ns-prose .c-callout strong { color: var(--ns-callout-ink); }
+    article.ns-prose .c-callout .c-label { color: var(--ns-mint-light); }   /* light green reads well on ink (10:1) */
+</style>
+
+<style>
+    article.ns-prose img { cursor: zoom-in; }
+    .lightbox {
+        position: fixed; inset: 0; z-index: 50;
+        display: flex; align-items: center; justify-content: center;
+        padding: 2rem; background: rgba(17, 17, 17, 0.85);
+        cursor: zoom-out; opacity: 0; transition: opacity 150ms ease; outline: none;
+    }
+    .lightbox.is-open { opacity: 1; }
+    .lightbox img {
+        max-width: 95vw; max-height: 90vh; width: auto; height: auto;
+        background: #fff; border-radius: 4px; cursor: default;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+    }
+    @media (min-width: 768px) {
+        .lightbox img { min-width: 70vw; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+        .lightbox { transition: none; }
+    }
+</style>
+<script>
+    (function () {
+        var overlay = null;
+        var lastFocus = null;
+
+        function close() {
+            if (!overlay) return;
+            overlay.remove();
+            overlay = null;
+            document.body.style.overflow = '';
+            if (lastFocus) lastFocus.focus();
+        }
+
+        function open(img) {
+            lastFocus = document.activeElement;
+            overlay = document.createElement('div');
+            overlay.className = 'lightbox';
+            overlay.setAttribute('role', 'dialog');
+            overlay.setAttribute('aria-modal', 'true');
+            overlay.setAttribute('aria-label', img.alt || 'Image');
+            overlay.tabIndex = -1;
+
+            var big = document.createElement('img');
+            big.src = img.currentSrc || img.src;
+            big.alt = img.alt;
+            overlay.appendChild(big);
+
+            // Clicking the dimmed area closes; clicking the image itself does not.
+            overlay.addEventListener('click', function (e) {
+                if (e.target === overlay) close();
+            });
+
+            document.body.appendChild(overlay);
+            document.body.style.overflow = 'hidden';
+            overlay.focus();
+            requestAnimationFrame(function () { overlay.classList.add('is-open'); });
+        }
+
+        document.addEventListener('click', function (e) {
+            var img = e.target.closest && e.target.closest('article.ns-prose img');
+            if (img && !overlay) open(img);
+        });
+
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') close();
+        });
+    })();
+</script>
+
+
+    </div>
+
+    <script>
+    // Links that leave the site open in a new tab (design/brand.md → Voice and copy).
+    // Inside a post every link does, as before, except in-page anchors like the contents list.
+    // Elsewhere, links within notshant.xyz (nav, logo, writing rows) stay in the same tab.
+    document.querySelectorAll('a[href]').forEach(function (a) {
+        if (a.getAttribute('href').charAt(0) === '#') return;
+        if (a.protocol !== 'http:' && a.protocol !== 'https:') return;
+        if (a.host === location.host && !a.closest('article.ns-prose')) return;
+        a.target = '_blank';
+        a.rel = 'noopener';
+    });
+</script>
+
+    <script src="/assets/js/ns-logo.js" defer></script>
+    <script src="/assets/js/ns-theme.js" defer></script>
+</body>
+
+</html>
