@@ -219,7 +219,7 @@ Rows that leave the site (archive) use the platform and year as meta, open in a 
 - `ns-toc.js` marks the section in view with `li.is-active`: a mint dot with a soft halo, and the label turns ink.
 
 **Prose.** Posts render inside `<article class="ns-prose">`:
-- H2s at 20px and h3s at 17px.
+- H2s at 20px and h3s at 17px. Long posts with numbered sections (`article_class: numbered`) step up so the headings stand out from the 17px body: the h1 at 36px, sections (h3) at 26px and sub-sections (h4) at 20px. Their "In this post" box numbers sections 01, 02 … like the headings, with each section's sub-headings on one line under it.
 - Square bullets in faint grey.
 - Blockquotes with a grey rule.
 - Code on `--ns-surface`.
@@ -337,5 +337,6 @@ Post components (`.c-key`, `.fact`, `.pull`, `.c-card`, `.c-callout`, numbered s
 | 14 | Photos on R2 (10 Nov 2026) | Every photo is served from `photos.notshant.xyz` (a Cloudflare R2 bucket, edge-cached) instead of the repo, so the repo stops growing with each trip. The Italian Summer adds a 3200px size for big and high-resolution screens. Files are named after the camera file and cached for a year, never renamed. |
 | 15 | Photo rows (10 Nov 2026) | Replaces the masonry columns (canvas Round 7, option B). Columns read down, so a trip's photos came out of order. Rows read across, aim for 300px (220px on phones) and never crop. Portrait thumbnails get smaller (about 200px wide), so high-resolution screens load the 720px file again, and the page is lighter. |
 | 16 | Photo collections (10 Nov 2026) | `/photos/` became a list of collections, each with its own page: Italy, Ladakh, Others. Collections are folders for organising, not trips: a place, a theme, or a catch-all, each holding one or more series. One long page was getting heavy, and a collection can now be shared as a link (its first cover is the link preview). |
+| 17 | Post headings (12 Nov 2026) | In long posts the h1 (20px), section (17px) and sub-section (16px) headings were barely bigger than the 17px body, and hard to spot when scrolling. Long posts now use 36, 26 and 20px, weight 600. The contents box numbers sections 01, 02 … to match the headings. |
 
 When you change the system, update `tokens.css` first, then this file, and add a row here.
