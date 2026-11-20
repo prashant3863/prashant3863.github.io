@@ -314,7 +314,7 @@ Front matter the layouts read:
 | `listed` | post | `false` keeps a post out of the Writing list (the old Tailwind demo). |
 | `soon` | `index.html` | One announced, unpublished post shown with `Soon`. Delete the line to hide it. |
 
-Post components (`.c-key`, `.fact`, `.pull`, `.c-card`, `.c-callout`, numbered sections and so on) use the tokens: the glider's light green for rules and the key-idea block (`--c-accent`, `--c-tint` in `_includes/post-components.html`), muted labels, and weights up to 600. Figures in `assets/estimates/` use mint where they used red.
+Post components (`.c-key`, `.fact`, `.pull`, `.c-card`, `.c-callout`, numbered sections, `.c-groups` contents columns, `.c-band` + `.c-rail-item` rail sections and so on) use the tokens: the glider's light green for rules and the key-idea block (`--c-accent`, `--c-tint` in `_includes/post-components.html`), muted labels, and weights up to 600. Figures in `assets/estimates/` use mint where they used red.
 
 ## Decision log
 
@@ -338,5 +338,6 @@ Post components (`.c-key`, `.fact`, `.pull`, `.c-card`, `.c-callout`, numbered s
 | 15 | Photo rows (10 Nov 2026) | Replaces the masonry columns (canvas Round 7, option B). Columns read down, so a trip's photos came out of order. Rows read across, aim for 300px (220px on phones) and never crop. Portrait thumbnails get smaller (about 200px wide), so high-resolution screens load the 720px file again, and the page is lighter. |
 | 16 | Photo collections (10 Nov 2026) | `/photos/` became a list of collections, each with its own page: Italy, Ladakh, Others. Collections are folders for organising, not trips: a place, a theme, or a catch-all, each holding one or more series. One long page was getting heavy, and a collection can now be shared as a link (its first cover is the link preview). |
 | 17 | Post headings (12 Nov 2026) | In long posts the h1 (20px), section (17px) and sub-section (16px) headings were barely bigger than the 17px body, and hard to spot when scrolling. Long posts now use 36, 26 and 20px, weight 600. The contents box numbers sections 01, 02 … to match the headings. |
+| 18 | Rail sections (20 Nov 2026) | For list posts ("How to be successful at work"): the contents box becomes one column per group (`.c-groups`), each group opens with a band (`.c-band`), and each item keeps its number and name in a 200px sticky left rail while its text scrolls (`.c-rail-item`). One column under 760px. Ported from the realfast memo layout Prashant liked. |
 
 When you change the system, update `tokens.css` first, then this file, and add a row here.

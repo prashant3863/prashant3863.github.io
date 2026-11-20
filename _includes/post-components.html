@@ -145,4 +145,47 @@
     article.ns-prose .c-callout p { margin: 0.3em 0; color: var(--ns-callout-ink); opacity: .9; }
     article.ns-prose .c-callout strong { color: var(--ns-callout-ink); }
     article.ns-prose .c-callout .c-label { color: var(--ns-mint-light); }   /* light green reads well on ink (10:1) */
+
+    /* Contents as one column per group: the group's name, then its numbered items, linked */
+    article.ns-prose .c-groups {
+        display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; margin: 2.25rem 0 1rem;
+    }
+    article.ns-prose .c-groups > div { border-top: 2px solid var(--c-ink); padding-top: 0.75rem; }
+    article.ns-prose .c-groups .c-label { color: var(--c-ink); margin-bottom: 0.5rem; }
+    article.ns-prose .c-groups ol { margin: 0; padding-left: 1.7em; font-size: 0.95em; }
+    article.ns-prose .c-groups li { margin: 0.2rem 0; padding-left: 0.15em; }
+    article.ns-prose .c-groups li::marker { font-family: var(--ns-mono); font-size: 0.85em; color: var(--c-muted); }
+    article.ns-prose .c-groups a { color: var(--c-ink); text-decoration-color: var(--c-rule); }
+    @media (max-width: 760px) { article.ns-prose .c-groups { grid-template-columns: minmax(0, 1fr); } }
+
+    /* Rail sections: a band names each group, then every item keeps its number and name in a
+     * sticky left rail while its text scrolls past. Collapses to one column on small screens. */
+    article.ns-prose .c-band {
+        display: flex; align-items: baseline; justify-content: space-between; gap: 1rem;
+        border-top: 2px solid var(--c-ink); padding-top: 0.8rem; margin-top: 4.5rem; scroll-margin-top: var(--ns-sticky-top);
+    }
+    article.ns-prose .c-band h2 {
+        margin: 0; font-size: 0.8em; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--c-ink);
+    }
+    article.ns-prose .c-band .c-range { font-size: var(--ns-text-meta); color: var(--c-muted); }
+    article.ns-prose .c-rail-item {
+        display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 0 2.5rem;
+        border-top: 1px solid var(--c-rule); padding: 1.75rem 0 0.75rem; scroll-margin-top: var(--ns-sticky-top);
+    }
+    article.ns-prose .c-band + .c-rail-item { border-top: 0; padding-top: 1.25rem; }
+    article.ns-prose .c-rail { position: sticky; top: var(--ns-sticky-top); align-self: start; }
+    article.ns-prose .c-rail .c-num {
+        display: block; font-family: var(--ns-mono); font-size: var(--ns-text-meta); letter-spacing: 0.04em;
+        color: var(--c-muted); margin-bottom: 0.35rem;
+    }
+    article.ns-prose .c-rail h3 {
+        margin: 0; padding: 0; border: 0; font-size: 20px; line-height: 1.3; font-weight: 600; letter-spacing: -0.01em;
+    }
+    article.ns-prose .c-rail h3::before { content: none; }
+    article.ns-prose .c-rail-body > :first-child { margin-top: 0; }
+    article.ns-prose .c-rail-body > :last-child { margin-bottom: 0.75rem; }
+    @media (max-width: 760px) {
+        article.ns-prose .c-rail-item { grid-template-columns: minmax(0, 1fr); }
+        article.ns-prose .c-rail { position: static; margin-bottom: 0.9rem; }
+    }
 </style>
